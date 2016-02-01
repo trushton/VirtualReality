@@ -1,10 +1,12 @@
 #include <cavr/cavr.h>
 #include <cavr/gfx/renderer.h>
 #include <cavr/gfx/shapes.h>
+#include <cavr/gfx/ray.h>
 #include <cavr/gl/shader.h>
 #include <cavr/gl/vao.h>
 #include <cavr/gl/vbo.h>
 #include <glog/logging.h>
+//#include <glm/glm.hpp>
 #include <math.h>
 
 // Self make files
@@ -61,7 +63,7 @@ void initContext() {
     vec3df(0,1,0), // Music source position
     true, // play looped
     false, //  start paused
-    true); //  enable sound
+    true); //  enable sound--no-cache-dir 
 
   cd->simple_program = cavr::gl::Program::createSimple();
 
@@ -133,7 +135,8 @@ void initContext() {
                                GL_FLOAT,
                                0,
                                0,
-                               0);
+                               0      
+);
 
   auto pointer_vertices = cavr::gfx::Shapes::solidCylinder(30, 20, 0.1);
   cd->num_triangles_in_pointer = pointer_vertices.size();
@@ -151,10 +154,48 @@ void initContext() {
   cavr::System::setContextData(cd);
 }
 
+// STOLEN
+bool solveQuadratic(const float &a, const float &b, const float &c, float &x0, float &x1) 
+{ 
+    float discr = b * b - 4 * a * c; 
+    if (discr < 0) return false; 
+    else if (discr == 0) x0 = x1 = - 0.5 * b / a; 
+    else { 
+        float q = (b > 0) ? 
+            -0.5 * (b + sqrt(discr)) : 
+            -0.5 * (b - sqrt(discr)); 
+        x0 = q / a; 
+        x1 = c / q; 
+    } 
+    if (x0 > x1) std::swap(x0, x1); 
+ 
+    return true; 
+} 
+
+bool solveRaycast(const cavr::gfx::Ray& ray, const cavr::math::vec3f& pos, float radius_sq) {
+  float t0, t1;
+
+  cavr::math::vec3f L = ray.origin() - pos; 
+  float a = ray.direction().dot(ray.direction()); 
+  float b = 2 * ray.direction().dot(L); 
+  float c = L.dot(L) - radius_sq; 
+  if(!solveQuadratic(a, b, c, t0, t1)) return false;
+
+  if (t0 > t1) std::swap(t0, t1); 
+ 
+  if (t0 < 0) { 
+    t0 = t1; // if t0 is negative, let's use t1 instead 
+    if (t0 < 0) return false; // both t0 and t1 are negative 
+  } 
+ 
+    return true;
+}
+
 void frame() {
   ContextData* cd = (ContextData*)cavr::System::getContextData();
 }
 
+static bool itemSelected = false;
 void render() {
   using cavr::math::mat4f;
   glEnable(GL_CULL_FACE);
@@ -174,14 +215,7 @@ void render() {
 
 
   // Check if a button has been pressed
-  if (cavr::input::getButton("color")->delta() == cavr::input::Button::Held )
-  {
-    glUniform3f(cd->color_uniform, 0, 0, 1);
-  }
-  else
-  {
-    glUniform3f(cd->color_uniform, 1, 0, 0);
-  }
+   
 
   // draw the sphere for the simple program
   glDrawArrays(GL_TRIANGLES, 0, cd->num_triangles_in_sphere);
@@ -190,13 +224,39 @@ void render() {
 
   cd->pointer_vao->bind();
 
-  auto pos = cavr::input::getSixDOF("wand")->getPosition();
+  auto wand_sixdof = cavr::input::getSixDOF("wand");
+  auto pos = wand_sixdof->getPosition();
 
-  model = mat4f::translate(pos.x,pos.y,pos.z) * mat4f::scale(0.1);
+  //model = mat4f::translate(pos.x,pos.y,pos.z) * mat4f::scale(0.1) * mat4f::look_at(pos, pos + wand_sixdof->getForward(), wand_sixdof->getUp()); //mat4f::rotate(3.14, wand_sixdof->getForward().cross(wand_sixdof->getUp()));
+
+  model = wand_sixdof->getMatrix() * mat4f::translate(0, 0, -2) * mat4f::scale(0.1);
   glUniformMatrix4fv(cd->model_uniform, 1, GL_FALSE, model.v);
 
   glDrawArrays(GL_TRIANGLES, 0, cd->num_triangles_in_pointer);
   glBindVertexArray(0);
+
+   if (cavr::input::getButton("color")->delta() == cavr::input::Button::Held )
+   {  
+     cavr::gfx::Ray ray(pos, wand_sixdof->getForward());
+
+     if(solveRaycast(ray, cavr::math::vec3f(0,1,0), 0.075)) {
+       LOG(INFO) << "HIT";
+       itemSelected = true;
+     }
+
+     else {
+      LOG(INFO) << "MISS";
+      itemSelected = false;
+     }
+   }
+   
+   if(itemSelected) {
+      glUniform3f(cd->color_uniform, 0, 0, 1);
+   }
+
+   else {
+     glUniform3f(cd->color_uniform, 1, 0, 0);
+   }
 
   cd->simple_program->end();
 
@@ -208,7 +268,7 @@ void render() {
   cd->cube_angle += 3.14/4.0 * cavr::input::InputManager::dt()*1000;
 
   // Set your current
-  auto position = cavr::input::getSixDOF("wand")->getPosition();
+  auto position = cavr::input::getSixDOF("head")->getPosition();
   position.x *= 10;
   position.z *= 10;
 
@@ -240,8 +300,10 @@ void update() {
 }
 
 int main(int argc, char** argv) {
+
+  //google::InitGoogleLogging(argv[0]);
   //Test *val = new Test();
-  LOG(INFO) << "Setting callbacks.";
+  //LOG(INFO) << "Setting callbacks.";
 
   // cavr is a system of callbacks
   cavr::System::setCallback("update", update);
@@ -257,11 +319,12 @@ int main(int argc, char** argv) {
   input_map.button_map["exit"] = "keyboard[Escape]";
 
   // A wii remote button
-  input_map.button_map["color"] = "vrpn[WiiMote0[0]]";
+  input_map.button_map["color"] = "vrpn[WiiMote0[3]]";
 
   // A wand that we want to follow based on some tracker -- we are tracing point 0
   input_map.sixdof_map["wand"] = "vrpn[WiiMote[0]]";
 
+  input_map.sixdof_map["head"] = "vrpn[TallGlass[0]]";
 
   if (!cavr::System::init(argc, argv, &input_map)) {
     LOG(ERROR) << "Failed to initialize cavr.";
