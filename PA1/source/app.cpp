@@ -90,7 +90,7 @@ void initContext() {
   cd->cube_program->bindFragDataLocation(0,"color");
   cd->cube_angle = 0;
   if(!cd->cube_program->link())
-  { 
+  {
     LOG(ERROR) << "Failed to link simple shader";
     delete vs;
     delete fs;
@@ -135,7 +135,7 @@ void initContext() {
                                0,
                                0);
 
-  auto pointer_vertices = cavr::gfx::Shapes::solidCylinder(30, 1, 1);
+  auto pointer_vertices = cavr::gfx::Shapes::solidCylinder(30, 20, 0.1);
   cd->num_triangles_in_pointer = pointer_vertices.size();
   cd->pointer_vbo = new cavr::gl::VBO(pointer_vertices, GL_STATIC_DRAW);
   cd->pointer_vao = new cavr::gl::VAO();
@@ -260,7 +260,7 @@ int main(int argc, char** argv) {
   input_map.button_map["color"] = "vrpn[WiiMote0[0]]";
 
   // A wand that we want to follow based on some tracker -- we are tracing point 0
-  input_map.sixdof_map["wand"] = "vrpn[Tracker0[1]]";
+  input_map.sixdof_map["wand"] = "vrpn[WiiMote[0]]";
 
 
   if (!cavr::System::init(argc, argv, &input_map)) {
