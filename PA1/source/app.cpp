@@ -36,8 +36,12 @@ struct ContextData {
   cavr::gl::VBO* sphere_vbo;
   cavr::gl::VAO* cube_vao;
   cavr::gl::VBO* cube_vbo;
+  cavr::gl::VBO* pointer_vbo;
+  cavr::gl::VAO* pointer_vao;
+
   size_t num_triangles_in_sphere;
   size_t num_triangles_in_cube;
+  size_t num_triangles_in_pointer;
 
   // Rotating angle
   float cube_angle;
@@ -61,7 +65,7 @@ void initContext() {
 
   cd->simple_program = cavr::gl::Program::createSimple();
 
-  // Create a program using some custom code of ours
+  // Create a program using s--no-cache-dir ome custom code of ours
   cd->cube_program = new cavr::gl::Program();
 
   // custom shader initialization
@@ -86,7 +90,7 @@ void initContext() {
   cd->cube_program->bindFragDataLocation(0,"color");
   cd->cube_angle = 0;
   if(!cd->cube_program->link())
-  {
+  { 
     LOG(ERROR) << "Failed to link simple shader";
     delete vs;
     delete fs;
@@ -131,6 +135,18 @@ void initContext() {
                                0,
                                0);
 
+  auto pointer_vertices = cavr::gfx::Shapes::solidCylinder(30, 1, 1);
+  cd->num_triangles_in_pointer = pointer_vertices.size();
+  cd->pointer_vbo = new cavr::gl::VBO(pointer_vertices, GL_STATIC_DRAW);
+  cd->pointer_vao = new cavr::gl::VAO();
+  cd->pointer_vao->setAttribute(cd->simple_program->getAttribute("in_position"),
+                                cd->pointer_vbo,
+                                4,
+                                GL_FLOAT,
+                                0,
+                                0,
+                                0);
+
   // set context data
   cavr::System::setContextData(cd);
 }
@@ -170,8 +186,19 @@ void render() {
   // draw the sphere for the simple program
   glDrawArrays(GL_TRIANGLES, 0, cd->num_triangles_in_sphere);
   glBindVertexArray(0);
-  cd->simple_program->end();
+  //cd->simple_program->end();
 
+  cd->pointer_vao->bind();
+
+  auto pos = cavr::input::getSixDOF("wand")->getPosition();
+
+  model = mat4f::translate(pos.x,pos.y,pos.z) * mat4f::scale(0.1);
+  glUniformMatrix4fv(cd->model_uniform, 1, GL_FALSE, model.v);
+
+  glDrawArrays(GL_TRIANGLES, 0, cd->num_triangles_in_pointer);
+  glBindVertexArray(0);
+
+  cd->simple_program->end();
 
   // Cube Program
   cd->cube_program->begin();
@@ -213,7 +240,7 @@ void update() {
 }
 
 int main(int argc, char** argv) {
-  Test *val = new Test();
+  //Test *val = new Test();
   LOG(INFO) << "Setting callbacks.";
 
   // cavr is a system of callbacks
