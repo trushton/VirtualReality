@@ -63,7 +63,7 @@ void initContext() {
     vec3df(0,1,0), // Music source position
     true, // play looped
     false, //  start paused
-    true); //  enable sound--no-cache-dir 
+    true); //  enable sound--no-cache-dir
 
   cd->simple_program = cavr::gl::Program::createSimple();
 
@@ -135,7 +135,7 @@ void initContext() {
                                GL_FLOAT,
                                0,
                                0,
-                               0      
+                               0
 );
 
   auto pointer_vertices = cavr::gfx::Shapes::solidCylinder(30, 20, 0.1);
@@ -155,39 +155,39 @@ void initContext() {
 }
 
 // STOLEN
-bool solveQuadratic(const float &a, const float &b, const float &c, float &x0, float &x1) 
-{ 
-    float discr = b * b - 4 * a * c; 
-    if (discr < 0) return false; 
-    else if (discr == 0) x0 = x1 = - 0.5 * b / a; 
-    else { 
-        float q = (b > 0) ? 
-            -0.5 * (b + sqrt(discr)) : 
-            -0.5 * (b - sqrt(discr)); 
-        x0 = q / a; 
-        x1 = c / q; 
-    } 
-    if (x0 > x1) std::swap(x0, x1); 
- 
-    return true; 
-} 
+bool solveQuadratic(const float &a, const float &b, const float &c, float &x0, float &x1)
+{
+    float discr = b * b - 4 * a * c;
+    if (discr < 0) return false;
+    else if (discr == 0) x0 = x1 = - 0.5 * b / a;
+    else {
+        float q = (b > 0) ?
+            -0.5 * (b + sqrt(discr)) :
+            -0.5 * (b - sqrt(discr));
+        x0 = q / a;
+        x1 = c / q;
+    }
+    if (x0 > x1) std::swap(x0, x1);
+
+    return true;
+}
 
 bool solveRaycast(const cavr::gfx::Ray& ray, const cavr::math::vec3f& pos, float radius_sq) {
   float t0, t1;
 
-  cavr::math::vec3f L = ray.origin() - pos; 
-  float a = ray.direction().dot(ray.direction()); 
-  float b = 2 * ray.direction().dot(L); 
-  float c = L.dot(L) - radius_sq; 
+  cavr::math::vec3f L = ray.origin() - pos;
+  float a = ray.direction().dot(ray.direction());
+  float b = 2 * ray.direction().dot(L);
+  float c = L.dot(L) - radius_sq;
   if(!solveQuadratic(a, b, c, t0, t1)) return false;
 
-  if (t0 > t1) std::swap(t0, t1); 
- 
-  if (t0 < 0) { 
-    t0 = t1; // if t0 is negative, let's use t1 instead 
-    if (t0 < 0) return false; // both t0 and t1 are negative 
-  } 
- 
+  if (t0 > t1) std::swap(t0, t1);
+
+  if (t0 < 0) {
+    t0 = t1; // if t0 is negative, let's use t1 instead
+    if (t0 < 0) return false; // both t0 and t1 are negative
+  }
+
     return true;
 }
 
@@ -209,13 +209,14 @@ void render() {
   cd->sphere_vao->bind();
   glUniformMatrix4fv(cd->projection_uniform, 1, GL_FALSE, cavr::gfx::getProjection().v);
   glUniformMatrix4fv(cd->view_uniform, 1, GL_FALSE, cavr::gfx::getView().v);
-  auto model = mat4f::translate(0, 1, 0) * mat4f::scale(0.1);
+  static auto model = mat4f::translate(0, 1, 0) * mat4f::scale(0.1);
+  static auto cylinderModel = mat4f::translate(0,1,0) * mat4f::scale(0.1);
   auto cubeModel = mat4f::translate(1,0,0) * mat4f::scale(0.1);
   glUniformMatrix4fv(cd->model_uniform, 1, GL_FALSE, model.v);
 
 
   // Check if a button has been pressed
-   
+
 
   // draw the sphere for the simple program
   glDrawArrays(GL_TRIANGLES, 0, cd->num_triangles_in_sphere);
@@ -229,18 +230,19 @@ void render() {
 
   //model = mat4f::translate(pos.x,pos.y,pos.z) * mat4f::scale(0.1) * mat4f::look_at(pos, pos + wand_sixdof->getForward(), wand_sixdof->getUp()); //mat4f::rotate(3.14, wand_sixdof->getForward().cross(wand_sixdof->getUp()));
 
-  model = wand_sixdof->getMatrix() * mat4f::translate(0, 0, -2) * mat4f::scale(0.1);
-  glUniformMatrix4fv(cd->model_uniform, 1, GL_FALSE, model.v);
+  cylinderModel = wand_sixdof->getMatrix() * mat4f::translate(0, 0, -2) * mat4f::scale(0.1);
+  glUniformMatrix4fv(cd->model_uniform, 1, GL_FALSE, cylinderModel.v);
 
   glDrawArrays(GL_TRIANGLES, 0, cd->num_triangles_in_pointer);
   glBindVertexArray(0);
 
    if (cavr::input::getButton("color")->delta() == cavr::input::Button::Held )
-   {  
+   {
      cavr::gfx::Ray ray(pos, wand_sixdof->getForward());
-
-     if(solveRaycast(ray, cavr::math::vec3f(0,1,0), 0.075)) {
+     cavr::math::vec3f updatedPosition(model[3][0], model[3][1], model[3][2]);
+     if(solveRaycast(ray, updatedPosition, 0.075)) {
        LOG(INFO) << "HIT";
+       model = wand_sixdof->getMatrix() * mat4f::translate(0, 0, -2) * mat4f::scale(0.1);
        itemSelected = true;
      }
 
@@ -249,7 +251,7 @@ void render() {
       itemSelected = false;
      }
    }
-   
+
    if(itemSelected) {
       glUniform3f(cd->color_uniform, 0, 0, 1);
    }
@@ -278,7 +280,7 @@ void render() {
   vec3df(0,0,1)); // What direction is the listener's facing directiion -- in this case we are always stareing forward..
 
   // rotate cube
-  glUniformMatrix4fv(cd->mvp_uniform, 1, GL_FALSE, (cavr::gfx::getProjection() * cavr::gfx::getView() * cubeModel * cavr::math::mat4f::rotate(cd->cube_angle,cavr::math::vec3f(0,1,0))).v );
+  glUniformMatrix4fv(cd->mvp_uniform, 1, GL_FALSE, (cavr::gfx::getProjection() * cavr::gfx::getView() * cubeModel * cavr::math::mat4f::rotate(cd->cube_angle,cavr::math::vec3f(0,0,0))).v );
 
   // draw cube
   glDrawArrays(GL_LINES,0,cd->num_triangles_in_cube);
@@ -324,7 +326,7 @@ int main(int argc, char** argv) {
   // A wand that we want to follow based on some tracker -- we are tracing point 0
   input_map.sixdof_map["wand"] = "vrpn[WiiMote[0]]";
 
-  input_map.sixdof_map["head"] = "vrpn[TallGlass[0]]";
+  input_map.sixdof_map["head"] = "vrpn[ShortGlass[0]]";
 
   if (!cavr::System::init(argc, argv, &input_map)) {
     LOG(ERROR) << "Failed to initialize cavr.";

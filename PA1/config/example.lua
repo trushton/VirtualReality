@@ -15,16 +15,16 @@ sim_window = {
 perspective_window = {
   view = {
     eyes = {
-      eye = cavr.sixdof("vrpn[TallGlass[0]]");
+      eye = cavr.sixdof("vrpn[ShortGlass[0]]");
       --left_eye = cavr.sixdof("emulated3");
       --right_eye = cavr.sixdof("emulated2");
       --stereo ="mono";
     };
-    lower_left = cavr.sixdof("vrpn[TallGlass[0]]") * cavr.translate(-1, -1, 1);
-    lower_right = cavr.sixdof("vrpn[TallGlass[0]]") * cavr.translate(1, -1, 1);
-    upper_left = cavr.sixdof("vrpn[TallGlass[0]]") * cavr.translate(-1, 1, 1);
+    lower_left = cavr.sixdof("vrpn[ShortGlass[0]]") * cavr.translate(-1, -1, -1);
+    lower_right = cavr.sixdof("vrpn[ShortGlass[0]]") * cavr.translate(1, -1, -1);
+    upper_left = cavr.sixdof("vrpn[ShortGlass[0]]") * cavr.translate(-1, 1, -1);
   };
-  fullscreen = false;
+  fullscreen = true;
 };
 
 x11_renderer = {
@@ -32,16 +32,16 @@ x11_renderer = {
   display = ":0.0";
   windows = {
     sim_window = sim_window;
-    sim_window2 = sim_window;
+    --sim_window2 = sim_window;
     perspective_window = perspective_window;
   };
 };
 
 x11_renderer2 = {
   type = "x11gl";
-  display = ":0.0";
+  display = ":0.1";
   windows = {
-    sim_window = sim_window;
+    --sim_window = sim_window;
     --sim_window2 = sim_window;
     perspective_window = perspective_window;
 
@@ -69,14 +69,14 @@ vrpn = {
   };
   sixdofs = {
     "WiiMote@tracker.rd.unr.edu";
-    "TallGlass@tracker.rd.unr.edu";
+    "ShortGlass@tracker.rd.unr.edu";
   };
 };
 
 self = {
-  hostname = HOSTNAME;
-  ssh = HOSTNAME;--"chase@" .. HOSTNAME;
-  address = HOSTNAME;
+  hostname = "HOSTNAME";
+  ssh = "HOSTNAME";--"chase@" .. HOSTNAME;
+  address = "HOSTNAME";
   plugins = {
     x11_renderer = x11_renderer;
     --x11_renderer2 = x11_renderer2;
