@@ -326,7 +326,7 @@ int main(int argc, char** argv) {
   // A wand that we want to follow based on some tracker -- we are tracing point 0
   input_map.sixdof_map["wand"] = "vrpn[WiiMote[0]]";
 
-  input_map.sixdof_map["head"] = "vrpn[ShortGlass[0]]";
+  input_map.sixdof_map["head"] = "vrpn[Tracker0[0]]";
 
   if (!cavr::System::init(argc, argv, &input_map)) {
     LOG(ERROR) << "Failed to initialize cavr.";

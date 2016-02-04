@@ -4,6 +4,8 @@
 
 #include <cmath>
 
+#include <glog/logging.h>
+
 using namespace vr;
 
 Object3D::Object3D(cavr::gl::Program *prog)
@@ -14,6 +16,7 @@ Object3D::Object3D(cavr::gl::Program *prog)
       rotation(1)
 {
     if(!prog) {
+        LOG(INFO) << "Program is null, creating default";
         prog = Scene::getDefaultProgram();
     }
 }

@@ -3,6 +3,8 @@
 
 #include <cavr/gfx/renderer.h>
 
+#include <glog/logging.h>
+
 using namespace vr;
 
 namespace {
@@ -31,11 +33,13 @@ Sphere::Sphere(float r, const std::string& n, cavr::gl::Program *prog)
     color.y = 0; // g
     color.z = 0; // b
 
+    LOG(INFO) << "Accessing program";
     uniforms.color = program->getUniform("color");
     uniforms.projection = program->getUniform("projection");
     uniforms.view = program->getUniform("view");
     uniforms.model = program->getUniform("model");
 
+    LOG(INFO) << "Done accessing program";
     sphereCount++;
     if(n == "") {
         name = std::string("Sphere") + std::to_string(sphereCount);

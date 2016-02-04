@@ -15,14 +15,14 @@ sim_window = {
 perspective_window = {
   view = {
     eyes = {
-      eye = cavr.sixdof("vrpn[ShortGlass[0]]");
+      eye = cavr.sixdof("vrpn[Tracker0[0]]");
       --left_eye = cavr.sixdof("emulated3");
       --right_eye = cavr.sixdof("emulated2");
       --stereo ="mono";
     };
-    lower_left = cavr.sixdof("vrpn[ShortGlass[0]]") * cavr.translate(-1, -1, -1);
-    lower_right = cavr.sixdof("vrpn[ShortGlass[0]]") * cavr.translate(1, -1, -1);
-    upper_left = cavr.sixdof("vrpn[ShortGlass[0]]") * cavr.translate(-1, 1, -1);
+    lower_left = cavr.sixdof("vrpn[Tracker0[0]]") * cavr.translate(-1, -1, -1);
+    lower_right = cavr.sixdof("vrpn[Tracker0[0]]") * cavr.translate(1, -1, -1);
+    upper_left = cavr.sixdof("vrpn[Tracker0[0]]") * cavr.translate(-1, 1, -1);
   };
   fullscreen = true;
 };
@@ -70,13 +70,14 @@ vrpn = {
   sixdofs = {
     "WiiMote@tracker.rd.unr.edu";
     "ShortGlass@tracker.rd.unr.edu";
+    "Tracker0@tracker.rd.unr.edu";
   };
 };
 
 self = {
-  hostname = "HOSTNAME";
-  ssh = "HOSTNAME";--"chase@" .. HOSTNAME;
-  address = "HOSTNAME";
+  hostname = HOSTNAME;
+  ssh = HOSTNAME;--"chase@" .. HOSTNAME;
+  address = HOSTNAME;
   plugins = {
     x11_renderer = x11_renderer;
     --x11_renderer2 = x11_renderer2;

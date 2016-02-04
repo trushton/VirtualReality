@@ -74,9 +74,9 @@ x11_renderer3 = {
 --};
 
 self = {
-  hostname = "HOSTNAME";
-  ssh = "HOSTNAME";--"chase@" .. HOSTNAME;
-  address = "HOSTNAME";
+  hostname = HOSTNAME;
+  ssh = HOSTNAME;--"chase@" .. HOSTNAME;
+  address = HOSTNAME;
   plugins = {
     x11_renderer = x11_renderer;
     --x11_renderer2 = x11_renderer2;
