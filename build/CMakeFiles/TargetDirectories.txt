@@ -1,0 +1,4 @@
+/usr/local/home/demo/Desktop/Thomas/VirtualReality/build/Demo/CMakeFiles/DEMO.dir
+/usr/local/home/demo/Desktop/Thomas/VirtualReality/build/Demo/CMakeFiles/DEMO_SUCCESSFUL.dir
+/usr/local/home/demo/Desktop/Thomas/VirtualReality/build/PA1/CMakeFiles/PA1.dir
+/usr/local/home/demo/Desktop/Thomas/VirtualReality/build/PA1/CMakeFiles/PA1_SUCCESSFUL.dir

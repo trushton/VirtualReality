@@ -15,23 +15,23 @@ sim_window = {
 perspective_window = {
   view = {
     eyes = {
-      eye = cavr.sixdof("vrpn[ShortGlass[0]]");
+      eye = cavr.sixdof("vrpn[ShortGlasses[0]]");
       --left_eye = cavr.sixdof("emulated3");
       --right_eye = cavr.sixdof("emulated2");
       --stereo ="mono";
     };
-    lower_left = cavr.sixdof("vrpn[ShortGlass[0]]") * cavr.translate(-1, -1, -1);
-    lower_right = cavr.sixdof("vrpn[ShortGlass[0]]") * cavr.translate(1, -1, -1);
-    upper_left = cavr.sixdof("vrpn[ShortGlass[0]]") * cavr.translate(-1, 1, -1);
+    lower_left = cavr.sixdof("vrpn[ShortGlasses[0]]") * cavr.translate(-1, -1, -1);
+    lower_right = cavr.sixdof("vrpn[ShortGlasses[0]]") * cavr.translate(1, -1, -1);
+    upper_left = cavr.sixdof("vrpn[ShortGlasses[0]]") * cavr.translate(-1, 1, -1);
   };
   fullscreen = true;
 };
 
 x11_renderer = {
   type = "x11gl";
-  display = ":0.0";
+  display = ":0.1";
   windows = {
-    sim_window = sim_window;
+    --sim_window = sim_window;
     --sim_window2 = sim_window;
     perspective_window = perspective_window;
   };
@@ -39,7 +39,7 @@ x11_renderer = {
 
 x11_renderer2 = {
   type = "x11gl";
-  display = ":0.1";
+  display = ":0.2";
   windows = {
     --sim_window = sim_window;
     --sim_window2 = sim_window;
@@ -52,9 +52,9 @@ x11_renderer3 = {
   type = "x11gl";
   display = ":0.0";
   windows = {
-    --sim_window = sim_window;
+    sim_window = sim_window;
     --sim_window2 = sim_window;
-    perspective_window = perspective_window;
+    --perspective_window = perspective_window;
   };
 };
 
@@ -68,19 +68,19 @@ vrpn = {
   analogs = {
   };
   sixdofs = {
-    "WiiMote@tracker.rd.unr.edu";
-    "ShortGlass@tracker.rd.unr.edu";
+    "WiiMote0@tracker.rd.unr.edu";
+    "ShortGlasses@tracker.rd.unr.edu";
   };
 };
 
 self = {
-  hostname = "HOSTNAME";
-  ssh = "HOSTNAME";--"chase@" .. HOSTNAME;
-  address = "HOSTNAME";
+  hostname = "projector";
+  ssh = "projector";--"chase@" .. HOSTNAME;
+  address = "projector";
   plugins = {
     x11_renderer = x11_renderer;
-    --x11_renderer2 = x11_renderer2;
-    --x11_renderer3 = x11_renderer3;
+    x11_renderer2 = x11_renderer2;
+    x11_renderer3 = x11_renderer3;
     vrpn = vrpn;
   };
 };

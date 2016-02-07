@@ -59,11 +59,11 @@ void initContext() {
 
   // Initialize some irrklang music
   cd->engine = createIrrKlangDevice();
-  cd->music = cd->engine->play3D("media/136608__thesoundcatcher__wind-in-small-forrest-01.wav",
-    vec3df(0,1,0), // Music source position
-    true, // play looped
-    false, //  start paused
-    true); //  enable sound--no-cache-dir
+  // cd->music = cd->engine->play3D("media/136608__thesoundcatcher__wind-in-small-forrest-01.wav",
+  //   vec3df(0,1,0), // Music source position
+  //   true, // play looped
+  //   false, //  start paused
+  //   true); //  enable sound--no-cache-dir
 
   cd->simple_program = cavr::gl::Program::createSimple();
 
@@ -211,14 +211,14 @@ void render() {
   glUniformMatrix4fv(cd->view_uniform, 1, GL_FALSE, cavr::gfx::getView().v);
   static auto model = mat4f::translate(0, 1, 0) * mat4f::scale(0.1);
   static auto cylinderModel = mat4f::translate(0,1,0) * mat4f::scale(0.1);
-  auto cubeModel = mat4f::translate(1,0,0) * mat4f::scale(0.1);
-  glUniformMatrix4fv(cd->model_uniform, 1, GL_FALSE, model.v);
+  auto cubeModel = mat4f::translate(0,1,0) * mat4f::scale(0.1);
 
 
   // Check if a button has been pressed
 
 
   // draw the sphere for the simple program
+  glUniformMatrix4fv(cd->model_uniform, 1, GL_FALSE, model.v);
   glDrawArrays(GL_TRIANGLES, 0, cd->num_triangles_in_sphere);
   glBindVertexArray(0);
   //cd->simple_program->end();
@@ -227,12 +227,33 @@ void render() {
 
   auto wand_sixdof = cavr::input::getSixDOF("wand");
   auto pos = wand_sixdof->getPosition();
-
+  //auto angle = wand_sixdof->getDirection();
   //model = mat4f::translate(pos.x,pos.y,pos.z) * mat4f::scale(0.1) * mat4f::look_at(pos, pos + wand_sixdof->getForward(), wand_sixdof->getUp()); //mat4f::rotate(3.14, wand_sixdof->getForward().cross(wand_sixdof->getUp()));
+  
+  //RENDER z cylinder
+  cylinderModel =  mat4f::translate(0,0,0) * mat4f::rotate(1.57, cavr::math::vec3f(0,0,1))* mat4f::scale(0.1);
+  glUniformMatrix4fv(cd->model_uniform, 1, GL_FALSE, cylinderModel.v);
+  glUniform3f(cd->color_uniform, 0, 0, 1);
+  glDrawArrays(GL_TRIANGLES, 0, cd->num_triangles_in_pointer);
+
+  //RENDER y CYLINDER
+  cylinderModel =  mat4f::translate(0,0,0) * mat4f::rotate(-1.57, cavr::math::vec3f(1,0,0))* mat4f::scale(0.1);
+  glUniformMatrix4fv(cd->model_uniform, 1, GL_FALSE, cylinderModel.v);
+  glUniform3f(cd->color_uniform, 0, 1, 0);
+  glDrawArrays(GL_TRIANGLES, 0, cd->num_triangles_in_pointer);
+
+  //RENDER X CYLINDER
+  cylinderModel =  mat4f::translate(0,0,0) * mat4f::rotate(1.57, cavr::math::vec3f(0,1,0))* mat4f::scale(0.1);
+  glUniformMatrix4fv(cd->model_uniform, 1, GL_FALSE, cylinderModel.v);
+  glUniform3f(cd->color_uniform, 1, 0, 0);
+  glDrawArrays(GL_TRIANGLES, 0, cd->num_triangles_in_pointer);
 
   cylinderModel = wand_sixdof->getMatrix() * mat4f::translate(0, 0, -2) * mat4f::scale(0.1);
-  glUniformMatrix4fv(cd->model_uniform, 1, GL_FALSE, cylinderModel.v);
+  cout << "POSITION: " << wand_sixdof->getPosition() << endl;
+  cout << "DIRECTION: " << wand_sixdof->getForward() << endl;
 
+  glUniformMatrix4fv(cd->model_uniform, 1, GL_FALSE, cylinderModel.v);
+  glUniform3f(cd->color_uniform, 0, 1, 1);
   glDrawArrays(GL_TRIANGLES, 0, cd->num_triangles_in_pointer);
   glBindVertexArray(0);
 
@@ -244,20 +265,18 @@ void render() {
        LOG(INFO) << "HIT";
        model = wand_sixdof->getMatrix() * mat4f::translate(0, 0, -2) * mat4f::scale(0.1);
        itemSelected = true;
-     }
-
-     else {
-      LOG(INFO) << "MISS";
+     }     
+   }
+   else {
       itemSelected = false;
      }
-   }
 
    if(itemSelected) {
       glUniform3f(cd->color_uniform, 0, 0, 1);
    }
 
    else {
-     glUniform3f(cd->color_uniform, 1, 0, 0);
+     glUniform3f(cd->color_uniform, 1, 1, 0);
    }
 
   cd->simple_program->end();
@@ -274,13 +293,19 @@ void render() {
   position.x *= 10;
   position.z *= 10;
 
-  auto model2 = mat4f::translate(0, 0, 0) * mat4f::scale(0.1);
 
   cd->engine->setListenerPosition(vec3df(position.x,position.y,position.z), // Listener's position
   vec3df(0,0,1)); // What direction is the listener's facing directiion -- in this case we are always stareing forward..
 
   // rotate cube
-  glUniformMatrix4fv(cd->mvp_uniform, 1, GL_FALSE, (cavr::gfx::getProjection() * cavr::gfx::getView() * cubeModel * cavr::math::mat4f::rotate(cd->cube_angle,cavr::math::vec3f(0,0,0))).v );
+  glUniformMatrix4fv(cd->mvp_uniform, 1, GL_FALSE, (cavr::gfx::getProjection() * cavr::gfx::getView() * cubeModel).v );
+
+  // draw cube
+  glDrawArrays(GL_LINES,0,cd->num_triangles_in_cube);
+
+  // rotate cube
+  cubeModel = mat4f::translate(1,1,0) * mat4f::scale(0.1);
+  glUniformMatrix4fv(cd->mvp_uniform, 1, GL_FALSE, (cavr::gfx::getProjection() * cavr::gfx::getView() * cubeModel).v );
 
   // draw cube
   glDrawArrays(GL_LINES,0,cd->num_triangles_in_cube);
@@ -324,7 +349,7 @@ int main(int argc, char** argv) {
   input_map.button_map["color"] = "vrpn[WiiMote0[3]]";
 
   // A wand that we want to follow based on some tracker -- we are tracing point 0
-  input_map.sixdof_map["wand"] = "vrpn[WiiMote[0]]";
+  input_map.sixdof_map["wand"] = "vrpn[WiiMote0[0]]";
 
   input_map.sixdof_map["head"] = "vrpn[ShortGlass[0]]";
 

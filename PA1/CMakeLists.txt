@@ -1,13 +1,11 @@
-CMAKE_MINIMUM_REQUIRED(VERSION 2.6)
-PROJECT(Example)
+PROJECT(PA1)
 
-SET(CMAKE_MODULE_PATH "${CMAKE_MODULE_PATH}" "$ENV{CAVR_BUILD_PATH}/CMakeModules")
 
 FIND_PACKAGE(Lua51 REQUIRED)
 FIND_PACKAGE(GLOG REQUIRED)
 FIND_PACKAGE(OpenGL REQUIRED)
 FIND_PACKAGE(GLEW REQUIRED)
-
+#FIND_PACKAGE(CAVR REQUIRED)
 #SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
 SET(CXX11_FLAGS -std=gnu++11)
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${CXX11_FLAGS}")
@@ -19,19 +17,16 @@ ENDIF(UNIX)
 
 INCLUDE_DIRECTORIES(
 	"${LUA_INCLUDE_DIR}"
-	"$ENV{CAVR_HOME_PATH}/cavr/include"
-	"$ENV{CAVR_HOME_PATH}/extensions/gfx/include"
-	"$ENV{CAVR_HOME_PATH}/extensions/gl/include"
-	"$ENV{CAVR_BUILD_PATH}/IrrKlang/include"
-  "${PROJECT_SOURCE_DIR}/include"
+	"${CAVR_INCLUDE_PATH}"
+	"${HOME_BUILD_PATH}/IrrKlang/include"
+  	"${PROJECT_SOURCE_DIR}/include"
 	"${GLOG_INCLUDE_DIRS}"
+  "/usr/local/include"
 )
 
 LINK_DIRECTORIES(
-	"$ENV{CAVR_BUILD_PATH}/IrrKlang/lib"
-	"$ENV{CAVR_HOME_PATH}/build/cavr" 
-	"$ENV{CAVR_HOME_PATH}/build/extensions/gl" 
-	"$ENV{CAVR_HOME_PATH}/build/extensions/gfx"
+	"${HOME_BUILD_PATH}/IrrKlang/lib"
+	"${CAVR_LIBRARIES}"
 )
 
 # Set Includes
@@ -41,21 +36,20 @@ INCLUDE_DIRECTORIES(${INCLUDES})
 
 # Set sources
 file(GLOB_RECURSE SOURCES "source/*.cpp")
-ADD_EXECUTABLE(Example ${SOURCES})
+ADD_EXECUTABLE(${PROJECT_NAME} ${SOURCES})
 
-add_custom_target(BUILD_SUCCESSFUL ALL
-                  DEPENDS Example
+add_custom_target("${PROJECT_NAME}_SUCCESSFUL" ALL
+                  DEPENDS ${PROJECT_NAME}
                   COMMAND ${CMAKE_COMMAND} -E echo ""
                   COMMAND ${CMAKE_COMMAND} -E echo "====================="
                   COMMAND ${CMAKE_COMMAND} -E echo "  Compile complete!"
                   COMMAND ${CMAKE_COMMAND} -E echo "====================="
                   COMMAND ${CMAKE_COMMAND} -E echo "${CMAKE_CURRENT_BINARY_DIR}"
-		  COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_CURRENT_BINARY_DIR}/config
                   COMMAND ${CMAKE_COMMAND} -E copy_directory ${PROJECT_SOURCE_DIR}/shaders/ ${CMAKE_CURRENT_BINARY_DIR}/shaders
-		              COMMAND ${CMAKE_COMMAND} -E copy_directory ${PROJECT_SOURCE_DIR}/media/ ${CMAKE_CURRENT_BINARY_DIR}/media
-                  COMMAND ${CMAKE_COMMAND} -E copy ${PROJECT_SOURCE_DIR}/config/example.lua ${CMAKE_CURRENT_BINARY_DIR}/config
+		  COMMAND ${CMAKE_COMMAND} -E copy_directory ${PROJECT_SOURCE_DIR}/media/ ${CMAKE_CURRENT_BINARY_DIR}/media
+                  COMMAND ${CMAKE_COMMAND} -E copy_directory ${PROJECT_SOURCE_DIR}/config/ ${CMAKE_CURRENT_BINARY_DIR}/config
                   COMMAND ${CMAKE_COMMAND} -E copy ${PROJECT_SOURCE_DIR}/config/cavrconfig.lua ${CMAKE_CURRENT_BINARY_DIR}
                   COMMAND ${CMAKE_COMMAND} -E copy ${PROJECT_SOURCE_DIR}/config/cavrplugins.lua ${CMAKE_CURRENT_BINARY_DIR}
                  )
 
-TARGET_LINK_LIBRARIES(Example cavr cavrgl cavrgfx IrrKlang ${GLOG_LIBRARIES} ${OPENGL_LIBRARY} ${GLEW_LIBRARIES})
+TARGET_LINK_LIBRARIES(${PROJECT_NAME} cavr cavrgl cavrgfx IrrKlang ${GLOG_LIBRARIES} ${OPENGL_LIBRARY} ${GLEW_LIBRARIES} ${CAVR_LIBRARIES})
