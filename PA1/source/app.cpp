@@ -8,6 +8,8 @@
 #include <glog/logging.h>
 //#include <glm/glm.hpp>
 #include <math.h>
+#include "Model.h"
+#include "ds_geom_pass_tech.h"
 
 // Self make files
 #include <Test.h>
@@ -25,6 +27,9 @@ struct ContextData {
   // Shader Programs
   cavr::gl::Program* simple_program;
   cavr::gl::Program* cube_program;
+
+  //custom Programs
+  DSGeomPassTech geomProgram;
 
   // Uniforms
   GLint color_uniform;
@@ -45,6 +50,9 @@ struct ContextData {
   size_t num_triangles_in_cube;
   size_t num_triangles_in_pointer;
 
+  //models
+  Model tree;
+
   // Rotating angle
   float cube_angle;
 
@@ -56,6 +64,11 @@ struct ContextData {
 // Initialize our program
 void initContext() {
   ContextData* cd = new ContextData();
+
+  //init geomProgram
+  cd->geomProgram.init();
+  //load models
+  cd->tree.loadModel("./bin/tree/tree.obj");
 
   // Initialize some irrklang music
   cd->engine = createIrrKlangDevice();
@@ -212,6 +225,20 @@ void render() {
   static auto model = mat4f::translate(0, 1, 0) * mat4f::scale(0.1);
   static auto cylinderModel = mat4f::translate(0,1,0) * mat4f::scale(0.1);
   auto cubeModel = mat4f::translate(0,1,0) * mat4f::scale(0.1);
+  cd->simple_program->end();
+
+  //attempt to render tree model
+  cd->geomProgram.enable();
+  auto treeModel = mat4f::translate(0,1,1) * mat4f::scale(0.2);
+  auto mvp4 = (cavr::gfx::getProjection() * cavr::gfx::getView() * treeModel);
+  //glUniformMatrix4fv(cd->model_uniform, 1, GL_FALSE, treeModel.v);
+  cd->geomProgram.set("gWVP", mvp4);
+  cd->geomProgram.set("gWorld", treeModel);
+  cd->geomProgram.set("gColorMap", 1);
+  cd->tree.renderModel();
+
+  cd->simple_program->begin();
+  cd->sphere_vao->bind();
 
 
   // Check if a button has been pressed
@@ -229,7 +256,7 @@ void render() {
   auto pos = wand_sixdof->getPosition();
   //auto angle = wand_sixdof->getDirection();
   //model = mat4f::translate(pos.x,pos.y,pos.z) * mat4f::scale(0.1) * mat4f::look_at(pos, pos + wand_sixdof->getForward(), wand_sixdof->getUp()); //mat4f::rotate(3.14, wand_sixdof->getForward().cross(wand_sixdof->getUp()));
-  
+
   //RENDER z cylinder
   cylinderModel =  mat4f::translate(0,0,0) * mat4f::rotate(1.57, cavr::math::vec3f(0,0,1))* mat4f::scale(0.1);
   glUniformMatrix4fv(cd->model_uniform, 1, GL_FALSE, cylinderModel.v);
@@ -249,8 +276,8 @@ void render() {
   glDrawArrays(GL_TRIANGLES, 0, cd->num_triangles_in_pointer);
 
   cylinderModel = wand_sixdof->getMatrix() * mat4f::translate(0, 0, -2) * mat4f::scale(0.1);
-  cout << "POSITION: " << wand_sixdof->getPosition() << endl;
-  cout << "DIRECTION: " << wand_sixdof->getForward() << endl;
+  //cout << "POSITION: " << wand_sixdof->getPosition() << endl;
+  //cout << "DIRECTION: " << wand_sixdof->getForward() << endl;
 
   glUniformMatrix4fv(cd->model_uniform, 1, GL_FALSE, cylinderModel.v);
   glUniform3f(cd->color_uniform, 0, 1, 1);
@@ -265,7 +292,7 @@ void render() {
        LOG(INFO) << "HIT";
        model = wand_sixdof->getMatrix() * mat4f::translate(0, 0, -2) * mat4f::scale(0.1);
        itemSelected = true;
-     }     
+     }
    }
    else {
       itemSelected = false;

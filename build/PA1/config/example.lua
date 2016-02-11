@@ -29,11 +29,11 @@ perspective_window = {
 
 x11_renderer = {
   type = "x11gl";
-  display = ":0.1";
+  display = ":0.0";
   windows = {
-    --sim_window = sim_window;
+    sim_window = sim_window;
     --sim_window2 = sim_window;
-    perspective_window = perspective_window;
+    --perspective_window = perspective_window;
   };
 };
 
@@ -74,13 +74,13 @@ vrpn = {
 };
 
 self = {
-  hostname = "projector";
-  ssh = "projector";--"chase@" .. HOSTNAME;
-  address = "projector";
+  hostname = "hpcvis7";
+  ssh = "hpcvis7";--"chase@" .. HOSTNAME;
+  address = "hpcvis7";
   plugins = {
     x11_renderer = x11_renderer;
-    x11_renderer2 = x11_renderer2;
-    x11_renderer3 = x11_renderer3;
+    --x11_renderer2 = x11_renderer2;
+    --x11_renderer3 = x11_renderer3;
     vrpn = vrpn;
   };
 };

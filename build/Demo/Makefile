@@ -38,22 +38,19 @@ RM = /usr/bin/cmake -E remove -f
 # Escaping for special characters.
 EQUALS = =
 
-# The program to use to edit the cache.
-CMAKE_EDIT_COMMAND = /usr/bin/ccmake
-
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /usr/local/home/demo/Desktop/Thomas/VirtualReality
+CMAKE_SOURCE_DIR = /cse/home/trushton/Desktop/VirtualReality
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /usr/local/home/demo/Desktop/Thomas/VirtualReality/build
+CMAKE_BINARY_DIR = /cse/home/trushton/Desktop/VirtualReality/build
 
 #=============================================================================
 # Targets provided globally by CMake.
 
 # Special rule for the target edit_cache
 edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
-	/usr/bin/ccmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running interactive CMake command-line interface..."
+	/usr/bin/cmake -i .
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -72,14 +69,14 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /usr/local/home/demo/Desktop/Thomas/VirtualReality/build && $(CMAKE_COMMAND) -E cmake_progress_start /usr/local/home/demo/Desktop/Thomas/VirtualReality/build/CMakeFiles /usr/local/home/demo/Desktop/Thomas/VirtualReality/build/Demo/CMakeFiles/progress.marks
-	cd /usr/local/home/demo/Desktop/Thomas/VirtualReality/build && $(MAKE) -f CMakeFiles/Makefile2 Demo/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /usr/local/home/demo/Desktop/Thomas/VirtualReality/build/CMakeFiles 0
+	cd /cse/home/trushton/Desktop/VirtualReality/build && $(CMAKE_COMMAND) -E cmake_progress_start /cse/home/trushton/Desktop/VirtualReality/build/CMakeFiles /cse/home/trushton/Desktop/VirtualReality/build/Demo/CMakeFiles/progress.marks
+	cd /cse/home/trushton/Desktop/VirtualReality/build && $(MAKE) -f CMakeFiles/Makefile2 Demo/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /cse/home/trushton/Desktop/VirtualReality/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /usr/local/home/demo/Desktop/Thomas/VirtualReality/build && $(MAKE) -f CMakeFiles/Makefile2 Demo/clean
+	cd /cse/home/trushton/Desktop/VirtualReality/build && $(MAKE) -f CMakeFiles/Makefile2 Demo/clean
 .PHONY : clean
 
 # The main clean target
@@ -88,22 +85,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /usr/local/home/demo/Desktop/Thomas/VirtualReality/build && $(MAKE) -f CMakeFiles/Makefile2 Demo/preinstall
+	cd /cse/home/trushton/Desktop/VirtualReality/build && $(MAKE) -f CMakeFiles/Makefile2 Demo/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /usr/local/home/demo/Desktop/Thomas/VirtualReality/build && $(MAKE) -f CMakeFiles/Makefile2 Demo/preinstall
+	cd /cse/home/trushton/Desktop/VirtualReality/build && $(MAKE) -f CMakeFiles/Makefile2 Demo/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /usr/local/home/demo/Desktop/Thomas/VirtualReality/build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /cse/home/trushton/Desktop/VirtualReality/build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 Demo/CMakeFiles/DEMO.dir/rule:
-	cd /usr/local/home/demo/Desktop/Thomas/VirtualReality/build && $(MAKE) -f CMakeFiles/Makefile2 Demo/CMakeFiles/DEMO.dir/rule
+	cd /cse/home/trushton/Desktop/VirtualReality/build && $(MAKE) -f CMakeFiles/Makefile2 Demo/CMakeFiles/DEMO.dir/rule
 .PHONY : Demo/CMakeFiles/DEMO.dir/rule
 
 # Convenience name for target.
@@ -112,12 +109,12 @@ DEMO: Demo/CMakeFiles/DEMO.dir/rule
 
 # fast build rule for target.
 DEMO/fast:
-	cd /usr/local/home/demo/Desktop/Thomas/VirtualReality/build && $(MAKE) -f Demo/CMakeFiles/DEMO.dir/build.make Demo/CMakeFiles/DEMO.dir/build
+	cd /cse/home/trushton/Desktop/VirtualReality/build && $(MAKE) -f Demo/CMakeFiles/DEMO.dir/build.make Demo/CMakeFiles/DEMO.dir/build
 .PHONY : DEMO/fast
 
 # Convenience name for target.
 Demo/CMakeFiles/DEMO_SUCCESSFUL.dir/rule:
-	cd /usr/local/home/demo/Desktop/Thomas/VirtualReality/build && $(MAKE) -f CMakeFiles/Makefile2 Demo/CMakeFiles/DEMO_SUCCESSFUL.dir/rule
+	cd /cse/home/trushton/Desktop/VirtualReality/build && $(MAKE) -f CMakeFiles/Makefile2 Demo/CMakeFiles/DEMO_SUCCESSFUL.dir/rule
 .PHONY : Demo/CMakeFiles/DEMO_SUCCESSFUL.dir/rule
 
 # Convenience name for target.
@@ -126,7 +123,7 @@ DEMO_SUCCESSFUL: Demo/CMakeFiles/DEMO_SUCCESSFUL.dir/rule
 
 # fast build rule for target.
 DEMO_SUCCESSFUL/fast:
-	cd /usr/local/home/demo/Desktop/Thomas/VirtualReality/build && $(MAKE) -f Demo/CMakeFiles/DEMO_SUCCESSFUL.dir/build.make Demo/CMakeFiles/DEMO_SUCCESSFUL.dir/build
+	cd /cse/home/trushton/Desktop/VirtualReality/build && $(MAKE) -f Demo/CMakeFiles/DEMO_SUCCESSFUL.dir/build.make Demo/CMakeFiles/DEMO_SUCCESSFUL.dir/build
 .PHONY : DEMO_SUCCESSFUL/fast
 
 source/Test.o: source/Test.cpp.o
@@ -134,7 +131,7 @@ source/Test.o: source/Test.cpp.o
 
 # target to build an object file
 source/Test.cpp.o:
-	cd /usr/local/home/demo/Desktop/Thomas/VirtualReality/build && $(MAKE) -f Demo/CMakeFiles/DEMO.dir/build.make Demo/CMakeFiles/DEMO.dir/source/Test.cpp.o
+	cd /cse/home/trushton/Desktop/VirtualReality/build && $(MAKE) -f Demo/CMakeFiles/DEMO.dir/build.make Demo/CMakeFiles/DEMO.dir/source/Test.cpp.o
 .PHONY : source/Test.cpp.o
 
 source/Test.i: source/Test.cpp.i
@@ -142,7 +139,7 @@ source/Test.i: source/Test.cpp.i
 
 # target to preprocess a source file
 source/Test.cpp.i:
-	cd /usr/local/home/demo/Desktop/Thomas/VirtualReality/build && $(MAKE) -f Demo/CMakeFiles/DEMO.dir/build.make Demo/CMakeFiles/DEMO.dir/source/Test.cpp.i
+	cd /cse/home/trushton/Desktop/VirtualReality/build && $(MAKE) -f Demo/CMakeFiles/DEMO.dir/build.make Demo/CMakeFiles/DEMO.dir/source/Test.cpp.i
 .PHONY : source/Test.cpp.i
 
 source/Test.s: source/Test.cpp.s
@@ -150,7 +147,7 @@ source/Test.s: source/Test.cpp.s
 
 # target to generate assembly for a file
 source/Test.cpp.s:
-	cd /usr/local/home/demo/Desktop/Thomas/VirtualReality/build && $(MAKE) -f Demo/CMakeFiles/DEMO.dir/build.make Demo/CMakeFiles/DEMO.dir/source/Test.cpp.s
+	cd /cse/home/trushton/Desktop/VirtualReality/build && $(MAKE) -f Demo/CMakeFiles/DEMO.dir/build.make Demo/CMakeFiles/DEMO.dir/source/Test.cpp.s
 .PHONY : source/Test.cpp.s
 
 source/app.o: source/app.cpp.o
@@ -158,7 +155,7 @@ source/app.o: source/app.cpp.o
 
 # target to build an object file
 source/app.cpp.o:
-	cd /usr/local/home/demo/Desktop/Thomas/VirtualReality/build && $(MAKE) -f Demo/CMakeFiles/DEMO.dir/build.make Demo/CMakeFiles/DEMO.dir/source/app.cpp.o
+	cd /cse/home/trushton/Desktop/VirtualReality/build && $(MAKE) -f Demo/CMakeFiles/DEMO.dir/build.make Demo/CMakeFiles/DEMO.dir/source/app.cpp.o
 .PHONY : source/app.cpp.o
 
 source/app.i: source/app.cpp.i
@@ -166,7 +163,7 @@ source/app.i: source/app.cpp.i
 
 # target to preprocess a source file
 source/app.cpp.i:
-	cd /usr/local/home/demo/Desktop/Thomas/VirtualReality/build && $(MAKE) -f Demo/CMakeFiles/DEMO.dir/build.make Demo/CMakeFiles/DEMO.dir/source/app.cpp.i
+	cd /cse/home/trushton/Desktop/VirtualReality/build && $(MAKE) -f Demo/CMakeFiles/DEMO.dir/build.make Demo/CMakeFiles/DEMO.dir/source/app.cpp.i
 .PHONY : source/app.cpp.i
 
 source/app.s: source/app.cpp.s
@@ -174,7 +171,7 @@ source/app.s: source/app.cpp.s
 
 # target to generate assembly for a file
 source/app.cpp.s:
-	cd /usr/local/home/demo/Desktop/Thomas/VirtualReality/build && $(MAKE) -f Demo/CMakeFiles/DEMO.dir/build.make Demo/CMakeFiles/DEMO.dir/source/app.cpp.s
+	cd /cse/home/trushton/Desktop/VirtualReality/build && $(MAKE) -f Demo/CMakeFiles/DEMO.dir/build.make Demo/CMakeFiles/DEMO.dir/source/app.cpp.s
 .PHONY : source/app.cpp.s
 
 # Help Target
@@ -204,6 +201,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /usr/local/home/demo/Desktop/Thomas/VirtualReality/build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /cse/home/trushton/Desktop/VirtualReality/build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

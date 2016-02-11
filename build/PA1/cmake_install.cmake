@@ -1,4 +1,4 @@
-# Install script for directory: /usr/local/home/demo/Desktop/Thomas/VirtualReality/PA1
+# Install script for directory: /cse/home/trushton/Desktop/VirtualReality/PA1
 
 # Set the install prefix
 IF(NOT DEFINED CMAKE_INSTALL_PREFIX)

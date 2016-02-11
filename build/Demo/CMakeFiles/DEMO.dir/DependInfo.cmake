@@ -4,8 +4,8 @@ SET(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 SET(CMAKE_DEPENDS_CHECK_CXX
-  "/usr/local/home/demo/Desktop/Thomas/VirtualReality/Demo/source/Test.cpp" "/usr/local/home/demo/Desktop/Thomas/VirtualReality/build/Demo/CMakeFiles/DEMO.dir/source/Test.cpp.o"
-  "/usr/local/home/demo/Desktop/Thomas/VirtualReality/Demo/source/app.cpp" "/usr/local/home/demo/Desktop/Thomas/VirtualReality/build/Demo/CMakeFiles/DEMO.dir/source/app.cpp.o"
+  "/cse/home/trushton/Desktop/VirtualReality/Demo/source/Test.cpp" "/cse/home/trushton/Desktop/VirtualReality/build/Demo/CMakeFiles/DEMO.dir/source/Test.cpp.o"
+  "/cse/home/trushton/Desktop/VirtualReality/Demo/source/app.cpp" "/cse/home/trushton/Desktop/VirtualReality/build/Demo/CMakeFiles/DEMO.dir/source/app.cpp.o"
   )
 SET(CMAKE_CXX_COMPILER_ID "GNU")
 

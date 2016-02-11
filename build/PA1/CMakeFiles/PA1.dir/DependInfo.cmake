@@ -4,8 +4,12 @@ SET(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 SET(CMAKE_DEPENDS_CHECK_CXX
-  "/usr/local/home/demo/Desktop/Thomas/VirtualReality/PA1/source/Test.cpp" "/usr/local/home/demo/Desktop/Thomas/VirtualReality/build/PA1/CMakeFiles/PA1.dir/source/Test.cpp.o"
-  "/usr/local/home/demo/Desktop/Thomas/VirtualReality/PA1/source/app.cpp" "/usr/local/home/demo/Desktop/Thomas/VirtualReality/build/PA1/CMakeFiles/PA1.dir/source/app.cpp.o"
+  "/cse/home/trushton/Desktop/VirtualReality/PA1/source/Model.cpp" "/cse/home/trushton/Desktop/VirtualReality/build/PA1/CMakeFiles/PA1.dir/source/Model.cpp.o"
+  "/cse/home/trushton/Desktop/VirtualReality/PA1/source/Program.cpp" "/cse/home/trushton/Desktop/VirtualReality/build/PA1/CMakeFiles/PA1.dir/source/Program.cpp.o"
+  "/cse/home/trushton/Desktop/VirtualReality/PA1/source/Test.cpp" "/cse/home/trushton/Desktop/VirtualReality/build/PA1/CMakeFiles/PA1.dir/source/Test.cpp.o"
+  "/cse/home/trushton/Desktop/VirtualReality/PA1/source/app.cpp" "/cse/home/trushton/Desktop/VirtualReality/build/PA1/CMakeFiles/PA1.dir/source/app.cpp.o"
+  "/cse/home/trushton/Desktop/VirtualReality/PA1/source/ds_geom_pass_tech.cpp" "/cse/home/trushton/Desktop/VirtualReality/build/PA1/CMakeFiles/PA1.dir/source/ds_geom_pass_tech.cpp.o"
+  "/cse/home/trushton/Desktop/VirtualReality/PA1/source/mesh.cpp" "/cse/home/trushton/Desktop/VirtualReality/build/PA1/CMakeFiles/PA1.dir/source/mesh.cpp.o"
   )
 SET(CMAKE_CXX_COMPILER_ID "GNU")
 

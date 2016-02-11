@@ -46,14 +46,11 @@ RM = /usr/bin/cmake -E remove -f
 # Escaping for special characters.
 EQUALS = =
 
-# The program to use to edit the cache.
-CMAKE_EDIT_COMMAND = /usr/bin/ccmake
-
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /usr/local/home/demo/Desktop/Thomas/VirtualReality
+CMAKE_SOURCE_DIR = /cse/home/trushton/Desktop/VirtualReality
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /usr/local/home/demo/Desktop/Thomas/VirtualReality/build
+CMAKE_BINARY_DIR = /cse/home/trushton/Desktop/VirtualReality/build
 
 #=============================================================================
 # Directory level rules for directory Demo
@@ -79,7 +76,7 @@ Demo/preinstall:
 Demo/CMakeFiles/DEMO.dir/all:
 	$(MAKE) -f Demo/CMakeFiles/DEMO.dir/build.make Demo/CMakeFiles/DEMO.dir/depend
 	$(MAKE) -f Demo/CMakeFiles/DEMO.dir/build.make Demo/CMakeFiles/DEMO.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /usr/local/home/demo/Desktop/Thomas/VirtualReality/build/CMakeFiles  1 2
+	$(CMAKE_COMMAND) -E cmake_progress_report /cse/home/trushton/Desktop/VirtualReality/build/CMakeFiles  1 2
 	@echo "Built target DEMO"
 .PHONY : Demo/CMakeFiles/DEMO.dir/all
 
@@ -89,9 +86,9 @@ all: Demo/CMakeFiles/DEMO.dir/all
 
 # Build rule for subdir invocation for target.
 Demo/CMakeFiles/DEMO.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /usr/local/home/demo/Desktop/Thomas/VirtualReality/build/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /cse/home/trushton/Desktop/VirtualReality/build/CMakeFiles 2
 	$(MAKE) -f CMakeFiles/Makefile2 Demo/CMakeFiles/DEMO.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /usr/local/home/demo/Desktop/Thomas/VirtualReality/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /cse/home/trushton/Desktop/VirtualReality/build/CMakeFiles 0
 .PHONY : Demo/CMakeFiles/DEMO.dir/rule
 
 # Convenience name for target.
@@ -114,7 +111,7 @@ clean: Demo/CMakeFiles/DEMO.dir/clean
 Demo/CMakeFiles/DEMO_SUCCESSFUL.dir/all: Demo/CMakeFiles/DEMO.dir/all
 	$(MAKE) -f Demo/CMakeFiles/DEMO_SUCCESSFUL.dir/build.make Demo/CMakeFiles/DEMO_SUCCESSFUL.dir/depend
 	$(MAKE) -f Demo/CMakeFiles/DEMO_SUCCESSFUL.dir/build.make Demo/CMakeFiles/DEMO_SUCCESSFUL.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /usr/local/home/demo/Desktop/Thomas/VirtualReality/build/CMakeFiles 
+	$(CMAKE_COMMAND) -E cmake_progress_report /cse/home/trushton/Desktop/VirtualReality/build/CMakeFiles 
 	@echo "Built target DEMO_SUCCESSFUL"
 .PHONY : Demo/CMakeFiles/DEMO_SUCCESSFUL.dir/all
 
@@ -124,9 +121,9 @@ all: Demo/CMakeFiles/DEMO_SUCCESSFUL.dir/all
 
 # Build rule for subdir invocation for target.
 Demo/CMakeFiles/DEMO_SUCCESSFUL.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /usr/local/home/demo/Desktop/Thomas/VirtualReality/build/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /cse/home/trushton/Desktop/VirtualReality/build/CMakeFiles 2
 	$(MAKE) -f CMakeFiles/Makefile2 Demo/CMakeFiles/DEMO_SUCCESSFUL.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /usr/local/home/demo/Desktop/Thomas/VirtualReality/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /cse/home/trushton/Desktop/VirtualReality/build/CMakeFiles 0
 .PHONY : Demo/CMakeFiles/DEMO_SUCCESSFUL.dir/rule
 
 # Convenience name for target.
@@ -166,7 +163,7 @@ PA1/preinstall:
 PA1/CMakeFiles/PA1.dir/all:
 	$(MAKE) -f PA1/CMakeFiles/PA1.dir/build.make PA1/CMakeFiles/PA1.dir/depend
 	$(MAKE) -f PA1/CMakeFiles/PA1.dir/build.make PA1/CMakeFiles/PA1.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /usr/local/home/demo/Desktop/Thomas/VirtualReality/build/CMakeFiles  3 4
+	$(CMAKE_COMMAND) -E cmake_progress_report /cse/home/trushton/Desktop/VirtualReality/build/CMakeFiles  3 4 5 6 7 8
 	@echo "Built target PA1"
 .PHONY : PA1/CMakeFiles/PA1.dir/all
 
@@ -176,9 +173,9 @@ all: PA1/CMakeFiles/PA1.dir/all
 
 # Build rule for subdir invocation for target.
 PA1/CMakeFiles/PA1.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /usr/local/home/demo/Desktop/Thomas/VirtualReality/build/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /cse/home/trushton/Desktop/VirtualReality/build/CMakeFiles 6
 	$(MAKE) -f CMakeFiles/Makefile2 PA1/CMakeFiles/PA1.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /usr/local/home/demo/Desktop/Thomas/VirtualReality/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /cse/home/trushton/Desktop/VirtualReality/build/CMakeFiles 0
 .PHONY : PA1/CMakeFiles/PA1.dir/rule
 
 # Convenience name for target.
@@ -201,7 +198,7 @@ clean: PA1/CMakeFiles/PA1.dir/clean
 PA1/CMakeFiles/PA1_SUCCESSFUL.dir/all: PA1/CMakeFiles/PA1.dir/all
 	$(MAKE) -f PA1/CMakeFiles/PA1_SUCCESSFUL.dir/build.make PA1/CMakeFiles/PA1_SUCCESSFUL.dir/depend
 	$(MAKE) -f PA1/CMakeFiles/PA1_SUCCESSFUL.dir/build.make PA1/CMakeFiles/PA1_SUCCESSFUL.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /usr/local/home/demo/Desktop/Thomas/VirtualReality/build/CMakeFiles 
+	$(CMAKE_COMMAND) -E cmake_progress_report /cse/home/trushton/Desktop/VirtualReality/build/CMakeFiles 
 	@echo "Built target PA1_SUCCESSFUL"
 .PHONY : PA1/CMakeFiles/PA1_SUCCESSFUL.dir/all
 
@@ -211,9 +208,9 @@ all: PA1/CMakeFiles/PA1_SUCCESSFUL.dir/all
 
 # Build rule for subdir invocation for target.
 PA1/CMakeFiles/PA1_SUCCESSFUL.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /usr/local/home/demo/Desktop/Thomas/VirtualReality/build/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /cse/home/trushton/Desktop/VirtualReality/build/CMakeFiles 6
 	$(MAKE) -f CMakeFiles/Makefile2 PA1/CMakeFiles/PA1_SUCCESSFUL.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /usr/local/home/demo/Desktop/Thomas/VirtualReality/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /cse/home/trushton/Desktop/VirtualReality/build/CMakeFiles 0
 .PHONY : PA1/CMakeFiles/PA1_SUCCESSFUL.dir/rule
 
 # Convenience name for target.

@@ -34,14 +34,11 @@ RM = /usr/bin/cmake -E remove -f
 # Escaping for special characters.
 EQUALS = =
 
-# The program to use to edit the cache.
-CMAKE_EDIT_COMMAND = /usr/bin/ccmake
-
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /usr/local/home/demo/Desktop/Thomas/VirtualReality
+CMAKE_SOURCE_DIR = /cse/home/trushton/Desktop/VirtualReality
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /usr/local/home/demo/Desktop/Thomas/VirtualReality/build
+CMAKE_BINARY_DIR = /cse/home/trushton/Desktop/VirtualReality/build
 
 # Include any dependencies generated for this target.
 include Demo/CMakeFiles/DEMO.dir/depend.make
@@ -54,17 +51,17 @@ include Demo/CMakeFiles/DEMO.dir/flags.make
 
 Demo/CMakeFiles/DEMO.dir/source/Test.cpp.o: Demo/CMakeFiles/DEMO.dir/flags.make
 Demo/CMakeFiles/DEMO.dir/source/Test.cpp.o: ../Demo/source/Test.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /usr/local/home/demo/Desktop/Thomas/VirtualReality/build/CMakeFiles $(CMAKE_PROGRESS_1)
+	$(CMAKE_COMMAND) -E cmake_progress_report /cse/home/trushton/Desktop/VirtualReality/build/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object Demo/CMakeFiles/DEMO.dir/source/Test.cpp.o"
-	cd /usr/local/home/demo/Desktop/Thomas/VirtualReality/build/Demo && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/DEMO.dir/source/Test.cpp.o -c /usr/local/home/demo/Desktop/Thomas/VirtualReality/Demo/source/Test.cpp
+	cd /cse/home/trushton/Desktop/VirtualReality/build/Demo && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/DEMO.dir/source/Test.cpp.o -c /cse/home/trushton/Desktop/VirtualReality/Demo/source/Test.cpp
 
 Demo/CMakeFiles/DEMO.dir/source/Test.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/DEMO.dir/source/Test.cpp.i"
-	cd /usr/local/home/demo/Desktop/Thomas/VirtualReality/build/Demo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /usr/local/home/demo/Desktop/Thomas/VirtualReality/Demo/source/Test.cpp > CMakeFiles/DEMO.dir/source/Test.cpp.i
+	cd /cse/home/trushton/Desktop/VirtualReality/build/Demo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /cse/home/trushton/Desktop/VirtualReality/Demo/source/Test.cpp > CMakeFiles/DEMO.dir/source/Test.cpp.i
 
 Demo/CMakeFiles/DEMO.dir/source/Test.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/DEMO.dir/source/Test.cpp.s"
-	cd /usr/local/home/demo/Desktop/Thomas/VirtualReality/build/Demo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /usr/local/home/demo/Desktop/Thomas/VirtualReality/Demo/source/Test.cpp -o CMakeFiles/DEMO.dir/source/Test.cpp.s
+	cd /cse/home/trushton/Desktop/VirtualReality/build/Demo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /cse/home/trushton/Desktop/VirtualReality/Demo/source/Test.cpp -o CMakeFiles/DEMO.dir/source/Test.cpp.s
 
 Demo/CMakeFiles/DEMO.dir/source/Test.cpp.o.requires:
 .PHONY : Demo/CMakeFiles/DEMO.dir/source/Test.cpp.o.requires
@@ -77,17 +74,17 @@ Demo/CMakeFiles/DEMO.dir/source/Test.cpp.o.provides.build: Demo/CMakeFiles/DEMO.
 
 Demo/CMakeFiles/DEMO.dir/source/app.cpp.o: Demo/CMakeFiles/DEMO.dir/flags.make
 Demo/CMakeFiles/DEMO.dir/source/app.cpp.o: ../Demo/source/app.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /usr/local/home/demo/Desktop/Thomas/VirtualReality/build/CMakeFiles $(CMAKE_PROGRESS_2)
+	$(CMAKE_COMMAND) -E cmake_progress_report /cse/home/trushton/Desktop/VirtualReality/build/CMakeFiles $(CMAKE_PROGRESS_2)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object Demo/CMakeFiles/DEMO.dir/source/app.cpp.o"
-	cd /usr/local/home/demo/Desktop/Thomas/VirtualReality/build/Demo && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/DEMO.dir/source/app.cpp.o -c /usr/local/home/demo/Desktop/Thomas/VirtualReality/Demo/source/app.cpp
+	cd /cse/home/trushton/Desktop/VirtualReality/build/Demo && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/DEMO.dir/source/app.cpp.o -c /cse/home/trushton/Desktop/VirtualReality/Demo/source/app.cpp
 
 Demo/CMakeFiles/DEMO.dir/source/app.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/DEMO.dir/source/app.cpp.i"
-	cd /usr/local/home/demo/Desktop/Thomas/VirtualReality/build/Demo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /usr/local/home/demo/Desktop/Thomas/VirtualReality/Demo/source/app.cpp > CMakeFiles/DEMO.dir/source/app.cpp.i
+	cd /cse/home/trushton/Desktop/VirtualReality/build/Demo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /cse/home/trushton/Desktop/VirtualReality/Demo/source/app.cpp > CMakeFiles/DEMO.dir/source/app.cpp.i
 
 Demo/CMakeFiles/DEMO.dir/source/app.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/DEMO.dir/source/app.cpp.s"
-	cd /usr/local/home/demo/Desktop/Thomas/VirtualReality/build/Demo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /usr/local/home/demo/Desktop/Thomas/VirtualReality/Demo/source/app.cpp -o CMakeFiles/DEMO.dir/source/app.cpp.s
+	cd /cse/home/trushton/Desktop/VirtualReality/build/Demo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /cse/home/trushton/Desktop/VirtualReality/Demo/source/app.cpp -o CMakeFiles/DEMO.dir/source/app.cpp.s
 
 Demo/CMakeFiles/DEMO.dir/source/app.cpp.o.requires:
 .PHONY : Demo/CMakeFiles/DEMO.dir/source/app.cpp.o.requires
@@ -122,7 +119,7 @@ Demo/DEMO: /usr/local/cavr/plugins/libcavr_vrpn.so
 Demo/DEMO: /usr/local/cavr/plugins/libx11gl.so
 Demo/DEMO: Demo/CMakeFiles/DEMO.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking CXX executable DEMO"
-	cd /usr/local/home/demo/Desktop/Thomas/VirtualReality/build/Demo && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/DEMO.dir/link.txt --verbose=$(VERBOSE)
+	cd /cse/home/trushton/Desktop/VirtualReality/build/Demo && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/DEMO.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
 Demo/CMakeFiles/DEMO.dir/build: Demo/DEMO
@@ -133,10 +130,10 @@ Demo/CMakeFiles/DEMO.dir/requires: Demo/CMakeFiles/DEMO.dir/source/app.cpp.o.req
 .PHONY : Demo/CMakeFiles/DEMO.dir/requires
 
 Demo/CMakeFiles/DEMO.dir/clean:
-	cd /usr/local/home/demo/Desktop/Thomas/VirtualReality/build/Demo && $(CMAKE_COMMAND) -P CMakeFiles/DEMO.dir/cmake_clean.cmake
+	cd /cse/home/trushton/Desktop/VirtualReality/build/Demo && $(CMAKE_COMMAND) -P CMakeFiles/DEMO.dir/cmake_clean.cmake
 .PHONY : Demo/CMakeFiles/DEMO.dir/clean
 
 Demo/CMakeFiles/DEMO.dir/depend:
-	cd /usr/local/home/demo/Desktop/Thomas/VirtualReality/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /usr/local/home/demo/Desktop/Thomas/VirtualReality /usr/local/home/demo/Desktop/Thomas/VirtualReality/Demo /usr/local/home/demo/Desktop/Thomas/VirtualReality/build /usr/local/home/demo/Desktop/Thomas/VirtualReality/build/Demo /usr/local/home/demo/Desktop/Thomas/VirtualReality/build/Demo/CMakeFiles/DEMO.dir/DependInfo.cmake --color=$(COLOR)
+	cd /cse/home/trushton/Desktop/VirtualReality/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /cse/home/trushton/Desktop/VirtualReality /cse/home/trushton/Desktop/VirtualReality/Demo /cse/home/trushton/Desktop/VirtualReality/build /cse/home/trushton/Desktop/VirtualReality/build/Demo /cse/home/trushton/Desktop/VirtualReality/build/Demo/CMakeFiles/DEMO.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : Demo/CMakeFiles/DEMO.dir/depend
 

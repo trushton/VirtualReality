@@ -34,14 +34,11 @@ RM = /usr/bin/cmake -E remove -f
 # Escaping for special characters.
 EQUALS = =
 
-# The program to use to edit the cache.
-CMAKE_EDIT_COMMAND = /usr/bin/ccmake
-
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /usr/local/home/demo/Desktop/Thomas/VirtualReality
+CMAKE_SOURCE_DIR = /cse/home/trushton/Desktop/VirtualReality
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /usr/local/home/demo/Desktop/Thomas/VirtualReality/build
+CMAKE_BINARY_DIR = /cse/home/trushton/Desktop/VirtualReality/build
 
 # Utility rule file for DEMO_SUCCESSFUL.
 
@@ -49,16 +46,16 @@ CMAKE_BINARY_DIR = /usr/local/home/demo/Desktop/Thomas/VirtualReality/build
 include Demo/CMakeFiles/DEMO_SUCCESSFUL.dir/progress.make
 
 Demo/CMakeFiles/DEMO_SUCCESSFUL: Demo/DEMO
-	cd /usr/local/home/demo/Desktop/Thomas/VirtualReality/build/Demo && /usr/bin/cmake -E echo 
-	cd /usr/local/home/demo/Desktop/Thomas/VirtualReality/build/Demo && /usr/bin/cmake -E echo =====================
-	cd /usr/local/home/demo/Desktop/Thomas/VirtualReality/build/Demo && /usr/bin/cmake -E echo \ \ Compile\ complete!
-	cd /usr/local/home/demo/Desktop/Thomas/VirtualReality/build/Demo && /usr/bin/cmake -E echo =====================
-	cd /usr/local/home/demo/Desktop/Thomas/VirtualReality/build/Demo && /usr/bin/cmake -E echo /usr/local/home/demo/Desktop/Thomas/VirtualReality/build/Demo
-	cd /usr/local/home/demo/Desktop/Thomas/VirtualReality/build/Demo && /usr/bin/cmake -E copy_directory /usr/local/home/demo/Desktop/Thomas/VirtualReality/Demo/shaders/ /usr/local/home/demo/Desktop/Thomas/VirtualReality/build/Demo/shaders
-	cd /usr/local/home/demo/Desktop/Thomas/VirtualReality/build/Demo && /usr/bin/cmake -E copy_directory /usr/local/home/demo/Desktop/Thomas/VirtualReality/Demo/media/ /usr/local/home/demo/Desktop/Thomas/VirtualReality/build/Demo/media
-	cd /usr/local/home/demo/Desktop/Thomas/VirtualReality/build/Demo && /usr/bin/cmake -E copy_directory /usr/local/home/demo/Desktop/Thomas/VirtualReality/Demo/config/ /usr/local/home/demo/Desktop/Thomas/VirtualReality/build/Demo/config
-	cd /usr/local/home/demo/Desktop/Thomas/VirtualReality/build/Demo && /usr/bin/cmake -E copy /usr/local/home/demo/Desktop/Thomas/VirtualReality/Demo/config/cavrconfig.lua /usr/local/home/demo/Desktop/Thomas/VirtualReality/build/Demo
-	cd /usr/local/home/demo/Desktop/Thomas/VirtualReality/build/Demo && /usr/bin/cmake -E copy /usr/local/home/demo/Desktop/Thomas/VirtualReality/Demo/config/cavrplugins.lua /usr/local/home/demo/Desktop/Thomas/VirtualReality/build/Demo
+	cd /cse/home/trushton/Desktop/VirtualReality/build/Demo && /usr/bin/cmake -E echo 
+	cd /cse/home/trushton/Desktop/VirtualReality/build/Demo && /usr/bin/cmake -E echo =====================
+	cd /cse/home/trushton/Desktop/VirtualReality/build/Demo && /usr/bin/cmake -E echo \ \ Compile\ complete!
+	cd /cse/home/trushton/Desktop/VirtualReality/build/Demo && /usr/bin/cmake -E echo =====================
+	cd /cse/home/trushton/Desktop/VirtualReality/build/Demo && /usr/bin/cmake -E echo /cse/home/trushton/Desktop/VirtualReality/build/Demo
+	cd /cse/home/trushton/Desktop/VirtualReality/build/Demo && /usr/bin/cmake -E copy_directory /cse/home/trushton/Desktop/VirtualReality/Demo/shaders/ /cse/home/trushton/Desktop/VirtualReality/build/Demo/shaders
+	cd /cse/home/trushton/Desktop/VirtualReality/build/Demo && /usr/bin/cmake -E copy_directory /cse/home/trushton/Desktop/VirtualReality/Demo/media/ /cse/home/trushton/Desktop/VirtualReality/build/Demo/media
+	cd /cse/home/trushton/Desktop/VirtualReality/build/Demo && /usr/bin/cmake -E copy_directory /cse/home/trushton/Desktop/VirtualReality/Demo/config/ /cse/home/trushton/Desktop/VirtualReality/build/Demo/config
+	cd /cse/home/trushton/Desktop/VirtualReality/build/Demo && /usr/bin/cmake -E copy /cse/home/trushton/Desktop/VirtualReality/Demo/config/cavrconfig.lua /cse/home/trushton/Desktop/VirtualReality/build/Demo
+	cd /cse/home/trushton/Desktop/VirtualReality/build/Demo && /usr/bin/cmake -E copy /cse/home/trushton/Desktop/VirtualReality/Demo/config/cavrplugins.lua /cse/home/trushton/Desktop/VirtualReality/build/Demo
 
 DEMO_SUCCESSFUL: Demo/CMakeFiles/DEMO_SUCCESSFUL
 DEMO_SUCCESSFUL: Demo/CMakeFiles/DEMO_SUCCESSFUL.dir/build.make
@@ -69,10 +66,10 @@ Demo/CMakeFiles/DEMO_SUCCESSFUL.dir/build: DEMO_SUCCESSFUL
 .PHONY : Demo/CMakeFiles/DEMO_SUCCESSFUL.dir/build
 
 Demo/CMakeFiles/DEMO_SUCCESSFUL.dir/clean:
-	cd /usr/local/home/demo/Desktop/Thomas/VirtualReality/build/Demo && $(CMAKE_COMMAND) -P CMakeFiles/DEMO_SUCCESSFUL.dir/cmake_clean.cmake
+	cd /cse/home/trushton/Desktop/VirtualReality/build/Demo && $(CMAKE_COMMAND) -P CMakeFiles/DEMO_SUCCESSFUL.dir/cmake_clean.cmake
 .PHONY : Demo/CMakeFiles/DEMO_SUCCESSFUL.dir/clean
 
 Demo/CMakeFiles/DEMO_SUCCESSFUL.dir/depend:
-	cd /usr/local/home/demo/Desktop/Thomas/VirtualReality/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /usr/local/home/demo/Desktop/Thomas/VirtualReality /usr/local/home/demo/Desktop/Thomas/VirtualReality/Demo /usr/local/home/demo/Desktop/Thomas/VirtualReality/build /usr/local/home/demo/Desktop/Thomas/VirtualReality/build/Demo /usr/local/home/demo/Desktop/Thomas/VirtualReality/build/Demo/CMakeFiles/DEMO_SUCCESSFUL.dir/DependInfo.cmake --color=$(COLOR)
+	cd /cse/home/trushton/Desktop/VirtualReality/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /cse/home/trushton/Desktop/VirtualReality /cse/home/trushton/Desktop/VirtualReality/Demo /cse/home/trushton/Desktop/VirtualReality/build /cse/home/trushton/Desktop/VirtualReality/build/Demo /cse/home/trushton/Desktop/VirtualReality/build/Demo/CMakeFiles/DEMO_SUCCESSFUL.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : Demo/CMakeFiles/DEMO_SUCCESSFUL.dir/depend
 

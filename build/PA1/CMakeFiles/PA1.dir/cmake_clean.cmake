@@ -1,6 +1,10 @@
 FILE(REMOVE_RECURSE
   "CMakeFiles/PA1.dir/source/Test.cpp.o"
   "CMakeFiles/PA1.dir/source/app.cpp.o"
+  "CMakeFiles/PA1.dir/source/mesh.cpp.o"
+  "CMakeFiles/PA1.dir/source/Model.cpp.o"
+  "CMakeFiles/PA1.dir/source/ds_geom_pass_tech.cpp.o"
+  "CMakeFiles/PA1.dir/source/Program.cpp.o"
   "PA1.pdb"
   "PA1"
 )
