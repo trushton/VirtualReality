@@ -40,6 +40,10 @@ void Graphics::initGL()
     //cube = new Cube();
     sim = new VRSim();
 
+    //set context data
+    cavr::System::setContextData(sim);
+
+    //include this later
     //skybox = new Skybox();
 
 

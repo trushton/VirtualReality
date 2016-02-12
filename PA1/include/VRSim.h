@@ -43,6 +43,9 @@ public:
   void InitBoxPositions();
   void DSLightPass();
 
+  bool solveQuadratic(const float a, const float b, const float c, float &x0, float &x1);
+  bool solveRaycast(const cavr::gfx::Ray& ray, const cavr::math::vec3f& pos, float radius_sq);
+
 
 
 //////////////STANDARD STUFF////////////////
@@ -84,17 +87,19 @@ private:
   DSGeomPassTech geomProgram;
   Technique m_nullTech;
 
-  DSPointLightPassTech m_DSPointLightPassTech;
-  DSDirLightPassTech m_DSDirLightPassTech;
+  DSPointLightPassTech pointProgram;
+  DSDirLightPassTech dirProgram;
 
   DirectionalLight m_dirLight;
   vector<PointLight> m_pointLight;
 
   //models
-  Model tree;
+  Model tree, quad, sphere;
 
   std::chrono::time_point<std::chrono::high_resolution_clock> t1, t2;
   int time;
+
+  int windowWidth, windowHeight;
 };
 
 

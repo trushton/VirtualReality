@@ -27,8 +27,18 @@ void Engine::init()
     //input = new Input(this);
     graphics = new Graphics(this);
 
-    graphics->init();
-    //input->init();
+}
+
+void Engine::update(){
+  dt = tick();
+  if (cavr::input::getButton("exit")->delta() == cavr::input::Button::Pressed) {
+    cavr::System::shutdown();
+    return;
+  }
+}
+
+void Engine::frame(){
+  VRSim* sim = (VRSim*)cavr::System::getContextData();
 }
 
 int Engine::run()
@@ -36,13 +46,7 @@ int Engine::run()
     float dt;
     t1 = std::chrono::high_resolution_clock::now();
 
-    while (true)
-    {
-        dt = tick();
-        //input->tick(dt);
-        graphics->tick(dt);
-
-    }
+    cavr::System::run();
 
     return 0;
 }

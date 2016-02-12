@@ -37,8 +37,8 @@ void DSDirLightPassTech::unbind()
 
 void DSDirLightPassTech::loadShaders()
 {
-    shaders[0] = loadShader("../shaders/light_pass.vs", GL_VERTEX_SHADER);
-    shaders[1] = loadShader("../shaders/dir_light_pass.fs", GL_FRAGMENT_SHADER);
+    shaders[0] = loadShader("./shaders/light_pass.vs", GL_VERTEX_SHADER);
+    shaders[1] = loadShader("./shaders/dir_light_pass.fs", GL_FRAGMENT_SHADER);
 }
 
 void DSDirLightPassTech::initShaderProgram()

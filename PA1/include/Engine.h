@@ -14,7 +14,6 @@
 #include <glog/logging.h>
 #include <math.h>
 
-
 //class Input;
 class Graphics;
 
@@ -32,11 +31,15 @@ public:
     static Engine *getEngine();
 
     float tick();
+    float dt;
+    void update();
+    void frame();
 
     //Input *input;
     Graphics *graphics;
     std::chrono::time_point<std::chrono::high_resolution_clock> t1, t2;
     bool clicked, rayColor, project, dirlight;
+
 
 private:
     static Engine *currentEngine;
