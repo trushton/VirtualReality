@@ -126,6 +126,54 @@ PA1_SUCCESSFUL/fast:
 	cd /cse/home/trushton/Desktop/VirtualReality/build && $(MAKE) -f PA1/CMakeFiles/PA1_SUCCESSFUL.dir/build.make PA1/CMakeFiles/PA1_SUCCESSFUL.dir/build
 .PHONY : PA1_SUCCESSFUL/fast
 
+source/Engine.o: source/Engine.cpp.o
+.PHONY : source/Engine.o
+
+# target to build an object file
+source/Engine.cpp.o:
+	cd /cse/home/trushton/Desktop/VirtualReality/build && $(MAKE) -f PA1/CMakeFiles/PA1.dir/build.make PA1/CMakeFiles/PA1.dir/source/Engine.cpp.o
+.PHONY : source/Engine.cpp.o
+
+source/Engine.i: source/Engine.cpp.i
+.PHONY : source/Engine.i
+
+# target to preprocess a source file
+source/Engine.cpp.i:
+	cd /cse/home/trushton/Desktop/VirtualReality/build && $(MAKE) -f PA1/CMakeFiles/PA1.dir/build.make PA1/CMakeFiles/PA1.dir/source/Engine.cpp.i
+.PHONY : source/Engine.cpp.i
+
+source/Engine.s: source/Engine.cpp.s
+.PHONY : source/Engine.s
+
+# target to generate assembly for a file
+source/Engine.cpp.s:
+	cd /cse/home/trushton/Desktop/VirtualReality/build && $(MAKE) -f PA1/CMakeFiles/PA1.dir/build.make PA1/CMakeFiles/PA1.dir/source/Engine.cpp.s
+.PHONY : source/Engine.cpp.s
+
+source/GBuffer.o: source/GBuffer.cpp.o
+.PHONY : source/GBuffer.o
+
+# target to build an object file
+source/GBuffer.cpp.o:
+	cd /cse/home/trushton/Desktop/VirtualReality/build && $(MAKE) -f PA1/CMakeFiles/PA1.dir/build.make PA1/CMakeFiles/PA1.dir/source/GBuffer.cpp.o
+.PHONY : source/GBuffer.cpp.o
+
+source/GBuffer.i: source/GBuffer.cpp.i
+.PHONY : source/GBuffer.i
+
+# target to preprocess a source file
+source/GBuffer.cpp.i:
+	cd /cse/home/trushton/Desktop/VirtualReality/build && $(MAKE) -f PA1/CMakeFiles/PA1.dir/build.make PA1/CMakeFiles/PA1.dir/source/GBuffer.cpp.i
+.PHONY : source/GBuffer.cpp.i
+
+source/GBuffer.s: source/GBuffer.cpp.s
+.PHONY : source/GBuffer.s
+
+# target to generate assembly for a file
+source/GBuffer.cpp.s:
+	cd /cse/home/trushton/Desktop/VirtualReality/build && $(MAKE) -f PA1/CMakeFiles/PA1.dir/build.make PA1/CMakeFiles/PA1.dir/source/GBuffer.cpp.s
+.PHONY : source/GBuffer.cpp.s
+
 source/Model.o: source/Model.cpp.o
 .PHONY : source/Model.o
 
@@ -174,29 +222,53 @@ source/Program.cpp.s:
 	cd /cse/home/trushton/Desktop/VirtualReality/build && $(MAKE) -f PA1/CMakeFiles/PA1.dir/build.make PA1/CMakeFiles/PA1.dir/source/Program.cpp.s
 .PHONY : source/Program.cpp.s
 
-source/Test.o: source/Test.cpp.o
-.PHONY : source/Test.o
+source/Technique.o: source/Technique.cpp.o
+.PHONY : source/Technique.o
 
 # target to build an object file
-source/Test.cpp.o:
-	cd /cse/home/trushton/Desktop/VirtualReality/build && $(MAKE) -f PA1/CMakeFiles/PA1.dir/build.make PA1/CMakeFiles/PA1.dir/source/Test.cpp.o
-.PHONY : source/Test.cpp.o
+source/Technique.cpp.o:
+	cd /cse/home/trushton/Desktop/VirtualReality/build && $(MAKE) -f PA1/CMakeFiles/PA1.dir/build.make PA1/CMakeFiles/PA1.dir/source/Technique.cpp.o
+.PHONY : source/Technique.cpp.o
 
-source/Test.i: source/Test.cpp.i
-.PHONY : source/Test.i
+source/Technique.i: source/Technique.cpp.i
+.PHONY : source/Technique.i
 
 # target to preprocess a source file
-source/Test.cpp.i:
-	cd /cse/home/trushton/Desktop/VirtualReality/build && $(MAKE) -f PA1/CMakeFiles/PA1.dir/build.make PA1/CMakeFiles/PA1.dir/source/Test.cpp.i
-.PHONY : source/Test.cpp.i
+source/Technique.cpp.i:
+	cd /cse/home/trushton/Desktop/VirtualReality/build && $(MAKE) -f PA1/CMakeFiles/PA1.dir/build.make PA1/CMakeFiles/PA1.dir/source/Technique.cpp.i
+.PHONY : source/Technique.cpp.i
 
-source/Test.s: source/Test.cpp.s
-.PHONY : source/Test.s
+source/Technique.s: source/Technique.cpp.s
+.PHONY : source/Technique.s
 
 # target to generate assembly for a file
-source/Test.cpp.s:
-	cd /cse/home/trushton/Desktop/VirtualReality/build && $(MAKE) -f PA1/CMakeFiles/PA1.dir/build.make PA1/CMakeFiles/PA1.dir/source/Test.cpp.s
-.PHONY : source/Test.cpp.s
+source/Technique.cpp.s:
+	cd /cse/home/trushton/Desktop/VirtualReality/build && $(MAKE) -f PA1/CMakeFiles/PA1.dir/build.make PA1/CMakeFiles/PA1.dir/source/Technique.cpp.s
+.PHONY : source/Technique.cpp.s
+
+source/VRSim.o: source/VRSim.cpp.o
+.PHONY : source/VRSim.o
+
+# target to build an object file
+source/VRSim.cpp.o:
+	cd /cse/home/trushton/Desktop/VirtualReality/build && $(MAKE) -f PA1/CMakeFiles/PA1.dir/build.make PA1/CMakeFiles/PA1.dir/source/VRSim.cpp.o
+.PHONY : source/VRSim.cpp.o
+
+source/VRSim.i: source/VRSim.cpp.i
+.PHONY : source/VRSim.i
+
+# target to preprocess a source file
+source/VRSim.cpp.i:
+	cd /cse/home/trushton/Desktop/VirtualReality/build && $(MAKE) -f PA1/CMakeFiles/PA1.dir/build.make PA1/CMakeFiles/PA1.dir/source/VRSim.cpp.i
+.PHONY : source/VRSim.cpp.i
+
+source/VRSim.s: source/VRSim.cpp.s
+.PHONY : source/VRSim.s
+
+# target to generate assembly for a file
+source/VRSim.cpp.s:
+	cd /cse/home/trushton/Desktop/VirtualReality/build && $(MAKE) -f PA1/CMakeFiles/PA1.dir/build.make PA1/CMakeFiles/PA1.dir/source/VRSim.cpp.s
+.PHONY : source/VRSim.cpp.s
 
 source/app.o: source/app.cpp.o
 .PHONY : source/app.o
@@ -222,6 +294,30 @@ source/app.cpp.s:
 	cd /cse/home/trushton/Desktop/VirtualReality/build && $(MAKE) -f PA1/CMakeFiles/PA1.dir/build.make PA1/CMakeFiles/PA1.dir/source/app.cpp.s
 .PHONY : source/app.cpp.s
 
+source/ds_dir_light_pass_tech.o: source/ds_dir_light_pass_tech.cpp.o
+.PHONY : source/ds_dir_light_pass_tech.o
+
+# target to build an object file
+source/ds_dir_light_pass_tech.cpp.o:
+	cd /cse/home/trushton/Desktop/VirtualReality/build && $(MAKE) -f PA1/CMakeFiles/PA1.dir/build.make PA1/CMakeFiles/PA1.dir/source/ds_dir_light_pass_tech.cpp.o
+.PHONY : source/ds_dir_light_pass_tech.cpp.o
+
+source/ds_dir_light_pass_tech.i: source/ds_dir_light_pass_tech.cpp.i
+.PHONY : source/ds_dir_light_pass_tech.i
+
+# target to preprocess a source file
+source/ds_dir_light_pass_tech.cpp.i:
+	cd /cse/home/trushton/Desktop/VirtualReality/build && $(MAKE) -f PA1/CMakeFiles/PA1.dir/build.make PA1/CMakeFiles/PA1.dir/source/ds_dir_light_pass_tech.cpp.i
+.PHONY : source/ds_dir_light_pass_tech.cpp.i
+
+source/ds_dir_light_pass_tech.s: source/ds_dir_light_pass_tech.cpp.s
+.PHONY : source/ds_dir_light_pass_tech.s
+
+# target to generate assembly for a file
+source/ds_dir_light_pass_tech.cpp.s:
+	cd /cse/home/trushton/Desktop/VirtualReality/build && $(MAKE) -f PA1/CMakeFiles/PA1.dir/build.make PA1/CMakeFiles/PA1.dir/source/ds_dir_light_pass_tech.cpp.s
+.PHONY : source/ds_dir_light_pass_tech.cpp.s
+
 source/ds_geom_pass_tech.o: source/ds_geom_pass_tech.cpp.o
 .PHONY : source/ds_geom_pass_tech.o
 
@@ -245,6 +341,78 @@ source/ds_geom_pass_tech.s: source/ds_geom_pass_tech.cpp.s
 source/ds_geom_pass_tech.cpp.s:
 	cd /cse/home/trushton/Desktop/VirtualReality/build && $(MAKE) -f PA1/CMakeFiles/PA1.dir/build.make PA1/CMakeFiles/PA1.dir/source/ds_geom_pass_tech.cpp.s
 .PHONY : source/ds_geom_pass_tech.cpp.s
+
+source/ds_point_light_pass_tech.o: source/ds_point_light_pass_tech.cpp.o
+.PHONY : source/ds_point_light_pass_tech.o
+
+# target to build an object file
+source/ds_point_light_pass_tech.cpp.o:
+	cd /cse/home/trushton/Desktop/VirtualReality/build && $(MAKE) -f PA1/CMakeFiles/PA1.dir/build.make PA1/CMakeFiles/PA1.dir/source/ds_point_light_pass_tech.cpp.o
+.PHONY : source/ds_point_light_pass_tech.cpp.o
+
+source/ds_point_light_pass_tech.i: source/ds_point_light_pass_tech.cpp.i
+.PHONY : source/ds_point_light_pass_tech.i
+
+# target to preprocess a source file
+source/ds_point_light_pass_tech.cpp.i:
+	cd /cse/home/trushton/Desktop/VirtualReality/build && $(MAKE) -f PA1/CMakeFiles/PA1.dir/build.make PA1/CMakeFiles/PA1.dir/source/ds_point_light_pass_tech.cpp.i
+.PHONY : source/ds_point_light_pass_tech.cpp.i
+
+source/ds_point_light_pass_tech.s: source/ds_point_light_pass_tech.cpp.s
+.PHONY : source/ds_point_light_pass_tech.s
+
+# target to generate assembly for a file
+source/ds_point_light_pass_tech.cpp.s:
+	cd /cse/home/trushton/Desktop/VirtualReality/build && $(MAKE) -f PA1/CMakeFiles/PA1.dir/build.make PA1/CMakeFiles/PA1.dir/source/ds_point_light_pass_tech.cpp.s
+.PHONY : source/ds_point_light_pass_tech.cpp.s
+
+source/graphics.o: source/graphics.cpp.o
+.PHONY : source/graphics.o
+
+# target to build an object file
+source/graphics.cpp.o:
+	cd /cse/home/trushton/Desktop/VirtualReality/build && $(MAKE) -f PA1/CMakeFiles/PA1.dir/build.make PA1/CMakeFiles/PA1.dir/source/graphics.cpp.o
+.PHONY : source/graphics.cpp.o
+
+source/graphics.i: source/graphics.cpp.i
+.PHONY : source/graphics.i
+
+# target to preprocess a source file
+source/graphics.cpp.i:
+	cd /cse/home/trushton/Desktop/VirtualReality/build && $(MAKE) -f PA1/CMakeFiles/PA1.dir/build.make PA1/CMakeFiles/PA1.dir/source/graphics.cpp.i
+.PHONY : source/graphics.cpp.i
+
+source/graphics.s: source/graphics.cpp.s
+.PHONY : source/graphics.s
+
+# target to generate assembly for a file
+source/graphics.cpp.s:
+	cd /cse/home/trushton/Desktop/VirtualReality/build && $(MAKE) -f PA1/CMakeFiles/PA1.dir/build.make PA1/CMakeFiles/PA1.dir/source/graphics.cpp.s
+.PHONY : source/graphics.cpp.s
+
+source/main.o: source/main.cpp.o
+.PHONY : source/main.o
+
+# target to build an object file
+source/main.cpp.o:
+	cd /cse/home/trushton/Desktop/VirtualReality/build && $(MAKE) -f PA1/CMakeFiles/PA1.dir/build.make PA1/CMakeFiles/PA1.dir/source/main.cpp.o
+.PHONY : source/main.cpp.o
+
+source/main.i: source/main.cpp.i
+.PHONY : source/main.i
+
+# target to preprocess a source file
+source/main.cpp.i:
+	cd /cse/home/trushton/Desktop/VirtualReality/build && $(MAKE) -f PA1/CMakeFiles/PA1.dir/build.make PA1/CMakeFiles/PA1.dir/source/main.cpp.i
+.PHONY : source/main.cpp.i
+
+source/main.s: source/main.cpp.s
+.PHONY : source/main.s
+
+# target to generate assembly for a file
+source/main.cpp.s:
+	cd /cse/home/trushton/Desktop/VirtualReality/build && $(MAKE) -f PA1/CMakeFiles/PA1.dir/build.make PA1/CMakeFiles/PA1.dir/source/main.cpp.s
+.PHONY : source/main.cpp.s
 
 source/mesh.o: source/mesh.cpp.o
 .PHONY : source/mesh.o
@@ -280,21 +448,42 @@ help:
 	@echo "... PA1_SUCCESSFUL"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
+	@echo "... source/Engine.o"
+	@echo "... source/Engine.i"
+	@echo "... source/Engine.s"
+	@echo "... source/GBuffer.o"
+	@echo "... source/GBuffer.i"
+	@echo "... source/GBuffer.s"
 	@echo "... source/Model.o"
 	@echo "... source/Model.i"
 	@echo "... source/Model.s"
 	@echo "... source/Program.o"
 	@echo "... source/Program.i"
 	@echo "... source/Program.s"
-	@echo "... source/Test.o"
-	@echo "... source/Test.i"
-	@echo "... source/Test.s"
+	@echo "... source/Technique.o"
+	@echo "... source/Technique.i"
+	@echo "... source/Technique.s"
+	@echo "... source/VRSim.o"
+	@echo "... source/VRSim.i"
+	@echo "... source/VRSim.s"
 	@echo "... source/app.o"
 	@echo "... source/app.i"
 	@echo "... source/app.s"
+	@echo "... source/ds_dir_light_pass_tech.o"
+	@echo "... source/ds_dir_light_pass_tech.i"
+	@echo "... source/ds_dir_light_pass_tech.s"
 	@echo "... source/ds_geom_pass_tech.o"
 	@echo "... source/ds_geom_pass_tech.i"
 	@echo "... source/ds_geom_pass_tech.s"
+	@echo "... source/ds_point_light_pass_tech.o"
+	@echo "... source/ds_point_light_pass_tech.i"
+	@echo "... source/ds_point_light_pass_tech.s"
+	@echo "... source/graphics.o"
+	@echo "... source/graphics.i"
+	@echo "... source/graphics.s"
+	@echo "... source/main.o"
+	@echo "... source/main.i"
+	@echo "... source/main.s"
 	@echo "... source/mesh.o"
 	@echo "... source/mesh.i"
 	@echo "... source/mesh.s"
