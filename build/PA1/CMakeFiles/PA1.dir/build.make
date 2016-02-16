@@ -164,32 +164,9 @@ PA1/CMakeFiles/PA1.dir/source/Program.cpp.o.provides: PA1/CMakeFiles/PA1.dir/sou
 
 PA1/CMakeFiles/PA1.dir/source/Program.cpp.o.provides.build: PA1/CMakeFiles/PA1.dir/source/Program.cpp.o
 
-PA1/CMakeFiles/PA1.dir/source/VRSim.cpp.o: PA1/CMakeFiles/PA1.dir/flags.make
-PA1/CMakeFiles/PA1.dir/source/VRSim.cpp.o: ../PA1/source/VRSim.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /cse/home/trushton/Desktop/VirtualReality/build/CMakeFiles $(CMAKE_PROGRESS_6)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object PA1/CMakeFiles/PA1.dir/source/VRSim.cpp.o"
-	cd /cse/home/trushton/Desktop/VirtualReality/build/PA1 && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/PA1.dir/source/VRSim.cpp.o -c /cse/home/trushton/Desktop/VirtualReality/PA1/source/VRSim.cpp
-
-PA1/CMakeFiles/PA1.dir/source/VRSim.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/PA1.dir/source/VRSim.cpp.i"
-	cd /cse/home/trushton/Desktop/VirtualReality/build/PA1 && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /cse/home/trushton/Desktop/VirtualReality/PA1/source/VRSim.cpp > CMakeFiles/PA1.dir/source/VRSim.cpp.i
-
-PA1/CMakeFiles/PA1.dir/source/VRSim.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/PA1.dir/source/VRSim.cpp.s"
-	cd /cse/home/trushton/Desktop/VirtualReality/build/PA1 && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /cse/home/trushton/Desktop/VirtualReality/PA1/source/VRSim.cpp -o CMakeFiles/PA1.dir/source/VRSim.cpp.s
-
-PA1/CMakeFiles/PA1.dir/source/VRSim.cpp.o.requires:
-.PHONY : PA1/CMakeFiles/PA1.dir/source/VRSim.cpp.o.requires
-
-PA1/CMakeFiles/PA1.dir/source/VRSim.cpp.o.provides: PA1/CMakeFiles/PA1.dir/source/VRSim.cpp.o.requires
-	$(MAKE) -f PA1/CMakeFiles/PA1.dir/build.make PA1/CMakeFiles/PA1.dir/source/VRSim.cpp.o.provides.build
-.PHONY : PA1/CMakeFiles/PA1.dir/source/VRSim.cpp.o.provides
-
-PA1/CMakeFiles/PA1.dir/source/VRSim.cpp.o.provides.build: PA1/CMakeFiles/PA1.dir/source/VRSim.cpp.o
-
 PA1/CMakeFiles/PA1.dir/source/GBuffer.cpp.o: PA1/CMakeFiles/PA1.dir/flags.make
 PA1/CMakeFiles/PA1.dir/source/GBuffer.cpp.o: ../PA1/source/GBuffer.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /cse/home/trushton/Desktop/VirtualReality/build/CMakeFiles $(CMAKE_PROGRESS_7)
+	$(CMAKE_COMMAND) -E cmake_progress_report /cse/home/trushton/Desktop/VirtualReality/build/CMakeFiles $(CMAKE_PROGRESS_6)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object PA1/CMakeFiles/PA1.dir/source/GBuffer.cpp.o"
 	cd /cse/home/trushton/Desktop/VirtualReality/build/PA1 && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/PA1.dir/source/GBuffer.cpp.o -c /cse/home/trushton/Desktop/VirtualReality/PA1/source/GBuffer.cpp
 
@@ -212,7 +189,7 @@ PA1/CMakeFiles/PA1.dir/source/GBuffer.cpp.o.provides.build: PA1/CMakeFiles/PA1.d
 
 PA1/CMakeFiles/PA1.dir/source/Technique.cpp.o: PA1/CMakeFiles/PA1.dir/flags.make
 PA1/CMakeFiles/PA1.dir/source/Technique.cpp.o: ../PA1/source/Technique.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /cse/home/trushton/Desktop/VirtualReality/build/CMakeFiles $(CMAKE_PROGRESS_8)
+	$(CMAKE_COMMAND) -E cmake_progress_report /cse/home/trushton/Desktop/VirtualReality/build/CMakeFiles $(CMAKE_PROGRESS_7)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object PA1/CMakeFiles/PA1.dir/source/Technique.cpp.o"
 	cd /cse/home/trushton/Desktop/VirtualReality/build/PA1 && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/PA1.dir/source/Technique.cpp.o -c /cse/home/trushton/Desktop/VirtualReality/PA1/source/Technique.cpp
 
@@ -235,7 +212,7 @@ PA1/CMakeFiles/PA1.dir/source/Technique.cpp.o.provides.build: PA1/CMakeFiles/PA1
 
 PA1/CMakeFiles/PA1.dir/source/ds_point_light_pass_tech.cpp.o: PA1/CMakeFiles/PA1.dir/flags.make
 PA1/CMakeFiles/PA1.dir/source/ds_point_light_pass_tech.cpp.o: ../PA1/source/ds_point_light_pass_tech.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /cse/home/trushton/Desktop/VirtualReality/build/CMakeFiles $(CMAKE_PROGRESS_9)
+	$(CMAKE_COMMAND) -E cmake_progress_report /cse/home/trushton/Desktop/VirtualReality/build/CMakeFiles $(CMAKE_PROGRESS_8)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object PA1/CMakeFiles/PA1.dir/source/ds_point_light_pass_tech.cpp.o"
 	cd /cse/home/trushton/Desktop/VirtualReality/build/PA1 && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/PA1.dir/source/ds_point_light_pass_tech.cpp.o -c /cse/home/trushton/Desktop/VirtualReality/PA1/source/ds_point_light_pass_tech.cpp
 
@@ -258,7 +235,7 @@ PA1/CMakeFiles/PA1.dir/source/ds_point_light_pass_tech.cpp.o.provides.build: PA1
 
 PA1/CMakeFiles/PA1.dir/source/Engine.cpp.o: PA1/CMakeFiles/PA1.dir/flags.make
 PA1/CMakeFiles/PA1.dir/source/Engine.cpp.o: ../PA1/source/Engine.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /cse/home/trushton/Desktop/VirtualReality/build/CMakeFiles $(CMAKE_PROGRESS_10)
+	$(CMAKE_COMMAND) -E cmake_progress_report /cse/home/trushton/Desktop/VirtualReality/build/CMakeFiles $(CMAKE_PROGRESS_9)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object PA1/CMakeFiles/PA1.dir/source/Engine.cpp.o"
 	cd /cse/home/trushton/Desktop/VirtualReality/build/PA1 && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/PA1.dir/source/Engine.cpp.o -c /cse/home/trushton/Desktop/VirtualReality/PA1/source/Engine.cpp
 
@@ -281,7 +258,7 @@ PA1/CMakeFiles/PA1.dir/source/Engine.cpp.o.provides.build: PA1/CMakeFiles/PA1.di
 
 PA1/CMakeFiles/PA1.dir/source/graphics.cpp.o: PA1/CMakeFiles/PA1.dir/flags.make
 PA1/CMakeFiles/PA1.dir/source/graphics.cpp.o: ../PA1/source/graphics.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /cse/home/trushton/Desktop/VirtualReality/build/CMakeFiles $(CMAKE_PROGRESS_11)
+	$(CMAKE_COMMAND) -E cmake_progress_report /cse/home/trushton/Desktop/VirtualReality/build/CMakeFiles $(CMAKE_PROGRESS_10)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object PA1/CMakeFiles/PA1.dir/source/graphics.cpp.o"
 	cd /cse/home/trushton/Desktop/VirtualReality/build/PA1 && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/PA1.dir/source/graphics.cpp.o -c /cse/home/trushton/Desktop/VirtualReality/PA1/source/graphics.cpp
 
@@ -304,7 +281,7 @@ PA1/CMakeFiles/PA1.dir/source/graphics.cpp.o.provides.build: PA1/CMakeFiles/PA1.
 
 PA1/CMakeFiles/PA1.dir/source/main.cpp.o: PA1/CMakeFiles/PA1.dir/flags.make
 PA1/CMakeFiles/PA1.dir/source/main.cpp.o: ../PA1/source/main.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /cse/home/trushton/Desktop/VirtualReality/build/CMakeFiles $(CMAKE_PROGRESS_12)
+	$(CMAKE_COMMAND) -E cmake_progress_report /cse/home/trushton/Desktop/VirtualReality/build/CMakeFiles $(CMAKE_PROGRESS_11)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object PA1/CMakeFiles/PA1.dir/source/main.cpp.o"
 	cd /cse/home/trushton/Desktop/VirtualReality/build/PA1 && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/PA1.dir/source/main.cpp.o -c /cse/home/trushton/Desktop/VirtualReality/PA1/source/main.cpp
 
@@ -327,7 +304,7 @@ PA1/CMakeFiles/PA1.dir/source/main.cpp.o.provides.build: PA1/CMakeFiles/PA1.dir/
 
 PA1/CMakeFiles/PA1.dir/source/ds_dir_light_pass_tech.cpp.o: PA1/CMakeFiles/PA1.dir/flags.make
 PA1/CMakeFiles/PA1.dir/source/ds_dir_light_pass_tech.cpp.o: ../PA1/source/ds_dir_light_pass_tech.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /cse/home/trushton/Desktop/VirtualReality/build/CMakeFiles $(CMAKE_PROGRESS_13)
+	$(CMAKE_COMMAND) -E cmake_progress_report /cse/home/trushton/Desktop/VirtualReality/build/CMakeFiles $(CMAKE_PROGRESS_12)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object PA1/CMakeFiles/PA1.dir/source/ds_dir_light_pass_tech.cpp.o"
 	cd /cse/home/trushton/Desktop/VirtualReality/build/PA1 && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/PA1.dir/source/ds_dir_light_pass_tech.cpp.o -c /cse/home/trushton/Desktop/VirtualReality/PA1/source/ds_dir_light_pass_tech.cpp
 
@@ -348,6 +325,52 @@ PA1/CMakeFiles/PA1.dir/source/ds_dir_light_pass_tech.cpp.o.provides: PA1/CMakeFi
 
 PA1/CMakeFiles/PA1.dir/source/ds_dir_light_pass_tech.cpp.o.provides.build: PA1/CMakeFiles/PA1.dir/source/ds_dir_light_pass_tech.cpp.o
 
+PA1/CMakeFiles/PA1.dir/source/VRSim.cpp.o: PA1/CMakeFiles/PA1.dir/flags.make
+PA1/CMakeFiles/PA1.dir/source/VRSim.cpp.o: ../PA1/source/VRSim.cpp
+	$(CMAKE_COMMAND) -E cmake_progress_report /cse/home/trushton/Desktop/VirtualReality/build/CMakeFiles $(CMAKE_PROGRESS_13)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object PA1/CMakeFiles/PA1.dir/source/VRSim.cpp.o"
+	cd /cse/home/trushton/Desktop/VirtualReality/build/PA1 && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/PA1.dir/source/VRSim.cpp.o -c /cse/home/trushton/Desktop/VirtualReality/PA1/source/VRSim.cpp
+
+PA1/CMakeFiles/PA1.dir/source/VRSim.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/PA1.dir/source/VRSim.cpp.i"
+	cd /cse/home/trushton/Desktop/VirtualReality/build/PA1 && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /cse/home/trushton/Desktop/VirtualReality/PA1/source/VRSim.cpp > CMakeFiles/PA1.dir/source/VRSim.cpp.i
+
+PA1/CMakeFiles/PA1.dir/source/VRSim.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/PA1.dir/source/VRSim.cpp.s"
+	cd /cse/home/trushton/Desktop/VirtualReality/build/PA1 && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /cse/home/trushton/Desktop/VirtualReality/PA1/source/VRSim.cpp -o CMakeFiles/PA1.dir/source/VRSim.cpp.s
+
+PA1/CMakeFiles/PA1.dir/source/VRSim.cpp.o.requires:
+.PHONY : PA1/CMakeFiles/PA1.dir/source/VRSim.cpp.o.requires
+
+PA1/CMakeFiles/PA1.dir/source/VRSim.cpp.o.provides: PA1/CMakeFiles/PA1.dir/source/VRSim.cpp.o.requires
+	$(MAKE) -f PA1/CMakeFiles/PA1.dir/build.make PA1/CMakeFiles/PA1.dir/source/VRSim.cpp.o.provides.build
+.PHONY : PA1/CMakeFiles/PA1.dir/source/VRSim.cpp.o.provides
+
+PA1/CMakeFiles/PA1.dir/source/VRSim.cpp.o.provides.build: PA1/CMakeFiles/PA1.dir/source/VRSim.cpp.o
+
+PA1/CMakeFiles/PA1.dir/source/camera.cpp.o: PA1/CMakeFiles/PA1.dir/flags.make
+PA1/CMakeFiles/PA1.dir/source/camera.cpp.o: ../PA1/source/camera.cpp
+	$(CMAKE_COMMAND) -E cmake_progress_report /cse/home/trushton/Desktop/VirtualReality/build/CMakeFiles $(CMAKE_PROGRESS_14)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object PA1/CMakeFiles/PA1.dir/source/camera.cpp.o"
+	cd /cse/home/trushton/Desktop/VirtualReality/build/PA1 && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/PA1.dir/source/camera.cpp.o -c /cse/home/trushton/Desktop/VirtualReality/PA1/source/camera.cpp
+
+PA1/CMakeFiles/PA1.dir/source/camera.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/PA1.dir/source/camera.cpp.i"
+	cd /cse/home/trushton/Desktop/VirtualReality/build/PA1 && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /cse/home/trushton/Desktop/VirtualReality/PA1/source/camera.cpp > CMakeFiles/PA1.dir/source/camera.cpp.i
+
+PA1/CMakeFiles/PA1.dir/source/camera.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/PA1.dir/source/camera.cpp.s"
+	cd /cse/home/trushton/Desktop/VirtualReality/build/PA1 && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /cse/home/trushton/Desktop/VirtualReality/PA1/source/camera.cpp -o CMakeFiles/PA1.dir/source/camera.cpp.s
+
+PA1/CMakeFiles/PA1.dir/source/camera.cpp.o.requires:
+.PHONY : PA1/CMakeFiles/PA1.dir/source/camera.cpp.o.requires
+
+PA1/CMakeFiles/PA1.dir/source/camera.cpp.o.provides: PA1/CMakeFiles/PA1.dir/source/camera.cpp.o.requires
+	$(MAKE) -f PA1/CMakeFiles/PA1.dir/build.make PA1/CMakeFiles/PA1.dir/source/camera.cpp.o.provides.build
+.PHONY : PA1/CMakeFiles/PA1.dir/source/camera.cpp.o.provides
+
+PA1/CMakeFiles/PA1.dir/source/camera.cpp.o.provides.build: PA1/CMakeFiles/PA1.dir/source/camera.cpp.o
+
 # Object files for target PA1
 PA1_OBJECTS = \
 "CMakeFiles/PA1.dir/source/app.cpp.o" \
@@ -355,14 +378,15 @@ PA1_OBJECTS = \
 "CMakeFiles/PA1.dir/source/Model.cpp.o" \
 "CMakeFiles/PA1.dir/source/ds_geom_pass_tech.cpp.o" \
 "CMakeFiles/PA1.dir/source/Program.cpp.o" \
-"CMakeFiles/PA1.dir/source/VRSim.cpp.o" \
 "CMakeFiles/PA1.dir/source/GBuffer.cpp.o" \
 "CMakeFiles/PA1.dir/source/Technique.cpp.o" \
 "CMakeFiles/PA1.dir/source/ds_point_light_pass_tech.cpp.o" \
 "CMakeFiles/PA1.dir/source/Engine.cpp.o" \
 "CMakeFiles/PA1.dir/source/graphics.cpp.o" \
 "CMakeFiles/PA1.dir/source/main.cpp.o" \
-"CMakeFiles/PA1.dir/source/ds_dir_light_pass_tech.cpp.o"
+"CMakeFiles/PA1.dir/source/ds_dir_light_pass_tech.cpp.o" \
+"CMakeFiles/PA1.dir/source/VRSim.cpp.o" \
+"CMakeFiles/PA1.dir/source/camera.cpp.o"
 
 # External object files for target PA1
 PA1_EXTERNAL_OBJECTS =
@@ -372,7 +396,6 @@ PA1/PA1: PA1/CMakeFiles/PA1.dir/source/mesh.cpp.o
 PA1/PA1: PA1/CMakeFiles/PA1.dir/source/Model.cpp.o
 PA1/PA1: PA1/CMakeFiles/PA1.dir/source/ds_geom_pass_tech.cpp.o
 PA1/PA1: PA1/CMakeFiles/PA1.dir/source/Program.cpp.o
-PA1/PA1: PA1/CMakeFiles/PA1.dir/source/VRSim.cpp.o
 PA1/PA1: PA1/CMakeFiles/PA1.dir/source/GBuffer.cpp.o
 PA1/PA1: PA1/CMakeFiles/PA1.dir/source/Technique.cpp.o
 PA1/PA1: PA1/CMakeFiles/PA1.dir/source/ds_point_light_pass_tech.cpp.o
@@ -380,6 +403,8 @@ PA1/PA1: PA1/CMakeFiles/PA1.dir/source/Engine.cpp.o
 PA1/PA1: PA1/CMakeFiles/PA1.dir/source/graphics.cpp.o
 PA1/PA1: PA1/CMakeFiles/PA1.dir/source/main.cpp.o
 PA1/PA1: PA1/CMakeFiles/PA1.dir/source/ds_dir_light_pass_tech.cpp.o
+PA1/PA1: PA1/CMakeFiles/PA1.dir/source/VRSim.cpp.o
+PA1/PA1: PA1/CMakeFiles/PA1.dir/source/camera.cpp.o
 PA1/PA1: PA1/CMakeFiles/PA1.dir/build.make
 PA1/PA1: /usr/lib/x86_64-linux-gnu/libglog.so
 PA1/PA1: /usr/lib/x86_64-linux-gnu/libGLU.so
@@ -405,7 +430,6 @@ PA1/CMakeFiles/PA1.dir/requires: PA1/CMakeFiles/PA1.dir/source/mesh.cpp.o.requir
 PA1/CMakeFiles/PA1.dir/requires: PA1/CMakeFiles/PA1.dir/source/Model.cpp.o.requires
 PA1/CMakeFiles/PA1.dir/requires: PA1/CMakeFiles/PA1.dir/source/ds_geom_pass_tech.cpp.o.requires
 PA1/CMakeFiles/PA1.dir/requires: PA1/CMakeFiles/PA1.dir/source/Program.cpp.o.requires
-PA1/CMakeFiles/PA1.dir/requires: PA1/CMakeFiles/PA1.dir/source/VRSim.cpp.o.requires
 PA1/CMakeFiles/PA1.dir/requires: PA1/CMakeFiles/PA1.dir/source/GBuffer.cpp.o.requires
 PA1/CMakeFiles/PA1.dir/requires: PA1/CMakeFiles/PA1.dir/source/Technique.cpp.o.requires
 PA1/CMakeFiles/PA1.dir/requires: PA1/CMakeFiles/PA1.dir/source/ds_point_light_pass_tech.cpp.o.requires
@@ -413,6 +437,8 @@ PA1/CMakeFiles/PA1.dir/requires: PA1/CMakeFiles/PA1.dir/source/Engine.cpp.o.requ
 PA1/CMakeFiles/PA1.dir/requires: PA1/CMakeFiles/PA1.dir/source/graphics.cpp.o.requires
 PA1/CMakeFiles/PA1.dir/requires: PA1/CMakeFiles/PA1.dir/source/main.cpp.o.requires
 PA1/CMakeFiles/PA1.dir/requires: PA1/CMakeFiles/PA1.dir/source/ds_dir_light_pass_tech.cpp.o.requires
+PA1/CMakeFiles/PA1.dir/requires: PA1/CMakeFiles/PA1.dir/source/VRSim.cpp.o.requires
+PA1/CMakeFiles/PA1.dir/requires: PA1/CMakeFiles/PA1.dir/source/camera.cpp.o.requires
 .PHONY : PA1/CMakeFiles/PA1.dir/requires
 
 PA1/CMakeFiles/PA1.dir/clean:

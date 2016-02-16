@@ -266,6 +266,26 @@ glog/logging.h
 math.h
 -
 
+../PA1/include/camera.h
+GL/glew.h
+-
+GL/gl.h
+-
+math.h
+../PA1/include/math.h
+iostream
+-
+Vertex.h
+-
+glm/glm.hpp
+-
+glm/detail/type_vec.hpp
+-
+glm/gtc/matrix_transform.hpp
+-
+Engine.h
+../PA1/include/Engine.h
+
 ../PA1/include/ds_dir_light_pass_tech.h
 Program.h
 ../PA1/include/Program.h
@@ -300,6 +320,8 @@ GL/glew.h
 GL/gl.h
 -
 VRSim.h
+-
+camera.h
 -
 
 ../PA1/include/lights.h

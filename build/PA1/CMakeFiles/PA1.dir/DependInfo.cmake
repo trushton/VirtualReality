@@ -11,6 +11,7 @@ SET(CMAKE_DEPENDS_CHECK_CXX
   "/cse/home/trushton/Desktop/VirtualReality/PA1/source/Technique.cpp" "/cse/home/trushton/Desktop/VirtualReality/build/PA1/CMakeFiles/PA1.dir/source/Technique.cpp.o"
   "/cse/home/trushton/Desktop/VirtualReality/PA1/source/VRSim.cpp" "/cse/home/trushton/Desktop/VirtualReality/build/PA1/CMakeFiles/PA1.dir/source/VRSim.cpp.o"
   "/cse/home/trushton/Desktop/VirtualReality/PA1/source/app.cpp" "/cse/home/trushton/Desktop/VirtualReality/build/PA1/CMakeFiles/PA1.dir/source/app.cpp.o"
+  "/cse/home/trushton/Desktop/VirtualReality/PA1/source/camera.cpp" "/cse/home/trushton/Desktop/VirtualReality/build/PA1/CMakeFiles/PA1.dir/source/camera.cpp.o"
   "/cse/home/trushton/Desktop/VirtualReality/PA1/source/ds_dir_light_pass_tech.cpp" "/cse/home/trushton/Desktop/VirtualReality/build/PA1/CMakeFiles/PA1.dir/source/ds_dir_light_pass_tech.cpp.o"
   "/cse/home/trushton/Desktop/VirtualReality/PA1/source/ds_geom_pass_tech.cpp" "/cse/home/trushton/Desktop/VirtualReality/build/PA1/CMakeFiles/PA1.dir/source/ds_geom_pass_tech.cpp.o"
   "/cse/home/trushton/Desktop/VirtualReality/PA1/source/ds_point_light_pass_tech.cpp" "/cse/home/trushton/Desktop/VirtualReality/build/PA1/CMakeFiles/PA1.dir/source/ds_point_light_pass_tech.cpp.o"

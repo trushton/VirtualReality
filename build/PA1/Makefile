@@ -294,6 +294,30 @@ source/app.cpp.s:
 	cd /cse/home/trushton/Desktop/VirtualReality/build && $(MAKE) -f PA1/CMakeFiles/PA1.dir/build.make PA1/CMakeFiles/PA1.dir/source/app.cpp.s
 .PHONY : source/app.cpp.s
 
+source/camera.o: source/camera.cpp.o
+.PHONY : source/camera.o
+
+# target to build an object file
+source/camera.cpp.o:
+	cd /cse/home/trushton/Desktop/VirtualReality/build && $(MAKE) -f PA1/CMakeFiles/PA1.dir/build.make PA1/CMakeFiles/PA1.dir/source/camera.cpp.o
+.PHONY : source/camera.cpp.o
+
+source/camera.i: source/camera.cpp.i
+.PHONY : source/camera.i
+
+# target to preprocess a source file
+source/camera.cpp.i:
+	cd /cse/home/trushton/Desktop/VirtualReality/build && $(MAKE) -f PA1/CMakeFiles/PA1.dir/build.make PA1/CMakeFiles/PA1.dir/source/camera.cpp.i
+.PHONY : source/camera.cpp.i
+
+source/camera.s: source/camera.cpp.s
+.PHONY : source/camera.s
+
+# target to generate assembly for a file
+source/camera.cpp.s:
+	cd /cse/home/trushton/Desktop/VirtualReality/build && $(MAKE) -f PA1/CMakeFiles/PA1.dir/build.make PA1/CMakeFiles/PA1.dir/source/camera.cpp.s
+.PHONY : source/camera.cpp.s
+
 source/ds_dir_light_pass_tech.o: source/ds_dir_light_pass_tech.cpp.o
 .PHONY : source/ds_dir_light_pass_tech.o
 
@@ -469,6 +493,9 @@ help:
 	@echo "... source/app.o"
 	@echo "... source/app.i"
 	@echo "... source/app.s"
+	@echo "... source/camera.o"
+	@echo "... source/camera.i"
+	@echo "... source/camera.s"
 	@echo "... source/ds_dir_light_pass_tech.o"
 	@echo "... source/ds_dir_light_pass_tech.i"
 	@echo "... source/ds_dir_light_pass_tech.s"

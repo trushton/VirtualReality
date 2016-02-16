@@ -38,6 +38,9 @@ void Engine::init()
 
     input_map.sixdof_map["head"] = "vrpn[ShortGlass[0]]";
 
+    input_map.analog_map["x"] = "vrpn[WiiMote0[21]]";
+    input_map.analog_map["y"] = "vrpn[WiiMote0[22]]";
+
 }
 
 void Engine::update(){
