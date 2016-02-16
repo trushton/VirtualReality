@@ -39,6 +39,7 @@ public:
     Graphics *graphics;
     std::chrono::time_point<std::chrono::high_resolution_clock> t1, t2;
     bool clicked, rayColor, project, dirlight;
+    cavr::input::InputMap input_map;
 
 
 private:

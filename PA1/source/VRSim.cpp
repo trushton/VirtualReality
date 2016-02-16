@@ -45,8 +45,7 @@ void VRSim::render(){
 
   // perform geometry pass
   DSGeometryPass();
-
-  // performa point light pass
+  //perform point light pass
   glEnable(GL_STENCIL_TEST);
   for (unsigned int i = 0 ; i < m_pointLight.size(); i++) {
     DSStencilPass(i);
@@ -58,6 +57,49 @@ void VRSim::render(){
 
   DSDirectionalLightPass();
   DSFinalPass();
+
+
+
+  // Get the Error
+  auto error = glGetError();
+  if ( error != GL_NO_ERROR )
+  {
+    string val = ErrorString( error );
+    std::cout<< "Error initializing OpenGL! " << error << ", " << val << std::endl;
+  }
+
+}
+
+std::string VRSim::ErrorString(GLenum error)
+{
+  if(error == GL_INVALID_ENUM)
+  {
+    return "GL_INVALID_ENUM: An unacceptable value is specified for an enumerated argument.";
+  }
+
+  else if(error == GL_INVALID_VALUE)
+  {
+    return "GL_INVALID_VALUE: A numeric argument is out of range.";
+  }
+
+  else if(error == GL_INVALID_OPERATION)
+  {
+    return "GL_INVALID_OPERATION: The specified operation is not allowed in the current state.";
+  }
+
+  else if(error == GL_INVALID_FRAMEBUFFER_OPERATION)
+  {
+    return "GL_INVALID_FRAMEBUFFER_OPERATION: The framebuffer object is not complete.";
+  }
+
+  else if(error == GL_OUT_OF_MEMORY)
+  {
+    return "GL_OUT_OF_MEMORY: There is not enough memory left to execute the command.";
+  }
+  else
+  {
+    return "None";
+  }
 }
 
 void VRSim::DSGeometryPass(){
@@ -72,14 +114,12 @@ void VRSim::DSGeometryPass(){
 
   glEnable(GL_DEPTH_TEST);
 
-  geomProgram.enable();
-
-  tree.model = cavr::math::mat4f::translate(0,1,1) * cavr::math::mat4f::scale(0.2);
+  tree.model = cavr::math::mat4f::translate(0,1,1) * cavr::math::mat4f::scale(0.1);
   auto mvp4 = (cavr::gfx::getProjection() * cavr::gfx::getView() * tree.model);
   //glUniformMatrix4fv(cd->model_uniform, 1, GL_FALSE, treeModel.v);
   geomProgram.set("gWVP", mvp4);
   geomProgram.set("gWorld", tree.model);
-  geomProgram.set("gColorMap", 1);
+  geomProgram.set("gColorMap", 0);
   tree.renderModel();
 
   glDepthMask(GL_FALSE);
@@ -135,7 +175,7 @@ void VRSim::DSPointLightsPass(unsigned int PointLightIndex)
 
     pointProgram.SetPointLight(m_pointLight[PointLightIndex]);
     pointProgram.set("gWVP", mvp);
-    pointProgram.set("gEyeWorldPos", cavr::math::vec3f(0,0,0));
+    pointProgram.set("gEyeWorldPos", (cavr::gfx::getView()[3].xyz));
     pointProgram.set("gPositionMap", GBuffer::GBUFFER_TEXTURE_TYPE_POSITION);
     pointProgram.set("gColorMap", GBuffer::GBUFFER_TEXTURE_TYPE_DIFFUSE);
     pointProgram.set("gNormalMap", GBuffer::GBUFFER_TEXTURE_TYPE_NORMAL);
@@ -178,11 +218,11 @@ void VRSim::DSDirectionalLightPass()
 
     quad.model = cavr::math::mat4f::translate(0,0,0);
     dirProgram.SetDirectionalLight(m_dirLight);
-    dirProgram.set("gWVP", cavr::math::mat4f::translate(1,1,1));
+    dirProgram.set("gWVP", quad.model);
     dirProgram.set("gPositionMap", GBuffer::GBUFFER_TEXTURE_TYPE_POSITION);
     dirProgram.set("gColorMap", GBuffer::GBUFFER_TEXTURE_TYPE_DIFFUSE);
     dirProgram.set("gNormalMap", GBuffer::GBUFFER_TEXTURE_TYPE_NORMAL);
-    dirProgram.set("gEyeWorldPos", cavr::math::vec3f(0,0,0));
+    dirProgram.set("gEyeWorldPos", (cavr::gfx::getView()[3].xyz));
     dirProgram.set("gMatSpecularIntensity", 0.10f);
     dirProgram.set("gSpecularPower", 32.0f);
 

@@ -318,10 +318,8 @@ Vertex.h
 FreeImagePlus.h
 -
 
-/cse/home/trushton/Desktop/VirtualReality/PA1/source/main.cpp
-Engine.h
--
-graphics.h
+/cse/home/trushton/Desktop/VirtualReality/PA1/source/VRSim.cpp
+VRSim.h
 -
 
 /usr/include/lua5.1/lauxlib.h

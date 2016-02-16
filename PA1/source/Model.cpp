@@ -232,7 +232,7 @@ void Model::renderModel()
         const unsigned int MaterialIndex = meshList[i].materialIndex;
 
 
-        glActiveTexture(GL_TEXTURE7);
+        glActiveTexture(GL_TEXTURE0);
 
         glBindTexture(GL_TEXTURE_2D, meshList[i].TB);
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, meshList[i].image.getWidth(), meshList[i].image.getHeight(), 0, GL_BGRA, GL_UNSIGNED_BYTE, (GLvoid *) meshList[i].image.accessPixels());

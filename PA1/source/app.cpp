@@ -281,12 +281,9 @@
 //
 //   glUniformMatrix4fv(cd->model_uniform, 1, GL_FALSE, cylinderModel.v);
 //   glUniform3f(cd->color_uniform, 0, 1, 1);
-//   glDrawArrays(GL_TRIANGLES, 0, cd->num_triangles_in_pointer);
-//   glBindVertexArray(0);
-//
-//    if (cavr::input::getButton("color")->delta() == cavr::input::Button::Held )
-//    {
-//      cavr::gfx::Ray ray(pos, wand_sixdof->getForward());
+//   glDrawArrays(GL_TRIANGLES, 0, cdvoid frame() {
+//   ContextData* cd = (ContextData*)cavr::System::getContextData();
+// }sixdof->getForward());
 //      cavr::math::vec3f updatedPosition(model[3][0], model[3][1], model[3][2]);
 //      if(solveRaycast(ray, updatedPosition, 0.075)) {
 //        LOG(INFO) << "HIT";
@@ -345,7 +342,9 @@
 //   delete cd;
 // }
 //
-// void update() {
+// void update() {void frame() {
+//   ContextData* cd = (ContextData*)cavr::System::getContextData();
+// }
 //   // shutdown cavr..
 //   if (cavr::input::getButton("exit")->delta() == cavr::input::Button::Pressed) {
 //     cavr::System::shutdown();

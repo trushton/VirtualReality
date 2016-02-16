@@ -27,6 +27,17 @@ void Engine::init()
     //input = new Input(this);
     graphics = new Graphics(this);
 
+    // A button that is pressed on the keyboard from the x11 plugin
+    input_map.button_map["exit"] = "keyboard[Escape]";
+
+    // A wii remote button
+    input_map.button_map["color"] = "vrpn[WiiMote0[3]]";
+
+    // A wand that we want to follow based on some tracker -- we are tracing point 0
+    input_map.sixdof_map["wand"] = "vrpn[WiiMote0[0]]";
+
+    input_map.sixdof_map["head"] = "vrpn[ShortGlass[0]]";
+
 }
 
 void Engine::update(){
@@ -38,7 +49,7 @@ void Engine::update(){
 }
 
 void Engine::frame(){
-  VRSim* sim = (VRSim*)cavr::System::getContextData();
+  graphics->sim = (VRSim*)cavr::System::getContextData();
 }
 
 int Engine::run()

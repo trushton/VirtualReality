@@ -46,6 +46,8 @@ public:
   bool solveQuadratic(const float a, const float b, const float c, float &x0, float &x1);
   bool solveRaycast(const cavr::gfx::Ray& ray, const cavr::math::vec3f& pos, float radius_sq);
 
+  std::string ErrorString(GLenum error);
+
 
 
 //////////////STANDARD STUFF////////////////

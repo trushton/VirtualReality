@@ -2,7 +2,6 @@
 #include <graphics.h>
 
 Engine e;
-cavr::input::InputMap input_map;
 
 class Graphics;
 
@@ -19,6 +18,7 @@ void frame(){
 }
 
 void render(){
+  e.dt = e.tick();
   e.graphics->tick(e.dt);
 }
 
@@ -38,18 +38,9 @@ int main(int argc, char **argv)
 
 
     //input->init();
-    // A button that is pressed on the keyboard from the x11 plugin
-    input_map.button_map["exit"] = "keyboard[Escape]";
 
-    // A wii remote button
-    input_map.button_map["color"] = "vrpn[WiiMote0[3]]";
 
-    // A wand that we want to follow based on some tracker -- we are tracing point 0
-    input_map.sixdof_map["wand"] = "vrpn[WiiMote0[0]]";
-
-    input_map.sixdof_map["head"] = "vrpn[ShortGlass[0]]";
-
-    if (!cavr::System::init(argc, argv, &input_map)) {
+    if (!cavr::System::init(argc, argv, &e.input_map)) {
     LOG(ERROR) << "Failed to initialize cavr.";
     return -1;
     }
