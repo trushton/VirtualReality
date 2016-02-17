@@ -66,6 +66,7 @@ vrpn = {
     "WiiMote0@projector.cse.unr.edu";
   };
   analogs = {
+    "WiiMote0@projector.cse.unr.edu"
   };
   sixdofs = {
     "WiiMote0@tracker.rd.unr.edu";
