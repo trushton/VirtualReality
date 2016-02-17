@@ -1,4 +1,0 @@
-/cse/home/trushton/Desktop/VirtualReality/build/Demo/CMakeFiles/DEMO.dir
-/cse/home/trushton/Desktop/VirtualReality/build/Demo/CMakeFiles/DEMO_SUCCESSFUL.dir
-/cse/home/trushton/Desktop/VirtualReality/build/PA1/CMakeFiles/PA1.dir
-/cse/home/trushton/Desktop/VirtualReality/build/PA1/CMakeFiles/PA1_SUCCESSFUL.dir
