@@ -48,10 +48,10 @@ void VRSim::tick(float dt){
   auto yVal = yAnalog->getValue();
   // cout << xVal << " | " << yVal << "\n";
 
-  if(xValOld != xVal || yValOld != yVal) {
-    Engine::getEngine()->graphics->camera->Move(cavr::math::vec3f(xVal, 0, yVal));
-    xValOld = xVal;
+  if(xValOld != -xVal || yValOld != yVal) {
+    xValOld = -xVal;
     yValOld = yVal;
+    Engine::getEngine()->graphics->camera->Move(cavr::math::vec3f(xValOld, 0, yValOld));
   }
 
   playerPos = Engine::getEngine()->graphics->camera->getPos();
