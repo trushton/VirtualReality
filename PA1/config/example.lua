@@ -75,9 +75,9 @@ vrpn = {
 };
 
 self = {
-  hostname = "hpcvis7";
-  ssh = "hpcvis7";--"chase@" .. HOSTNAME;
-  address = "hpcvis7";
+  hostname = "hpcvis6";
+  ssh = "hpcvis6";--"chase@" .. HOSTNAME;
+  address = "hpcvis6";
   plugins = {
     x11_renderer = x11_renderer;
     --x11_renderer2 = x11_renderer2;
@@ -88,9 +88,9 @@ self = {
 
 
 others = {
-  hostname = "hpcvis7";
-  ssh = "hpcvis7";
-  address = "hpcvis7";--"tcp://" .. "hpcvis7" .. ":8888";
+  hostname = "hpcvis6";
+  ssh = "hpcvis6";
+  address = "hpcvis6";--"tcp://" .. "hpcvis7" .. ":8888";
   plugins = {
     x11_renderer = x11_renderer;
     vrpn = vrpn;

@@ -32,6 +32,8 @@ void VRSim::init(){
   //the origins of time
   t2 = t1 = std::chrono::high_resolution_clock::now();
   time = 0;
+  xValOld = 0.0f;
+  yValOld = 0.0f;
 }
 
 void VRSim::tick(float dt){
@@ -44,9 +46,13 @@ void VRSim::tick(float dt){
   auto xVal = xAnalog->getValue();
   auto yAnalog = cavr::input::getAnalog("y");
   auto yVal = yAnalog->getValue();
-  cout << xVal << " | " << yVal << "\n";
+  // cout << xVal << " | " << yVal << "\n";
 
-  Engine::getEngine()->graphics->camera->Move(cavr::math::vec3f(xVal, 0, yVal));
+  if(xValOld != xVal || yValOld != yVal) {
+    Engine::getEngine()->graphics->camera->Move(cavr::math::vec3f(xVal, 0, yVal));
+    xValOld = xVal;
+    yValOld = yVal;
+  }
 
   playerPos = Engine::getEngine()->graphics->camera->getPos();
 }

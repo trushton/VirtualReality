@@ -102,6 +102,9 @@ private:
   int time;
 
   int windowWidth, windowHeight;
+
+  // Used for person movement
+  float xValOld, yValOld;
 };
 
 
