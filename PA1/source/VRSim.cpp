@@ -38,6 +38,17 @@ void VRSim::tick(float dt){
   tree.model = cavr::math::mat4f::translate(0,0,0);
   quad.model = cavr::math::mat4f::translate(0,0,0);
   sphere.model = cavr::math::mat4f::translate(0,0,0);
+
+  //move with analog
+  auto xAnalog = cavr::input::getAnalog("x");
+  auto xVal = xAnalog->getValue();
+  auto yAnalog = cavr::input::getAnalog("y");
+  auto yVal = yAnalog->getValue();
+  cout << xVal << " | " << yVal << "\n";
+
+  Engine::getEngine()->graphics->camera->Move(cavr::math::vec3f(xVal, 0, yVal));
+
+  playerPos = Engine::getEngine()->graphics->camera->getPos();
 }
 
 void VRSim::render(){
@@ -61,12 +72,12 @@ void VRSim::render(){
 
 
   // Get the Error
-  auto error = glGetError();
-  if ( error != GL_NO_ERROR )
-  {
-    string val = ErrorString( error );
-    std::cout<< "Error initializing OpenGL! " << error << ", " << val << std::endl;
-  }
+  // auto error = glGetError();
+  // if ( error != GL_NO_ERROR )
+  // {
+  //   string val = ErrorString( error );
+  //   std::cout<< "Error initializing OpenGL! " << error << ", " << val << std::endl;
+  // }
 
 }
 
@@ -103,7 +114,7 @@ std::string VRSim::ErrorString(GLenum error)
 }
 
 void VRSim::DSGeometryPass(){
-  m_gbuffer.BindForGeomPass();
+  //m_gbuffer.BindForGeomPass();
   geomProgram.enable();
 
   // Only the geometry pass updates the depth buffer
@@ -114,8 +125,8 @@ void VRSim::DSGeometryPass(){
 
   glEnable(GL_DEPTH_TEST);
 
-  tree.model = cavr::math::mat4f::translate(0,1,1) * cavr::math::mat4f::scale(0.1);
-  auto mvp4 = (cavr::gfx::getProjection() * cavr::gfx::getView() * tree.model);
+  tree.model = cavr::math::mat4f::translate(playerPos) * cavr::math::mat4f::scale(0.1) ;
+  auto mvp4 = (cavr::gfx::getProjection() * (cavr::gfx::getView()) * tree.model );
   //glUniformMatrix4fv(cd->model_uniform, 1, GL_FALSE, treeModel.v);
   geomProgram.set("gWVP", mvp4);
   geomProgram.set("gWorld", tree.model);

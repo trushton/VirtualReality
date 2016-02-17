@@ -16,9 +16,10 @@
 // #include <glm/gtc/matrix_transform.hpp>
 // #include <glm/gtc/type_ptr.hpp>
 #include <VRSim.h>
+#include <camera.h>
 
 class Engine;
-//class Camera;
+class Camera;
 class Texture;
 class Program;
 class VRSim;
@@ -43,7 +44,7 @@ public:
 
     cavr::math::mat4f view, projection;
 
-    //Camera * camera;
+    Camera * camera;
     VRSim *sim;
 
 

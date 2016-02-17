@@ -47,7 +47,7 @@ public:
   bool solveRaycast(const cavr::gfx::Ray& ray, const cavr::math::vec3f& pos, float radius_sq);
 
   std::string ErrorString(GLenum error);
-
+  cavr::math::vec3f playerPos;
 
 
 //////////////STANDARD STUFF////////////////

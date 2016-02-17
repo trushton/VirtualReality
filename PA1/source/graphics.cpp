@@ -11,7 +11,7 @@
 Graphics::Graphics(Engine *eng)
         : engine(eng)
 {
-    //camera = new Camera(engine);
+    camera = new Camera(engine);
 
 }
 
