@@ -2,7 +2,7 @@
 #define VERTEX_H
 
 #include <GL/glew.h>
-//#include <glm/glm.hpp>
+#include <glm/glm.hpp>
 #include <cavr/cavr.h>
 #include <cavr/gfx/renderer.h>
 #include <cavr/gfx/shapes.h>
@@ -42,5 +42,6 @@ struct textureVertex
     GLfloat position[3];
     GLfloat uv[2];
 };
+
 
 #endif // VERTEX_H

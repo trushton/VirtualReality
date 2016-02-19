@@ -38,6 +38,11 @@ void Engine::init()
 
     input_map.sixdof_map["head"] = "vrpn[ShortGlass[0]]";
 
+    //controls for rotation, translation, and speed
+    input_map.button_map["boost"] = "vrpn[WiiMote0[4]]";
+    input_map.button_map["rotation"] = "vrpn[WiiMote0[5]]";
+
+    // get input from the analog stick
     input_map.analog_map["x"] = "vrpn[WiiMote0[21]]";
     input_map.analog_map["y"] = "vrpn[WiiMote0[22]]";
 

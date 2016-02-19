@@ -49,6 +49,8 @@ public:
   std::string ErrorString(GLenum error);
   cavr::math::vec3f playerPos;
 
+  void processInput();
+
 
 //////////////STANDARD STUFF////////////////
   // Rotating angle
@@ -105,6 +107,7 @@ private:
 
   // Used for person movement
   float xValOld, yValOld;
+  bool boost, rotation;
 };
 
 

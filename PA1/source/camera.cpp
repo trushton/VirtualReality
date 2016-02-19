@@ -104,11 +104,42 @@ void Camera::rotate(GLfloat x, GLfloat y)
 void Camera::update()
 {
 
-    if(RotatedX != 0.0f)
+    if(RotatedX != 0.0f){
+        glm::vec3 V = RogerToGLMVec3(ViewDir);
+        glm::vec3 U = RogerToGLMVec3(UpVector);
+        V = glm::rotate(V, RotatedX, U);
+        ViewDir = glmToCavrVec3(V);
         //ViewDir = glm::rotate(ViewDir, RotatedX, UpVector);
+    }
 
-    if(RotatedY != 0.0f)
+    if(RotatedY != 0.0f){
+      glm::vec3 V = RogerToGLMVec3(ViewDir);
+      glm::vec3 U = RogerToGLMVec3(UpVector);
+      glm::vec3 cross = glm::cross(V, U);
+      V = glm::rotate(V, RotatedY, cross);
+      ViewDir = glmToCavrVec3(V);
         //ViewDir = glm::rotate(ViewDir, RotatedY, UpVector.cross(ViewDir));
+    }
 
     RotatedX = RotatedY = 0.0f;
+}
+
+glm::vec3 Camera::RogerToGLMVec3(cavr::math::vec3f src){
+  return glm::vec3(src.x, src.y, src.z);
+}
+
+cavr::math::vec3f Camera::glmToCavrVec3(glm::vec3 src){
+  return cavr::math::vec3f(src.x, src.y, src.z);
+}
+
+
+cavr::math::mat4f Camera::Rogerify(glm::mat4 src){
+  cavr::math::mat4f dest;
+  for(int i = 0; i < 4; i++){
+    for(int j = 0; j < 4; j++){
+      dest[i][j] = src[i][j];
+    }
+  }
+
+  return dest;
 }

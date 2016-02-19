@@ -37,17 +37,20 @@ public:
     void StrafeRight(GLfloat Distance);
 
     void rotate(GLfloat, GLfloat);
-
     void update();
     void printOut();
 
     cavr::math::mat4f getView();
     cavr::math::vec3f getPos();
+    cavr::math::mat4f Rogerify(glm::mat4 src);
+    glm::vec3 RogerToGLMVec3(cavr::math::vec3f src);
+    cavr::math::vec3f glmToCavrVec3(glm::vec3 src);
 
 //        cavr::math::vec3 getPos() const { return pos; }
     //cavr::math::vec3 getOrientation() const { return orientation; }
     GLfloat totalX;
     GLfloat totalY;
+    GLfloat movementSpeed;
 
 private:
     cavr::math::vec3f ViewDir;
@@ -60,7 +63,6 @@ private:
 
     GLfloat RotatedX, RotatedY, RotatedZ;
 
-    GLfloat movementSpeed;
 
     Engine *engine;
 };

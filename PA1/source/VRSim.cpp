@@ -34,6 +34,42 @@ void VRSim::init(){
   time = 0;
   xValOld = 0.0f;
   yValOld = 0.0f;
+  boost = rotation = false;
+}
+
+void VRSim::processInput(){
+  // handle analog stick movement
+  auto xAnalog = cavr::input::getAnalog("x");
+  auto xVal = xAnalog->getValue();
+  auto yAnalog = cavr::input::getAnalog("y");
+  auto yVal = yAnalog->getValue();
+  // cout << xVal << " | " << yVal << "\n";
+  if (cavr::input::getButton("boost")->delta() == cavr::input::Button::Pressed) {
+      boost = !boost;
+  }
+  if (boost){
+    Engine::getEngine()->graphics->camera->movementSpeed = 2;
+  }
+  else{
+    Engine::getEngine()->graphics->camera->movementSpeed = 1;
+  }
+
+  if (cavr::input::getButton("rotation")->delta() == cavr::input::Button::Pressed) {
+      rotation = !rotation;
+  }
+
+  if(xValOld != -xVal || yValOld != yVal) {
+    xValOld = -xVal;
+    yValOld = yVal;
+     if(rotation){
+       Engine::getEngine()->graphics->camera->rotate(xValOld, yValOld);
+     }
+     else{
+       Engine::getEngine()->graphics->camera->Move(cavr::math::vec3f(xValOld, 0, yValOld));
+     }
+  }
+
+  playerPos = Engine::getEngine()->graphics->camera->getPos();
 }
 
 void VRSim::tick(float dt){
@@ -41,20 +77,8 @@ void VRSim::tick(float dt){
   quad.model = cavr::math::mat4f::translate(0,0,0);
   sphere.model = cavr::math::mat4f::translate(0,0,0);
 
-  //move with analog
-  auto xAnalog = cavr::input::getAnalog("x");
-  auto xVal = xAnalog->getValue();
-  auto yAnalog = cavr::input::getAnalog("y");
-  auto yVal = yAnalog->getValue();
-  // cout << xVal << " | " << yVal << "\n";
+  processInput();
 
-  if(xValOld != -xVal || yValOld != yVal) {
-    xValOld = -xVal;
-    yValOld = yVal;
-    Engine::getEngine()->graphics->camera->Move(cavr::math::vec3f(xValOld, 0, yValOld));
-  }
-
-  playerPos = Engine::getEngine()->graphics->camera->getPos();
 }
 
 void VRSim::render(){
