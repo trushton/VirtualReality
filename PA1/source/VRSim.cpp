@@ -28,6 +28,7 @@ void VRSim::init(){
 
   //load models
   tree.loadModel("./bin/tree/tree.obj");
+  quad.loadModel("./bin/quad.obj");
 
   //the origins of time
   t2 = t1 = std::chrono::high_resolution_clock::now();
@@ -144,7 +145,7 @@ std::string VRSim::ErrorString(GLenum error)
 }
 
 void VRSim::DSGeometryPass(){
-  //m_gbuffer.BindForGeomPass();
+  m_gbuffer.BindForGeomPass();
   geomProgram.enable();
 
   // Only the geometry pass updates the depth buffer
@@ -257,7 +258,7 @@ void VRSim::DSDirectionalLightPass()
     glBlendFunc(GL_ONE, GL_ONE);
 
 
-    quad.model = cavr::math::mat4f::translate(0,0,0);
+    quad.model = cavr::gfx::getProjection() * cavr::gfx::getView() * cavr::math::mat4f::translate(0,0,0);
     dirProgram.SetDirectionalLight(m_dirLight);
     dirProgram.set("gWVP", quad.model);
     dirProgram.set("gPositionMap", GBuffer::GBUFFER_TEXTURE_TYPE_POSITION);

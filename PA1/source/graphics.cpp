@@ -45,9 +45,6 @@ void Graphics::initGL()
 
     //include this later
     //skybox = new Skybox();
-
-
-
 }
 
 void Graphics::tick(float dt)

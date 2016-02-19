@@ -18,12 +18,11 @@ void frame(){
 }
 
 void render(){
-  e.dt = e.tick();
   e.graphics->tick(e.dt);
 }
 
 void stop(){
-  e.stop();
+  e.stop(0);
 }
 
 int main(int argc, char **argv)
