@@ -51,9 +51,10 @@ public:
     GLfloat totalX;
     GLfloat totalY;
     GLfloat movementSpeed;
+    cavr::math::vec3f ViewDir;
+
 
 private:
-    cavr::math::vec3f ViewDir;
     cavr::math::vec3f RightVector;
     cavr::math::vec3f UpVector;
     cavr::math::vec3f Position;

@@ -36,11 +36,11 @@ void Engine::init()
     // A wand that we want to follow based on some tracker -- we are tracing point 0
     input_map.sixdof_map["wand"] = "vrpn[WiiMote0[0]]";
 
-    input_map.sixdof_map["head"] = "vrpn[ShortGlass[0]]";
+    input_map.sixdof_map["head"] = "vrpn[ShortGlasses[0]]";
 
     //controls for rotation, translation, and speed
-    input_map.button_map["boost"] = "vrpn[WiiMote0[4]]";
-    input_map.button_map["rotation"] = "vrpn[WiiMote0[5]]";
+    input_map.button_map["boost"] = "vrpn[WiiMote0[16]]";
+    input_map.button_map["rotation"] = "vrpn[WiiMote0[17]]";
 
     // get input from the analog stick
     input_map.analog_map["x"] = "vrpn[WiiMote0[21]]";

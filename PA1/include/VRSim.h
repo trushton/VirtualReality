@@ -12,6 +12,8 @@
 #include <Engine.h>
 #include <graphics.h>
 #include <lights.h>
+#include <Terrain.h>
+
 
 // Using IrrKlang for this project
 #include <irrKlang.h>
@@ -99,6 +101,8 @@ private:
 
   //models
   Model tree, quad, sphere;
+
+  Terrain *terrain;
 
   std::chrono::time_point<std::chrono::high_resolution_clock> t1, t2;
   int time;

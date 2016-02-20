@@ -15,7 +15,7 @@ Camera::Camera(Engine *eng)
 
 
     RotatedX = RotatedY = RotatedZ = 0.0f;
-    movementSpeed = 1.0f;
+    movementSpeed = 0.2f;
 }
 
 void Camera::Move(cavr::math::vec3f Direction)
@@ -76,8 +76,6 @@ void Camera::printOut() {
 
 cavr::math::mat4f Camera::getView()
 {
-    update();
-
     cavr::math::vec3f ViewPoint = Position + ViewDir;
     cavr::math::mat4f view = cavr::math::mat4f::look_at(Position, ViewPoint, UpVector);
     /*cout << Position.x << " | " << Position.y << " | " << Position.z << endl;
@@ -120,6 +118,8 @@ void Camera::update()
       ViewDir = glmToCavrVec3(V);
         //ViewDir = glm::rotate(ViewDir, RotatedY, UpVector.cross(ViewDir));
     }
+
+    std::cout << "View: " << ViewDir.x << "\n";
 
     RotatedX = RotatedY = 0.0f;
 }

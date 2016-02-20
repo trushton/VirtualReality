@@ -48,8 +48,9 @@ void Graphics::initGL()
 }
 
 void Graphics::tick(float dt)
-{
+{    
     sim->tick(dt);
+    camera->update();
     render();
 }
 

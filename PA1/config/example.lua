@@ -33,7 +33,7 @@ x11_renderer = {
   windows = {
     sim_window = sim_window;
     --sim_window2 = sim_window;
-    --perspective_window = perspective_window;
+    perspective_window = perspective_window;
   };
 };
 

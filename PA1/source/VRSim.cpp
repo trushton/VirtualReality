@@ -9,8 +9,8 @@ VRSim::~VRSim(){
 }
 
 void VRSim::init(){
-  windowWidth = 480;
-  windowHeight = 640;
+  windowWidth = 1920;
+  windowHeight = 1080;
   InitLights();
 
   m_gbuffer.Init(windowWidth,windowHeight);
@@ -29,6 +29,11 @@ void VRSim::init(){
   //load models
   tree.loadModel("./bin/tree/tree.obj");
   quad.loadModel("./bin/quad.obj");
+  sphere.loadModel("./bin/sphere.obj");
+
+  // Terrain
+  terrain = new Terrain(cavr::math::vec3f(100,30,100), "./bin/terrain/output.jpg");
+  terrain->initialize();
 
   //the origins of time
   t2 = t1 = std::chrono::high_resolution_clock::now();
@@ -45,28 +50,31 @@ void VRSim::processInput(){
   auto yAnalog = cavr::input::getAnalog("y");
   auto yVal = yAnalog->getValue();
   // cout << xVal << " | " << yVal << "\n";
-  if (cavr::input::getButton("boost")->delta() == cavr::input::Button::Pressed) {
+  if (cavr::input::getButton("boost")->delta() == cavr::input::Button::Held) {
+    std::cout << "Boost\n";
       boost = !boost;
   }
   if (boost){
-    Engine::getEngine()->graphics->camera->movementSpeed = 2;
+    Engine::getEngine()->graphics->camera->movementSpeed = 1.2f;
   }
   else{
-    Engine::getEngine()->graphics->camera->movementSpeed = 1;
+    Engine::getEngine()->graphics->camera->movementSpeed = 1.0f;
   }
 
-  if (cavr::input::getButton("rotation")->delta() == cavr::input::Button::Pressed) {
+  if (cavr::input::getButton("rotation")->delta() == cavr::input::Button::Held) {
+    std::cout << "rotation\n";
       rotation = !rotation;
   }
 
-  if(xValOld != -xVal || yValOld != yVal) {
-    xValOld = -xVal;
-    yValOld = yVal;
+  if(abs(xVal) > 0.05 || abs(yVal) > 0.05) {
      if(rotation){
-       Engine::getEngine()->graphics->camera->rotate(xValOld, yValOld);
+       Engine::getEngine()->graphics->camera->rotate(xVal, yVal);
      }
      else{
-       Engine::getEngine()->graphics->camera->Move(cavr::math::vec3f(xValOld, 0, yValOld));
+       auto wand = cavr::input::getSixDOF("wand");
+       cavr::math::vec3f wand_dir = wand->getForward();
+       cavr::math::vec3f move_dir = (cavr::math::vec3f(-xVal, 0, -yVal));
+       Engine::getEngine()->graphics->camera->Move(wand_dir * -yVal);
      }
   }
 
@@ -156,8 +164,15 @@ void VRSim::DSGeometryPass(){
 
   glEnable(GL_DEPTH_TEST);
 
-  tree.model = cavr::math::mat4f::translate(playerPos) * cavr::math::mat4f::scale(0.1) ;
-  auto mvp4 = (cavr::gfx::getProjection() * (cavr::gfx::getView()) * tree.model );
+  terrain->enable();
+  terrain->model = cavr::math::mat4f::translate(cavr::math::vec3f(0 , -40 , 0));
+  terrain->render(terrain->time);
+
+  geomProgram.enable();
+
+  tree.model = cavr::math::mat4f::translate(cavr::math::vec3f(0,0,0)) * cavr::math::mat4f::scale(0.1) ;
+  //tree.model = cavr::math::mat4f::translate(cavr::math::vec3f(0,0,0)) * cavr::math::mat4f::scale(0.1) ;
+  auto mvp4 = (cavr::gfx::getProjection() * (cavr::gfx::getView()*Engine::getEngine()->graphics->camera->getView()) * tree.model );
   //glUniformMatrix4fv(cd->model_uniform, 1, GL_FALSE, treeModel.v);
   geomProgram.set("gWVP", mvp4);
   geomProgram.set("gWorld", tree.model);
@@ -217,7 +232,7 @@ void VRSim::DSPointLightsPass(unsigned int PointLightIndex)
 
     pointProgram.SetPointLight(m_pointLight[PointLightIndex]);
     pointProgram.set("gWVP", mvp);
-    pointProgram.set("gEyeWorldPos", (cavr::gfx::getView()[3].xyz));
+    pointProgram.set("gEyeWorldPos", playerPos);
     pointProgram.set("gPositionMap", GBuffer::GBUFFER_TEXTURE_TYPE_POSITION);
     pointProgram.set("gColorMap", GBuffer::GBUFFER_TEXTURE_TYPE_DIFFUSE);
     pointProgram.set("gNormalMap", GBuffer::GBUFFER_TEXTURE_TYPE_NORMAL);
@@ -250,7 +265,7 @@ void VRSim::DSDirectionalLightPass()
     dirProgram.enable();
 
     glDisable(GL_CULL_FACE);
-    //glCullFace(GL_FRONT);
+    glCullFace(GL_FRONT);
 
     glDisable(GL_DEPTH_TEST);
     glEnable(GL_BLEND);
@@ -258,13 +273,13 @@ void VRSim::DSDirectionalLightPass()
     glBlendFunc(GL_ONE, GL_ONE);
 
 
-    quad.model = cavr::gfx::getProjection() * cavr::gfx::getView() * cavr::math::mat4f::translate(0,0,0);
+    quad.model = cavr::math::mat4f::translate(0,0,0);
     dirProgram.SetDirectionalLight(m_dirLight);
     dirProgram.set("gWVP", quad.model);
     dirProgram.set("gPositionMap", GBuffer::GBUFFER_TEXTURE_TYPE_POSITION);
     dirProgram.set("gColorMap", GBuffer::GBUFFER_TEXTURE_TYPE_DIFFUSE);
     dirProgram.set("gNormalMap", GBuffer::GBUFFER_TEXTURE_TYPE_NORMAL);
-    dirProgram.set("gEyeWorldPos", (cavr::gfx::getView()[3].xyz));
+    dirProgram.set("gEyeWorldPos", playerPos);
     dirProgram.set("gMatSpecularIntensity", 0.10f);
     dirProgram.set("gSpecularPower", 32.0f);
 
@@ -273,7 +288,7 @@ void VRSim::DSDirectionalLightPass()
     quad.renderModel();
 
     glDisable(GL_BLEND);
-    //glCullFace(GL_BACK);
+    glCullFace(GL_BACK);
 }
 
 void VRSim::DSFinalPass()
