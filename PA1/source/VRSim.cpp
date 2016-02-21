@@ -12,6 +12,7 @@ void VRSim::init(){
   windowWidth = 1920;
   windowHeight = 1080;
   InitLights();
+  InitColorPalette();
 
   m_gbuffer.Init(windowWidth,windowHeight);
   geomProgram.init();
@@ -41,6 +42,8 @@ void VRSim::init(){
   xValOld = 0.0f;
   yValOld = 0.0f;
   boost = rotation = false;
+
+
 }
 
 void VRSim::processInput(){
@@ -106,7 +109,9 @@ void VRSim::render(){
   glDisable(GL_STENCIL_TEST);
 
   DSDirectionalLightPass();
+
   DSFinalPass();
+
 
 
 
@@ -154,7 +159,7 @@ std::string VRSim::ErrorString(GLenum error)
 
 void VRSim::DSGeometryPass(){
   m_gbuffer.BindForGeomPass();
-  geomProgram.enable();
+  //geomProgram.enable();
 
   // Only the geometry pass updates the depth buffer
 
@@ -163,6 +168,10 @@ void VRSim::DSGeometryPass(){
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
   glEnable(GL_DEPTH_TEST);
+
+  for(int i = 0; i < colorPalette.size(); i++){
+    colorPalette[i].render(Engine::getEngine()->graphics->camera->getView());
+  }
 
   terrain->enable();
   terrain->model = cavr::math::mat4f::translate(cavr::math::vec3f(0 , -40 , 0));
@@ -177,7 +186,7 @@ void VRSim::DSGeometryPass(){
   geomProgram.set("gWVP", mvp4);
   geomProgram.set("gWorld", tree.model);
   geomProgram.set("gColorMap", 0);
-  tree.renderModel();
+  //tree.renderModel();
 
   glDepthMask(GL_FALSE);
 }
@@ -314,6 +323,21 @@ void VRSim::InitLights()
   temp.Attenuation.Exp = .1f;
   m_pointLight.push_back(temp);
 
+}
+
+void VRSim::InitColorPalette(){
+  Paintball temp(cavr::math::vec3f(1,0,0));
+
+  temp.setPos(cavr::math::vec3f(1,1,1));
+  colorPalette.push_back(temp);
+
+  temp.setColor(cavr::math::vec3f(0,1,0));
+  temp.setPos(cavr::math::vec3f(1,2,1));
+  colorPalette.push_back(temp);
+
+  temp.setColor(cavr::math::vec3f(0,0,1));
+  temp.setPos(cavr::math::vec3f(1,3,1));
+  colorPalette.push_back(temp);
 }
 
 //STOLEN

@@ -13,6 +13,7 @@
 #include <graphics.h>
 #include <lights.h>
 #include <Terrain.h>
+#include <paintball.h>
 
 
 // Using IrrKlang for this project
@@ -42,6 +43,7 @@ public:
   void DSFinalPass();
 
   void InitLights();
+  void InitColorPalette();
   void InitBoxPositions();
   void DSLightPass();
 
@@ -63,7 +65,7 @@ public:
   ISound* music;
 
    // Shader Programs
-  cavr::gl::Program* simple_program;
+  //cavr::gl::Program* simple_program;
   cavr::gl::Program* cube_program;
 
    // Uniforms
@@ -112,6 +114,8 @@ private:
   // Used for person movement
   float xValOld, yValOld;
   bool boost, rotation;
+
+  std::vector<Paintball> colorPalette;
 };
 
 
