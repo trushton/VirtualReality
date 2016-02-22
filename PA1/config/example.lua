@@ -33,13 +33,13 @@ x11_renderer = {
   windows = {
     sim_window = sim_window;
     --sim_window2 = sim_window;
-    perspective_window = perspective_window;
+    --perspective_window = perspective_window;
   };
 };
 
 x11_renderer2 = {
   type = "x11gl";
-  display = ":0.2";
+  display = ":0.1";
   windows = {
     --sim_window = sim_window;
     --sim_window2 = sim_window;
@@ -50,11 +50,11 @@ x11_renderer2 = {
 
 x11_renderer3 = {
   type = "x11gl";
-  display = ":0.0";
+  display = ":0.2";
   windows = {
-    sim_window = sim_window;
+    --sim_window = sim_window;
     --sim_window2 = sim_window;
-    --perspective_window = perspective_window;
+    perspective_window = perspective_window;
   };
 };
 
@@ -69,19 +69,19 @@ vrpn = {
     "WiiMote0@projector.cse.unr.edu"
   };
   sixdofs = {
-    "WiiMote0@tracker.rd.unr.edu";
-    "ShortGlasses@tracker.rd.unr.edu";
+    "WiiMote0@tracker.rd.unr.edu:1";
+    "ShortGlasses@tracker.rd.unr.edu:1";
   };
 };
 
 self = {
-  hostname = "hpcvis7";
-  ssh = "hpcvis7";--"chase@" .. HOSTNAME;
-  address = "hpcvis7";
+  hostname = "projector";
+  ssh = "projector";--"chase@" .. HOSTNAME;
+  address = "projector";
   plugins = {
     x11_renderer = x11_renderer;
-    --x11_renderer2 = x11_renderer2;
-    --x11_renderer3 = x11_renderer3;
+    x11_renderer2 = x11_renderer2;
+    x11_renderer3 = x11_renderer3;
     vrpn = vrpn;
   };
 };
