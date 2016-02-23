@@ -14,6 +14,7 @@ void VRSim::init(){
   InitLights();
   InitColorPalette();
 
+
   m_gbuffer.Init(windowWidth,windowHeight);
   geomProgram.init();
 
@@ -45,6 +46,10 @@ void VRSim::init(){
   boost = rotation = false;
 
   cam = Engine::getEngine()->graphics->camera;
+  currentColor = cavr::math::vec3f(1,0,0);
+
+  cursor.init();
+
 }
 
 void VRSim::processInput(){
@@ -96,13 +101,18 @@ void VRSim::processInput(){
     }
   }
 
-  if(cavr::input::getButton("painting")->delta() != cavr::input::Button::Open){
+  if(cavr::input::getButton("clear")->delta() != cavr::input::Button::Open){
+    painting.clear();
+  }
+
+  if(cavr::input::getButton("paint")->delta() != cavr::input::Button::Open){
      Paintball temp(currentColor);
-     temp.setPos(cavr::math::vec3f(wand_sixdof->getPosition() + cavr::math::vec3f(0,0,-1)));
+     temp.setPos(cavr::math::vec3f(wand_sixdof->getPosition() + cavr::math::vec3f(0,0,-2)));
      painting.push_back(temp);
   }
 
-
+  wand_sixdof = cavr::input::getSixDOF("wand");
+  cursor.wandModel = (wand_sixdof->getMatrix() * cavr::math::mat4f::translate(0, 0, -2) * cavr::math::mat4f::scale(0.1));
   playerPos = Engine::getEngine()->graphics->camera->getPos();
 }
 
@@ -110,7 +120,6 @@ void VRSim::tick(float dt){
   tree.model = cavr::math::mat4f::translate(0,0,0);
   quad.model = cavr::math::mat4f::translate(0,0,0);
   sphere.model = cavr::math::mat4f::translate(0,0,0);
-
   processInput();
 
 }
@@ -191,16 +200,18 @@ void VRSim::DSGeometryPass(){
 
   glEnable(GL_DEPTH_TEST);
 
+  //render the pointer
+
+  cursor.render(cam->getView());
+
   //render each ball of the color palette
   for(int i = 0; i < colorPalette.size(); i++){
     colorPalette[i].render(cam->getView());
   }
 
   //render the painting itself
-  if(painting.size() != 0){
-    for(int i = 0; i < painting.size(); i++){
-      painting[i].render(cam->getView());
-    }
+  for(int i = 0; i < painting.size(); i++){
+    painting[i].renderPainting(cam->getView());
   }
 
   //enable the terrains program and render it
@@ -214,14 +225,14 @@ void VRSim::DSGeometryPass(){
   //load regular models
 
   /////loads one model/////
-  wand_sixdof = cavr::input::getSixDOF("wand");
-  pen.model = wand_sixdof->getMatrix()* cavr::math::mat4f::translate(cavr::math::vec3f(0,0,-1)) * cavr::math::mat4f::scale(0.1);
-  //pen.model = cavr::math::mat4f::translate(cavr::math::vec3f(0,0,0)) * cavr::math::mat4f::scale(0.1) ;
-  auto mvp4 = (cavr::gfx::getProjection() * (cavr::gfx::getView()) * pen.model );
-  geomProgram.set("gWVP", mvp4);
-  geomProgram.set("gWorld", pen.model);
-  geomProgram.set("gColorMap", 0);
-  pen.renderModel();
+  // wand_sixdof = cavr::input::getSixDOF("wand");
+  // pen.model = wand_sixdof->getMatrix()* cavr::math::mat4f::translate(cavr::math::vec3f(0,0,-1)) * cavr::math::mat4f::scale(0.1);
+  // //pen.model = cavr::math::mat4f::translate(cavr::math::vec3f(0,0,0)) * cavr::math::mat4f::scale(0.1) ;
+  // auto mvp4 = (cavr::gfx::getProjection() * (cavr::gfx::getView()) * pen.model );
+  // geomProgram.set("gWVP", mvp4);
+  // geomProgram.set("gWorld", pen.model);
+  // geomProgram.set("gColorMap", 0);
+  // pen.renderModel();
   /////////////////////////
 
   glDepthMask(GL_FALSE);

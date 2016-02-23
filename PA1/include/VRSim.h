@@ -15,6 +15,7 @@
 #include <Terrain.h>
 #include <paintball.h>
 #include <camera.h>
+#include <pointer.h>
 
 
 // Using IrrKlang for this project
@@ -66,7 +67,7 @@ public:
   ISound* music;
 
    // Shader Programs
-  //cavr::gl::Program* simple_program;
+  cavr::gl::Program* simple_program;
   cavr::gl::Program* cube_program;
 
    // Uniforms
@@ -119,6 +120,7 @@ private:
 
   std::vector<Paintball> colorPalette;
   std::vector<Paintball> painting;
+  Pointer cursor;
   cavr::math::vec3f currentColor;
 };
 

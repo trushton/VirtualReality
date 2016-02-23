@@ -42,6 +42,21 @@ void Paintball::render(cavr::math::mat4f camView){
   simple_program->end();
 }
 
+void Paintball::renderPainting(cavr::math::mat4f camView){
+  simple_program->begin();
+  sphere_vao->bind();
+  glUniformMatrix4fv(projection_uniform, 1, GL_FALSE, cavr::gfx::getProjection().v);
+  glUniformMatrix4fv(view_uniform, 1, GL_FALSE, (cavr::gfx::getView()).v);
+  model = cavr::math::mat4f::translate(pos) * cavr::math::mat4f::scale(0.2);
+
+  // draw the sphere for the simple program
+  glUniformMatrix4fv(model_uniform, 1, GL_FALSE, model.v);
+  glUniform3f(color_uniform, color.x, color.y, color.z);
+  glDrawArrays(GL_TRIANGLES, 0, numTriangles);
+  glBindVertexArray(0);
+  simple_program->end();
+}
+
 
 cavr::math::vec3f Paintball::getColor(){
   return color;
