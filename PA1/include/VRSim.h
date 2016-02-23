@@ -14,6 +14,7 @@
 #include <lights.h>
 #include <Terrain.h>
 #include <paintball.h>
+#include <camera.h>
 
 
 // Using IrrKlang for this project
@@ -52,7 +53,7 @@ public:
 
   std::string ErrorString(GLenum error);
   cavr::math::vec3f playerPos;
-
+  cavr::input::SixDOF* wand_sixdof;
   void processInput();
 
 
@@ -90,6 +91,7 @@ public:
 
 private:
   GBuffer m_gbuffer;
+  Camera* cam;
 
    //custom Programs
   DSGeomPassTech geomProgram;
@@ -102,7 +104,7 @@ private:
   vector<PointLight> m_pointLight;
 
   //models
-  Model tree, quad, sphere;
+  Model tree, quad, sphere, pen;
 
   Terrain *terrain;
 
@@ -116,6 +118,8 @@ private:
   bool boost, rotation;
 
   std::vector<Paintball> colorPalette;
+  std::vector<Paintball> painting;
+  cavr::math::vec3f currentColor;
 };
 
 

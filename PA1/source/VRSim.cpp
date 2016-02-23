@@ -31,6 +31,7 @@ void VRSim::init(){
   tree.loadModel("./bin/tree/tree.obj");
   quad.loadModel("./bin/quad.obj");
   sphere.loadModel("./bin/sphere.obj");
+  pen.loadModel("./bin/objects/Pen.obj");
 
   // Terrain
   terrain = new Terrain(cavr::math::vec3f(100,30,100), "./bin/terrain/output.jpg");
@@ -43,7 +44,7 @@ void VRSim::init(){
   yValOld = 0.0f;
   boost = rotation = false;
 
-
+  cam = Engine::getEngine()->graphics->camera;
 }
 
 void VRSim::processInput(){
@@ -52,11 +53,14 @@ void VRSim::processInput(){
   auto xVal = xAnalog->getValue();
   auto yAnalog = cavr::input::getAnalog("y");
   auto yVal = yAnalog->getValue();
+
   // cout << xVal << " | " << yVal << "\n";
-  if (cavr::input::getButton("boost")->delta() == cavr::input::Button::Held) {
+  if (cavr::input::getButton("boost")->delta() != cavr::input::Button::Open) {
     std::cout << "Boost\n";
       boost = !boost;
   }
+
+
   if (boost){
     Engine::getEngine()->graphics->camera->movementSpeed = 1.2f;
   }
@@ -64,9 +68,10 @@ void VRSim::processInput(){
     Engine::getEngine()->graphics->camera->movementSpeed = 1.0f;
   }
 
-  if (cavr::input::getButton("rotation")->delta() == cavr::input::Button::Held) {
+  if (cavr::input::getButton("rotation")->delta() != cavr::input::Button::Open) {
     std::cout << "rotation\n";
       rotation = !rotation;
+      usleep(80000);
   }
 
   if(abs(xVal) > 0.05 || abs(yVal) > 0.05) {
@@ -80,6 +85,23 @@ void VRSim::processInput(){
        Engine::getEngine()->graphics->camera->Move(wand_dir * -yVal);
      }
   }
+
+  //do this for each color palette ball
+  for(int i = 0; i < colorPalette.size(); i++){
+    if(cavr::input::getButton("color")->delta() != cavr::input::Button::Open){
+      cavr::gfx::Ray ray(wand_sixdof->getPosition(), wand_sixdof->getForward());
+       if(solveRaycast(ray, colorPalette[i].getPos(), 0.075)) {
+         currentColor = colorPalette[i].getColor();
+       }
+    }
+  }
+
+  if(cavr::input::getButton("painting")->delta() != cavr::input::Button::Open){
+     Paintball temp(currentColor);
+     temp.setPos(cavr::math::vec3f(wand_sixdof->getPosition() + cavr::math::vec3f(0,0,-1)));
+     painting.push_back(temp);
+  }
+
 
   playerPos = Engine::getEngine()->graphics->camera->getPos();
 }
@@ -169,24 +191,38 @@ void VRSim::DSGeometryPass(){
 
   glEnable(GL_DEPTH_TEST);
 
+  //render each ball of the color palette
   for(int i = 0; i < colorPalette.size(); i++){
-    colorPalette[i].render(Engine::getEngine()->graphics->camera->getView());
+    colorPalette[i].render(cam->getView());
   }
 
+  //render the painting itself
+  if(painting.size() != 0){
+    for(int i = 0; i < painting.size(); i++){
+      painting[i].render(cam->getView());
+    }
+  }
+
+  //enable the terrains program and render it
   terrain->enable();
-  terrain->model = cavr::math::mat4f::translate(cavr::math::vec3f(0 , -40 , 0));
+  terrain->model = cavr::math::mat4f::translate(cavr::math::vec3f(0 , -100 , 0));
   terrain->render(terrain->time);
 
+  //enable geom program for those objects that require it
   geomProgram.enable();
 
-  tree.model = cavr::math::mat4f::translate(cavr::math::vec3f(0,0,0)) * cavr::math::mat4f::scale(0.1) ;
-  //tree.model = cavr::math::mat4f::translate(cavr::math::vec3f(0,0,0)) * cavr::math::mat4f::scale(0.1) ;
-  auto mvp4 = (cavr::gfx::getProjection() * (cavr::gfx::getView()*Engine::getEngine()->graphics->camera->getView()) * tree.model );
-  //glUniformMatrix4fv(cd->model_uniform, 1, GL_FALSE, treeModel.v);
+  //load regular models
+
+  /////loads one model/////
+  wand_sixdof = cavr::input::getSixDOF("wand");
+  pen.model = wand_sixdof->getMatrix()* cavr::math::mat4f::translate(cavr::math::vec3f(0,0,-1)) * cavr::math::mat4f::scale(0.1);
+  //pen.model = cavr::math::mat4f::translate(cavr::math::vec3f(0,0,0)) * cavr::math::mat4f::scale(0.1) ;
+  auto mvp4 = (cavr::gfx::getProjection() * (cavr::gfx::getView()) * pen.model );
   geomProgram.set("gWVP", mvp4);
-  geomProgram.set("gWorld", tree.model);
+  geomProgram.set("gWorld", pen.model);
   geomProgram.set("gColorMap", 0);
-  //tree.renderModel();
+  pen.renderModel();
+  /////////////////////////
 
   glDepthMask(GL_FALSE);
 }
@@ -328,15 +364,15 @@ void VRSim::InitLights()
 void VRSim::InitColorPalette(){
   Paintball temp(cavr::math::vec3f(1,0,0));
 
-  temp.setPos(cavr::math::vec3f(1,1,1));
+  temp.setPos(cavr::math::vec3f(1,1,2));
   colorPalette.push_back(temp);
 
   temp.setColor(cavr::math::vec3f(0,1,0));
-  temp.setPos(cavr::math::vec3f(1,2,1));
+  temp.setPos(cavr::math::vec3f(1,2,2));
   colorPalette.push_back(temp);
 
   temp.setColor(cavr::math::vec3f(0,0,1));
-  temp.setPos(cavr::math::vec3f(1,3,1));
+  temp.setPos(cavr::math::vec3f(1,3,2));
   colorPalette.push_back(temp);
 }
 

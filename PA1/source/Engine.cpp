@@ -32,6 +32,8 @@ void Engine::init()
 
     // A wii remote button
     input_map.button_map["color"] = "vrpn[WiiMote0[3]]";
+    input_map.button_map["paint"] = "vrpn[WiiMote0[4]]";
+
 
     // A wand that we want to follow based on some tracker -- we are tracing point 0
     input_map.sixdof_map["wand"] = "vrpn[WiiMote0[0]]";

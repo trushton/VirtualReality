@@ -119,7 +119,7 @@ void Camera::update()
         //ViewDir = glm::rotate(ViewDir, RotatedY, UpVector.cross(ViewDir));
     }
 
-    std::cout << "View: " << ViewDir.x << "\n";
+    //std::cout << "View: " << ViewDir.x << "\n";
 
     RotatedX = RotatedY = 0.0f;
 }

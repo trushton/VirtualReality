@@ -233,12 +233,12 @@ bool Terrain::buildTerrain() {
     {
         for(int j = 0; j < icols-1; j++)
         {
-            /* 
+            /*
              //printf("Indicies: ");
              for(int k = 0; k < 2; k++)
-             { 
-               int iRow = i+(1-k); 
-               int iIndex = iRow*icols+j; 
+             {
+               int iRow = i+(1-k);
+               int iIndex = iRow*icols+j;
                Indices.push_back((unsigned int)iIndex);
                //printf("%d, ", iIndex);
              }
@@ -297,12 +297,21 @@ void Terrain::render(float dt)
     set("ModelMatrix", model);
     set("NormalMatrix", cavr::math::mat4f(1.0f));
 
+    // create glm scale matrix...then caVRify it
+    glm::mat4 src = glm::scale(glm::mat4(1.0), glm::vec3(renderScale.x, renderScale.y, renderScale.z));
+
+    cavr::math::mat4f dest;
+    for(int i = 0; i < 4; i++){
+      for(int j = 0; j < 4; j++){
+        dest[i][j] = src[i][j];
+      }
+    }
 
     // Render Scale and Stuff
-    set("RenderHeight", renderScale.y);
+    set("RenderHeight", renderScale.x);
     set("MaxTextureU", float(icols)*0.1f);
     set("MaxTextureV", float(irows)*0.1f);
-    set("HeightmapScale", cavr::math::mat4f::scale(renderScale.x));
+    set("HeightmapScale", dest * cavr::math::mat4f::scale(renderScale.x/10));
     set("Color", cavr::math::vec4f(1.0f,1.0f,1.0f,1.0f));
 
 //    // Set Light
