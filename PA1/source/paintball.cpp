@@ -8,7 +8,7 @@ Paintball::Paintball(cavr::math::vec3f color){
 
 void Paintball::init(cavr::math::vec3f color){
   // Simple shader shader vbo and vao initialization
-  std::vector<cavr::math::vec4f> sphere_vertices = cavr::gfx::Shapes::solidSphere(2, 2);
+  std::vector<cavr::math::vec4f> sphere_vertices = cavr::gfx::Shapes::solidSphere(20, 20);
   numTriangles = sphere_vertices.size();
   sphere_vbo = new cavr::gl::VBO(sphere_vertices);
   sphere_vao = new cavr::gl::VAO();

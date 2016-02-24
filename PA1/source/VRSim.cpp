@@ -139,7 +139,7 @@ void VRSim::render(){
   DSGeometryPass();
 
   //fix this plz
-  //skybox->render();
+  skybox->render();
 
   //perform point light pass
   glEnable(GL_STENCIL_TEST);
