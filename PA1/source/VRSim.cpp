@@ -112,13 +112,13 @@ void VRSim::processInput(){
 
      //newView[2][0] = -newView[2][0];
      //newView[2][2] = -newView[2][2];
-     cavr::math::mat4f tempMat = (/*cam->getView()**/ wand_sixdof->getMatrix() * cavr::math::mat4f::translate(0, 0, -2));
+     cavr::math::mat4f tempMat = (/*cam->getView()**/ wand_sixdof->getMatrix() * cavr::math::mat4f::translate(0, 0, -2.5));
      temp.setPos(cavr::math::vec3f(-tempMat[3][0]+playerPos.x, tempMat[3][1]+playerPos.y, -tempMat[3][2]+playerPos.z));
      painting.push_back(temp);
   }
 
   wand_sixdof = cavr::input::getSixDOF("wand");
-  cursor.wandModel = (wand_sixdof->getMatrix() * cavr::math::mat4f::translate(0, 0, -2) * cavr::math::mat4f::scale(0.1));
+  cursor.wandModel = (wand_sixdof->getMatrix() * cavr::math::mat4f::translate(0, 0, -2.5) * cavr::math::mat4f::scale(0.1));
 
   cursor.setColor(currentColor);
   playerPos = Engine::getEngine()->graphics->camera->getPos();
@@ -237,14 +237,14 @@ void VRSim::DSGeometryPass(){
   //load regular models
 
   /////loads one model/////
-  // wand_sixdof = cavr::input::getSixDOF("wand");
-  // pen.model = wand_sixdof->getMatrix()* cavr::math::mat4f::translate(cavr::math::vec3f(0,0,-1)) * cavr::math::mat4f::scale(0.1);
-  // //pen.model = cavr::math::mat4f::translate(cavr::math::vec3f(0,0,0)) * cavr::math::mat4f::scale(0.1) ;
-  // auto mvp4 = (cavr::gfx::getProjection() * (cavr::gfx::getView()) * pen.model );
-  // geomProgram.set("gWVP", mvp4);
-  // geomProgram.set("gWorld", pen.model);
-  // geomProgram.set("gColorMap", 0);
-  // pen.renderModel();
+  wand_sixdof = cavr::input::getSixDOF("wand");
+  pen.model = wand_sixdof->getMatrix()* cavr::math::mat4f::translate(cavr::math::vec3f(0,0,-1)) * cavr::math::mat4f::scale(0.1);
+  //pen.model = cavr::math::mat4f::translate(cavr::math::vec3f(0,0,0)) * cavr::math::mat4f::scale(0.1) ;
+  auto mvp4 = (cavr::gfx::getProjection() * (cavr::gfx::getView()) * pen.model );
+  geomProgram.set("gWVP", mvp4);
+  geomProgram.set("gWorld", pen.model);
+  geomProgram.set("gColorMap", 0);
+  pen.renderModel();
   /////////////////////////
 
   glDepthMask(GL_FALSE);
