@@ -49,6 +49,7 @@ void VRSim::init(){
   currentColor = cavr::math::vec3f(1,0,0);
 
   cursor.init();
+  skybox = new Skybox();
 
 }
 
@@ -67,29 +68,29 @@ void VRSim::processInput(){
 
 
   if (boost){
-    Engine::getEngine()->graphics->camera->movementSpeed = 1.2f;
+    Engine::getEngine()->graphics->camera->movementSpeed = 1.0f;
   }
   else{
     Engine::getEngine()->graphics->camera->movementSpeed = 1.0f;
   }
 
-  if (cavr::input::getButton("rotation")->delta() != cavr::input::Button::Open) {
-    std::cout << "rotation\n";
-      rotation = !rotation;
-      usleep(80000);
-  }
+
 
   if(abs(xVal) > 0.05 || abs(yVal) > 0.05) {
-     if(rotation){
-       Engine::getEngine()->graphics->camera->rotate(xVal, yVal);
-     }
-     else{
-       auto wand = cavr::input::getSixDOF("wand");
-       cavr::math::vec3f wand_dir = wand->getForward();
-       cavr::math::vec3f move_dir = (cavr::math::vec3f(-xVal, 0, -yVal));
-       //Engine::getEngine()->graphics->camera->Move(wand_dir * -yVal);
-       Engine::getEngine()->graphics->camera->Move(move_dir);
-     }
+    if (cavr::input::getButton("rotation")->delta() == cavr::input::Button::Held) {
+        Engine::getEngine()->graphics->camera->rotate(xVal, yVal);
+    }
+    else{
+      //auto head = cavr::input::getSixDOF("head");
+      cavr::math::vec3f look_dir = cam->ViewDir;
+      cavr::math::vec3f move_dir = (cavr::math::vec3f(-xVal, 0, yVal));
+      cam->Move(look_dir * yVal);
+      cam->Move(cam->RightVector * xVal);
+      //cam->StrafeRight(xVal);
+      //cam->Move(move_dir);
+
+      //Engine::getEngine()->graphics->camera->Move(move_dir);
+    }
   }
 
   //do this for each color palette ball
@@ -108,12 +109,17 @@ void VRSim::processInput(){
 
   if(cavr::input::getButton("paint")->delta() != cavr::input::Button::Open){
      Paintball temp(currentColor);
-     temp.setPos(cavr::math::vec3f(wand_sixdof->getPosition() + cavr::math::vec3f(0,0,-2)));
+
+     //newView[2][0] = -newView[2][0];
+     //newView[2][2] = -newView[2][2];
+     cavr::math::mat4f tempMat = (/*cam->getView()**/ wand_sixdof->getMatrix() * cavr::math::mat4f::translate(0, 0, -2));
+     temp.setPos(cavr::math::vec3f(-tempMat[3][0]+playerPos.x, tempMat[3][1]+playerPos.y, -tempMat[3][2]+playerPos.z));
      painting.push_back(temp);
   }
 
   wand_sixdof = cavr::input::getSixDOF("wand");
   cursor.wandModel = (wand_sixdof->getMatrix() * cavr::math::mat4f::translate(0, 0, -2) * cavr::math::mat4f::scale(0.1));
+
   cursor.setColor(currentColor);
   playerPos = Engine::getEngine()->graphics->camera->getPos();
 }
@@ -131,6 +137,10 @@ void VRSim::render(){
 
   // perform geometry pass
   DSGeometryPass();
+
+  //fix this plz
+  //skybox->render();
+
   //perform point light pass
   glEnable(GL_STENCIL_TEST);
   for (unsigned int i = 0 ; i < m_pointLight.size(); i++) {
@@ -213,7 +223,7 @@ void VRSim::DSGeometryPass(){
 
   //render the painting itself
   for(int i = 0; i < painting.size(); i++){
-    painting[i].renderPainting(cam->getView());
+    painting[i].renderPainting(wand_sixdof->getPosition() + cavr::math::vec3f(0, 0, -2), cam->getView(), wand_sixdof->getForward());
   }
 
   //enable the terrains program and render it
@@ -377,23 +387,23 @@ void VRSim::InitLights()
 void VRSim::InitColorPalette(){
   Paintball temp(cavr::math::vec3f(1,0,0));
 
-  temp.setPos(cavr::math::vec3f(1,1,-2));
+  temp.setPos(cavr::math::vec3f(1,-1,-2));
   colorPalette.push_back(temp);
 
   temp.setColor(cavr::math::vec3f(0,1,0));
-  temp.setPos(cavr::math::vec3f(1,2,-2));
+  temp.setPos(cavr::math::vec3f(1,-.5,-2));
   colorPalette.push_back(temp);
 
   temp.setColor(cavr::math::vec3f(0,0,1));
-  temp.setPos(cavr::math::vec3f(1,3,-2));
+  temp.setPos(cavr::math::vec3f(1,0,-2));
   colorPalette.push_back(temp);
 
   temp.setColor(cavr::math::vec3f(1,1,0));
-  temp.setPos(cavr::math::vec3f(1,2.5,-2));
+  temp.setPos(cavr::math::vec3f(1,.5,-2));
   colorPalette.push_back(temp);
 
   temp.setColor(cavr::math::vec3f(0,1,1));
-  temp.setPos(cavr::math::vec3f(1,3.5,-2));
+  temp.setPos(cavr::math::vec3f(1,1,-2));
   colorPalette.push_back(temp);
 
   temp.setColor(cavr::math::vec3f(1,0,1));
@@ -401,7 +411,7 @@ void VRSim::InitColorPalette(){
   colorPalette.push_back(temp);
 
   temp.setColor(cavr::math::vec3f(1,1,1));
-  temp.setPos(cavr::math::vec3f(1,4,-2));
+  temp.setPos(cavr::math::vec3f(1,2,-2));
   colorPalette.push_back(temp);
 
 

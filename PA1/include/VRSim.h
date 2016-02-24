@@ -16,6 +16,7 @@
 #include <paintball.h>
 #include <camera.h>
 #include <pointer.h>
+#include <skybox.h>
 
 
 // Using IrrKlang for this project
@@ -93,6 +94,7 @@ public:
 private:
   GBuffer m_gbuffer;
   Camera* cam;
+  Skybox * skybox;
 
    //custom Programs
   DSGeomPassTech geomProgram;

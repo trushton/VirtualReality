@@ -53,11 +53,13 @@ public:
     GLfloat movementSpeed;
     cavr::math::vec3f ViewDir;
 
-
-private:
     cavr::math::vec3f RightVector;
     cavr::math::vec3f UpVector;
     cavr::math::vec3f Position;
+
+
+private:
+
 
     //glm::vec3 pos, orientation ,up;
     //GLfloat rotateX, rotateY, speed, sensitivity, boost;

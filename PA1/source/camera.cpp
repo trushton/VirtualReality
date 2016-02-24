@@ -10,17 +10,18 @@ Camera::Camera(Engine *eng)
     // initialize view
     Position = cavr::math::vec3f(0, 0, 0);
     ViewDir = cavr::math::vec3f(0,0,1);
-    RightVector = cavr::math::vec3f(1.0f, 0.0, 0.0f);
+    RightVector = cavr::math::vec3f(-1.0f, 0.0, 0.0f);
     UpVector = cavr::math::vec3f(0.0f, 1.0f, 0.0f);
 
 
     RotatedX = RotatedY = RotatedZ = 0.0f;
-    movementSpeed = 0.2f;
+    movementSpeed = 1.0f;
 }
 
 void Camera::Move(cavr::math::vec3f Direction)
 {
     Position = (Position + Direction) * movementSpeed;
+    update();
 }
 
 void Camera::RotateX(GLfloat Angle)

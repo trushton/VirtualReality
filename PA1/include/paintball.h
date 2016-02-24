@@ -9,7 +9,7 @@ public:
   Paintball(cavr::math::vec3f color);
   void init(cavr::math::vec3f color);
   void render(cavr::math::mat4f camView);
-  void renderPainting(cavr::math::mat4f camView);
+  void renderPainting(cavr::math::vec3f wandPos, cavr::math::mat4f camView, cavr::math::vec3f rotation);
 
   void setColor(cavr::math::vec3f newColor);
   cavr::math::vec3f getColor();
