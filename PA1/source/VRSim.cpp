@@ -61,7 +61,7 @@ void VRSim::processInput(){
 
   // cout << xVal << " | " << yVal << "\n";
   if (cavr::input::getButton("boost")->delta() != cavr::input::Button::Open) {
-    std::cout << "Boost\n";
+      std::cout << "Boost\n";
       boost = !boost;
   }
 
@@ -87,7 +87,8 @@ void VRSim::processInput(){
        auto wand = cavr::input::getSixDOF("wand");
        cavr::math::vec3f wand_dir = wand->getForward();
        cavr::math::vec3f move_dir = (cavr::math::vec3f(-xVal, 0, -yVal));
-       Engine::getEngine()->graphics->camera->Move(wand_dir * -yVal);
+       //Engine::getEngine()->graphics->camera->Move(wand_dir * -yVal);
+       Engine::getEngine()->graphics->camera->Move(move_dir);
      }
   }
 
@@ -113,6 +114,7 @@ void VRSim::processInput(){
 
   wand_sixdof = cavr::input::getSixDOF("wand");
   cursor.wandModel = (wand_sixdof->getMatrix() * cavr::math::mat4f::translate(0, 0, -2) * cavr::math::mat4f::scale(0.1));
+  cursor.setColor(currentColor);
   playerPos = Engine::getEngine()->graphics->camera->getPos();
 }
 
@@ -375,16 +377,34 @@ void VRSim::InitLights()
 void VRSim::InitColorPalette(){
   Paintball temp(cavr::math::vec3f(1,0,0));
 
-  temp.setPos(cavr::math::vec3f(1,1,2));
+  temp.setPos(cavr::math::vec3f(1,1,-2));
   colorPalette.push_back(temp);
 
   temp.setColor(cavr::math::vec3f(0,1,0));
-  temp.setPos(cavr::math::vec3f(1,2,2));
+  temp.setPos(cavr::math::vec3f(1,2,-2));
   colorPalette.push_back(temp);
 
   temp.setColor(cavr::math::vec3f(0,0,1));
-  temp.setPos(cavr::math::vec3f(1,3,2));
+  temp.setPos(cavr::math::vec3f(1,3,-2));
   colorPalette.push_back(temp);
+
+  temp.setColor(cavr::math::vec3f(1,1,0));
+  temp.setPos(cavr::math::vec3f(1,2.5,-2));
+  colorPalette.push_back(temp);
+
+  temp.setColor(cavr::math::vec3f(0,1,1));
+  temp.setPos(cavr::math::vec3f(1,3.5,-2));
+  colorPalette.push_back(temp);
+
+  temp.setColor(cavr::math::vec3f(1,0,1));
+  temp.setPos(cavr::math::vec3f(1,1.5,-2));
+  colorPalette.push_back(temp);
+
+  temp.setColor(cavr::math::vec3f(1,1,1));
+  temp.setPos(cavr::math::vec3f(1,4,-2));
+  colorPalette.push_back(temp);
+
+
 }
 
 //STOLEN
