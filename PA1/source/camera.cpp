@@ -95,8 +95,8 @@ cavr::math::vec3f Camera::getPos()
 
 void Camera::rotate(GLfloat x, GLfloat y)
 {
-    RotatedX -= x * 0.01f;
-    RotatedY += y * 0.01f;
+    RotatedX -= x * 0.02f;
+    RotatedY += y * 0.02f;
     RightVector = ViewDir.cross(UpVector);
 }
 

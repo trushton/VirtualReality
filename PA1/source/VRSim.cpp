@@ -61,20 +61,12 @@ void VRSim::processInput(){
   auto yVal = yAnalog->getValue();
 
   // cout << xVal << " | " << yVal << "\n";
-  if (cavr::input::getButton("boost")->delta() != cavr::input::Button::Open) {
-      std::cout << "Boost\n";
-      boost = !boost;
-  }
-
-
-  if (boost){
-    Engine::getEngine()->graphics->camera->movementSpeed = 1.0f;
+  if (cavr::input::getButton("boost")->delta() != cavr::input::Button::Held) {
+      speedMod = 5.0f;
   }
   else{
-    Engine::getEngine()->graphics->camera->movementSpeed = 1.0f;
+    speedMod = 2.0f;
   }
-
-
 
   if(abs(xVal) > 0.05 || abs(yVal) > 0.05) {
     if (cavr::input::getButton("rotation")->delta() == cavr::input::Button::Held) {
@@ -84,8 +76,8 @@ void VRSim::processInput(){
       //auto head = cavr::input::getSixDOF("head");
       cavr::math::vec3f look_dir = cam->ViewDir;
       cavr::math::vec3f move_dir = (cavr::math::vec3f(-xVal, 0, yVal));
-      cam->Move(look_dir * yVal);
-      cam->Move(cam->RightVector * xVal);
+      cam->Move(look_dir * (yVal/speedMod));
+      cam->Move(cam->RightVector * (xVal/speedMod));
       //cam->StrafeRight(xVal);
       //cam->Move(move_dir);
 
@@ -112,8 +104,14 @@ void VRSim::processInput(){
 
      //newView[2][0] = -newView[2][0];
      //newView[2][2] = -newView[2][2];
-     cavr::math::mat4f tempMat = (/*cam->getView()**/ wand_sixdof->getMatrix() * cavr::math::mat4f::translate(0, 0, -2.5));
+     cavr::math::vec3f forward = wand_sixdof->getForward();
+     cavr::math::mat4f tempMat = (/*cam->getView()**/ wand_sixdof->getMatrix() * cavr::math::mat4f::translate(cavr::math::vec3f(0,0,-2)));
+     cavr::math::vec3f wf = cavr::math::vec3f(tempMat[2][0], tempMat[2][1], tempMat[2][2]);
+     cavr::math::vec3f wp = cavr::math::vec3f(tempMat[3][0], tempMat[3][1], tempMat[3][2]);
+     cavr::math::vec3f better  =  cam->getPos() + cam->ViewDir + cavr::math::vec3f(wf.x, wf.y, wf.z) +cavr::math::vec3f(-wp.x, wp.y, -wp.z) ;
      temp.setPos(cavr::math::vec3f(-tempMat[3][0]+playerPos.x, tempMat[3][1]+playerPos.y, -tempMat[3][2]+playerPos.z));
+     //temp.setPos(better);
+
      painting.push_back(temp);
   }
 

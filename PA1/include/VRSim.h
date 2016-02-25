@@ -117,7 +117,7 @@ private:
   int windowWidth, windowHeight;
 
   // Used for person movement
-  float xValOld, yValOld;
+  float xValOld, yValOld, speedMod;
   bool boost, rotation;
 
   std::vector<Paintball> colorPalette;

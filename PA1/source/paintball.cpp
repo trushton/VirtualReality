@@ -8,7 +8,7 @@ Paintball::Paintball(cavr::math::vec3f color){
 
 void Paintball::init(cavr::math::vec3f color){
   // Simple shader shader vbo and vao initialization
-  std::vector<cavr::math::vec4f> sphere_vertices = cavr::gfx::Shapes::solidSphere(20, 20);
+  std::vector<cavr::math::vec4f> sphere_vertices = cavr::gfx::Shapes::solidSphere(12, 12);
   numTriangles = sphere_vertices.size();
   sphere_vbo = new cavr::gl::VBO(sphere_vertices);
   sphere_vao = new cavr::gl::VAO();
@@ -47,8 +47,8 @@ void Paintball::renderPainting(cavr::math::vec3f wandPos, cavr::math::mat4f camV
   sphere_vao->bind();
   glUniformMatrix4fv(projection_uniform, 1, GL_FALSE, cavr::gfx::getProjection().v);
   glUniformMatrix4fv(view_uniform, 1, GL_FALSE, (cavr::gfx::getView()*camView).v);
-  cavr::math::vec3f viewPoint = pos+rotation;
-  cavr::math::mat4f view = cavr::math::mat4f::look_at(pos, viewPoint, cavr::math::vec3f(0,1,0));
+  //cavr::math::vec3f viewPoint = pos+rotation;
+  //cavr::math::mat4f view = cavr::math::mat4f::look_at(pos, viewPoint, cavr::math::vec3f(0,1,0));
   model = cavr::math::mat4f::translate(pos) *  cavr::math::mat4f::scale(0.2);
 
 
