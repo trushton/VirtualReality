@@ -151,6 +151,7 @@ void Skybox::initShaderProgram()
 void Skybox::initShaderLocations()
 {
     glUseProgram(program);
+    locations["position"] = glGetUniformLocation(program, "position");
     locations["view"] = glGetUniformLocation(program, "view");
     locations["projection"] = glGetUniformLocation(program, "projection");
     locations["skybox"] = glGetUniformLocation(program,"skybox");
@@ -162,7 +163,7 @@ void Skybox::tick(float dt)
 }
 
 
-void Skybox::render()
+void Skybox::render(cavr::math::vec3f pos)
 {
     // Change depth function so depth test passes when values are equal to depth buffer's content
     glDepthFunc(GL_LEQUAL);
@@ -170,11 +171,22 @@ void Skybox::render()
     // enable shader program
     glUseProgram(program);
 
+    cavr::math::mat4f temp = Engine::getEngine()->graphics->camera->getView();
+    for(int i = 0; i < 3; i++){
+        for(int j = 0; j < 3; j++){
+            temp[i][j] = 0;
+        }
+    }
+    temp[0][0] = 1;
+    temp[1][1] = 1;
+    temp[2][2] = 1;
+
     // get the view from the camera and projection matrix
-    view = Engine::getEngine()->graphics->camera->getView();	// Remove any translation component of the view matrix
+    view = cavr::gfx::getView();	// Remove any translation component of the view matrix
     projection = cavr::gfx::getProjection();
 
     // pass the view and projection matrices to the shader
+    set("position", pos);
     set("view", view);
     set("projection", projection);
     set("skybox",6);

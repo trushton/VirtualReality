@@ -35,7 +35,7 @@ public:
 
 
     void tick(float dt);
-    void render();
+    void render(cavr::math::vec3f pos);
 
 private:
     void loadShaders();
@@ -48,6 +48,7 @@ private:
 
 
     // transform matrices
+    cavr::math::vec3f position;
     cavr::math::mat4f view;
     cavr::math::mat4f projection;
 

@@ -137,7 +137,7 @@ void VRSim::render(){
   DSGeometryPass();
 
   //fix this plz
-  skybox->render();
+  skybox->render(playerPos);
 
   //perform point light pass
   glEnable(GL_STENCIL_TEST);
@@ -365,7 +365,7 @@ void VRSim::DSFinalPass()
 
 void VRSim::InitLights()
 {
-  m_dirLight.AmbientIntensity = 0.2f;
+  m_dirLight.AmbientIntensity = 0.5f;
   m_dirLight.Color = COLOR_WHITE;
   m_dirLight.DiffuseIntensity = 0.25f;
   m_dirLight.Direction = cavr::math::vec3f(-1, -1, -1);
