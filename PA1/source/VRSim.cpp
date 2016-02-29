@@ -13,7 +13,7 @@ void VRSim::init(){
   windowHeight = 1080;
   InitLights();
   InitColorPalette();
-
+  InitTexturePalette();
 
   m_gbuffer.Init(windowWidth,windowHeight);
   geomProgram.init();
@@ -51,9 +51,6 @@ void VRSim::init(){
 
   cursor.init();
   skybox = new Skybox();
-  texSpheres.init();
-  texSpheres.currentModel = 0;
-
 }
 
 void VRSim::processInput(){
@@ -63,6 +60,26 @@ void VRSim::processInput(){
   auto yAnalog = cavr::input::getAnalog("y");
   auto yVal = yAnalog->getValue();
 
+  //determines if we paint with color or textures
+  if(cavr::input::getButton("plus")->delta() != cavr::input::Button::Open){
+    tex = false;
+  }
+  else if(cavr::input::getButton("minus")->delta() != cavr::input::Button::Open){
+    tex = true;
+  }
+
+  if(cavr::input::getButton("right")->delta() != cavr::input::Button::Open){
+    if(TexSphere +1 < selectedTexture.size()){
+      TexSphere++;
+      usleep(100000);
+    }
+  }
+  else if(cavr::input::getButton("left")->delta() != cavr::input::Button::Open){
+    if(TexSphere -1 >= 0){
+      TexSphere--;
+      usleep(100000);
+    }
+  }
   // cout << xVal << " | " << yVal << "\n";
   if (cavr::input::getButton("boost")->delta() != cavr::input::Button::Held) {
       speedMod = 5.0f;
@@ -100,22 +117,30 @@ void VRSim::processInput(){
 
   if(cavr::input::getButton("clear")->delta() != cavr::input::Button::Open){
     painting.clear();
+    texPainting.clear();
   }
 
+
+
+
   if(cavr::input::getButton("paint")->delta() != cavr::input::Button::Open){
-     Paintball temp(currentColor);
+    cavr::math::vec3f forward = wand_sixdof->getForward();
+    cavr::math::mat4f tempMat = (/*cam->getView()**/ wand_sixdof->getMatrix() * cavr::math::mat4f::translate(cavr::math::vec3f(0,0,-2)));
+    cavr::math::vec3f wf = cavr::math::vec3f(tempMat[2][0], tempMat[2][1], tempMat[2][2]);
+    cavr::math::vec3f wp = cavr::math::vec3f(tempMat[3][0], tempMat[3][1], tempMat[3][2]);
+    cavr::math::vec3f better  =  cam->getPos() + cam->ViewDir + cavr::math::vec3f(wf.x, wf.y, wf.z) +cavr::math::vec3f(-wp.x, wp.y, -wp.z) ;
+    cavr::math::vec3f finalPos = cavr::math::vec3f(-tempMat[3][0]+playerPos.x, tempMat[3][1]+playerPos.y, -tempMat[3][2]+playerPos.z);
+    if(!tex){
+       Paintball temp(currentColor);
+       temp.setPos(finalPos);
+       //temp.setPos(better);
 
-     //newView[2][0] = -newView[2][0];
-     //newView[2][2] = -newView[2][2];
-     cavr::math::vec3f forward = wand_sixdof->getForward();
-     cavr::math::mat4f tempMat = (/*cam->getView()**/ wand_sixdof->getMatrix() * cavr::math::mat4f::translate(cavr::math::vec3f(0,0,-2)));
-     cavr::math::vec3f wf = cavr::math::vec3f(tempMat[2][0], tempMat[2][1], tempMat[2][2]);
-     cavr::math::vec3f wp = cavr::math::vec3f(tempMat[3][0], tempMat[3][1], tempMat[3][2]);
-     cavr::math::vec3f better  =  cam->getPos() + cam->ViewDir + cavr::math::vec3f(wf.x, wf.y, wf.z) +cavr::math::vec3f(-wp.x, wp.y, -wp.z) ;
-     temp.setPos(cavr::math::vec3f(-tempMat[3][0]+playerPos.x, tempMat[3][1]+playerPos.y, -tempMat[3][2]+playerPos.z));
-     //temp.setPos(better);
-
-     painting.push_back(temp);
+       painting.push_back(temp);
+    }
+    else{
+      texBall temp(selectedTexture[TexSphere].modelName, finalPos);
+      texPainting.push_back(temp);
+    }
   }
 
   wand_sixdof = cavr::input::getSixDOF("wand");
@@ -218,14 +243,17 @@ void VRSim::DSGeometryPass(){
   cursor.render(cam->getView());
 
   //render each ball of the color palette
-  for(int i = 0; i < colorPalette.size(); i++){
-    colorPalette[i].render(cam->getView());
+  if(!tex){
+    for(int i = 0; i < colorPalette.size(); i++){
+      colorPalette[i].render(cam->getView());
+    }
   }
-
   //render the painting itself
   for(int i = 0; i < painting.size(); i++){
     painting[i].renderPainting(wand_sixdof->getPosition() + cavr::math::vec3f(0, 0, -2), cam->getView(), wand_sixdof->getForward());
   }
+
+
 
   //enable the terrains program and render it
   terrain->enable();
@@ -235,7 +263,13 @@ void VRSim::DSGeometryPass(){
   //enable geom program for those objects that require it
   geomProgram.enable();
 
-  texSpheres.render(cam, &geomProgram);
+  if(tex){
+    selectedTexture[TexSphere].render(cam, &geomProgram);
+  }
+
+  for(int i = 0; i < texPainting.size(); i++){
+    texPainting[i].renderPainting(cam, &geomProgram, cam->getView());
+  }
 
   //load regular models
 
@@ -419,6 +453,18 @@ void VRSim::InitColorPalette(){
   colorPalette.push_back(temp);
 
 
+}
+
+void VRSim::InitTexturePalette(){
+  texBall temp("./bin/spheres/iron.obj", cavr::math::vec3f(-.5,0.5,-1));
+  selectedTexture.push_back(temp);
+
+  temp.modelName = "./bin/spheres/goo.obj";
+  temp.model.loadModel(temp.modelName);
+  selectedTexture.push_back(temp);
+
+  tex = false;
+  TexSphere = 0;
 }
 
 //STOLEN

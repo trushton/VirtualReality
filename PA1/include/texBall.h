@@ -9,20 +9,20 @@
 
 class texBall{
 public:
-  texBall();
-  void init();
+  texBall(string mod, cavr::math::vec3f position);
+  void init(cavr::math::vec3f position);
   void render(Camera* cam, DSGeomPassTech* geomProgram);
-  void renderPainting(cavr::math::vec3f wandPos, cavr::math::mat4f camView, cavr::math::vec3f rotation);
+  void renderPainting(Camera* cam, DSGeomPassTech* geomProgram, cavr::math::mat4f camView);
+  void setPos(cavr::math::vec3f newPos);
+  cavr::math::vec3f getPos();
 
-
-  void setPos(int index, cavr::math::vec3f newPos);
-  cavr::math::vec3f getPos(int index);
-  int currentModel;
+  //terrible protection of nothing
+  string modelName;
+  Model model;
 
 private:
-  std::vector<Model> types;
-  std::vector<Model> painting;
-  std::vector<cavr::math::vec3f> positions;
+  cavr::math::vec3f position;
+
 };
 
 

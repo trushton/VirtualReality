@@ -1,43 +1,39 @@
 #include <texBall.h>
 
-texBall::texBall(){
-
+texBall::texBall(string mod, cavr::math::vec3f position){
+  modelName = mod;
+  init(position);
 }
 
-void texBall::init(){
-  Model temp;
-  cavr::math::vec3f tempPos;
-
-  temp.loadModel("./bin/spheres/iron.obj");
-  tempPos = cavr::math::vec3f(-0.5,0,-1);
-  types.push_back(temp);
-  positions.push_back(tempPos);
-
-  temp.loadModel("./bin/spheres/goo.obj");
-  tempPos = cavr::math::vec3f(-0.5,0.5,-1);
-  types.push_back(temp);
-  positions.push_back(tempPos);
+void texBall::init(cavr::math::vec3f position){
+  model.loadModel(modelName);
+  setPos(position);
 }
 
 void texBall::render(Camera* cam, DSGeomPassTech* geomProgram){
-  types[currentModel].model = cavr::math::mat4f::translate(positions[currentModel]) * cavr::math::mat4f::scale(0.1);
-  auto mvp4 = (cavr::gfx::getProjection() * (cavr::gfx::getView()) * types[currentModel].model );
+  model.model = cavr::math::mat4f::translate(position) * cavr::math::mat4f::scale(0.1);
+  auto mvp4 = (cavr::gfx::getProjection() * (cavr::gfx::getView()) * model.model );
   geomProgram->set("gWVP", mvp4);
-  geomProgram->set("gWorld", types[currentModel].model);
+  geomProgram->set("gWorld", model.model);
   geomProgram->set("gColorMap", 0);
-  types[currentModel].renderModel();
+  model.renderModel();
 
 }
 
-void texBall::renderPainting(cavr::math::vec3f wandPos, cavr::math::mat4f camView, cavr::math::vec3f rotation){
-
+void texBall::renderPainting(Camera* cam, DSGeomPassTech* geomProgram, cavr::math::mat4f camView){
+  model.model = cavr::math::mat4f::translate(position) * cavr::math::mat4f::scale(0.1);
+  auto mvp4 = (cavr::gfx::getProjection() * (cavr::gfx::getView() * camView) * model.model );
+  geomProgram->set("gWVP", mvp4);
+  geomProgram->set("gWorld", model.model);
+  geomProgram->set("gColorMap", 0);
+  model.renderModel();
 }
 
 
-cavr::math::vec3f texBall::getPos(int index){
-  return positions[index];
+cavr::math::vec3f texBall::getPos(){
+  return position;
 }
 
-void texBall::setPos(int index, cavr::math::vec3f newPos){
-  positions[index] = newPos;
+void texBall::setPos(cavr::math::vec3f newPos){
+  position = newPos;
 }

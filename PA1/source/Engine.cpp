@@ -34,6 +34,12 @@ void Engine::init()
     input_map.button_map["color"] = "vrpn[WiiMote0[3]]";
     input_map.button_map["paint"] = "vrpn[WiiMote0[4]]";
     input_map.button_map["clear"] = "vrpn[WiiMote0[0]]";
+    input_map.button_map["plus"] = "vrpn[WiiMote0[6]]";
+    input_map.button_map["minus"] = "vrpn[WiiMote0[5]]";
+    input_map.button_map["left"] = "vrpn[WiiMote0[7]]";
+    input_map.button_map["right"] = "vrpn[WiiMote0[8]]";
+    input_map.button_map["down"] = "vrpn[WiiMote0[9]]";
+    input_map.button_map["up"] = "vrpn[WiiMote0[10]]";
 
 
     // A wand that we want to follow based on some tracker -- we are tracing point 0

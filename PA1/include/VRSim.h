@@ -48,6 +48,7 @@ public:
 
   void InitLights();
   void InitColorPalette();
+  void InitTexturePalette();
   void InitBoxPositions();
   void DSLightPass();
 
@@ -58,6 +59,7 @@ public:
   cavr::math::vec3f playerPos;
   cavr::input::SixDOF* wand_sixdof;
   void processInput();
+  bool tex;
 
 
 //////////////STANDARD STUFF////////////////
@@ -121,12 +123,19 @@ private:
   float xValOld, yValOld, speedMod;
   bool boost, rotation;
 
+  //used for painting
   std::vector<Paintball> colorPalette;
   std::vector<Paintball> painting;
-  Pointer cursor;
   cavr::math::vec3f currentColor;
 
-  texBall texSpheres;
+
+  //for painting textures
+  std::vector<texBall> selectedTexture;
+  std::vector<texBall> texPainting;
+  int TexSphere;
+
+  Pointer cursor;
+
 };
 
 
