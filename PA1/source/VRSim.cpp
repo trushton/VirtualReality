@@ -34,6 +34,7 @@ void VRSim::init(){
   sphere.loadModel("./bin/sphere.obj");
   pen.loadModel("./bin/objects/Pen.obj");
 
+
   // Terrain
   terrain = new Terrain(cavr::math::vec3f(100,30,100), "./bin/terrain/output.jpg");
   terrain->initialize();
@@ -50,6 +51,8 @@ void VRSim::init(){
 
   cursor.init();
   skybox = new Skybox();
+  texSpheres.init();
+  texSpheres.currentModel = 0;
 
 }
 
@@ -166,37 +169,37 @@ void VRSim::render(){
 
 }
 
-std::string VRSim::ErrorString(GLenum error)
-{
-  if(error == GL_INVALID_ENUM)
-  {
-    return "GL_INVALID_ENUM: An unacceptable value is specified for an enumerated argument.";
-  }
-
-  else if(error == GL_INVALID_VALUE)
-  {
-    return "GL_INVALID_VALUE: A numeric argument is out of range.";
-  }
-
-  else if(error == GL_INVALID_OPERATION)
-  {
-    return "GL_INVALID_OPERATION: The specified operation is not allowed in the current state.";
-  }
-
-  else if(error == GL_INVALID_FRAMEBUFFER_OPERATION)
-  {
-    return "GL_INVALID_FRAMEBUFFER_OPERATION: The framebuffer object is not complete.";
-  }
-
-  else if(error == GL_OUT_OF_MEMORY)
-  {
-    return "GL_OUT_OF_MEMORY: There is not enough memory left to execute the command.";
-  }
-  else
-  {
-    return "None";
-  }
-}
+// std::string VRSim::ErrorString(GLenum error)
+// {
+//   if(error == GL_INVALID_ENUM)
+//   {
+//     return "GL_INVALID_ENUM: An unacceptable value is specified for an enumerated argument.";
+//   }
+//
+//   else if(error == GL_INVALID_VALUE)
+//   {
+//     return "GL_INVALID_VALUE: A numeric argument is out of range.";
+//   }
+//
+//   else if(error == GL_INVALID_OPERATION)
+//   {
+//     return "GL_INVALID_OPERATION: The specified operation is not allowed in the current state.";
+//   }
+//
+//   else if(error == GL_INVALID_FRAMEBUFFER_OPERATION)
+//   {
+//     return "GL_INVALID_FRAMEBUFFER_OPERATION: The framebuffer object is not complete.";
+//   }
+//
+//   else if(error == GL_OUT_OF_MEMORY)
+//   {
+//     return "GL_OUT_OF_MEMORY: There is not enough memory left to execute the command.";
+//   }
+//   else
+//   {
+//     return "None";
+//   }
+// }
 
 void VRSim::DSGeometryPass(){
   m_gbuffer.BindForGeomPass();
@@ -232,6 +235,8 @@ void VRSim::DSGeometryPass(){
   //enable geom program for those objects that require it
   geomProgram.enable();
 
+  texSpheres.render(cam, &geomProgram);
+
   //load regular models
 
   /////loads one model/////
@@ -244,6 +249,7 @@ void VRSim::DSGeometryPass(){
   geomProgram.set("gColorMap", 0);
   pen.renderModel();
   /////////////////////////
+
 
   glDepthMask(GL_FALSE);
 }

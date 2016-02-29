@@ -48,7 +48,7 @@ x11_renderer = {
   windows = {
     sim_window = sim_window;
     --sim_window2 = sim_window;
-    --perspective_window = perspective_window;
+    perspective_window = perspective_window;
   };
 };
 
@@ -99,13 +99,13 @@ vrpn = {
 };
 
 self = {
-  hostname = "projector";
-  ssh = "projector.cse.unr.edu";--"chase@" .. HOSTNAME;
-  address = "projector.cse.unr.edu";
+  hostname = "hpcvis7";
+  ssh = "hpcvis7.cse.unr.edu";--"chase@" .. HOSTNAME;
+  address = "hpcvis7.cse.unr.edu";
   plugins = {
     x11_renderer = x11_renderer;
-    x11_renderer2 = x11_renderer2;
-    x11_renderer3 = x11_renderer3;
+    --x11_renderer2 = x11_renderer2;
+    --x11_renderer3 = x11_renderer3;
     vrpn = vrpn;
   };
 };

@@ -171,22 +171,21 @@ void Skybox::render(cavr::math::vec3f pos)
     // enable shader program
     glUseProgram(program);
 
-    cavr::math::mat4f temp = Engine::getEngine()->graphics->camera->getView();
-    for(int i = 0; i < 3; i++){
-        for(int j = 0; j < 3; j++){
-            temp[i][j] = 0;
-        }
-    }
-    temp[0][0] = 1;
-    temp[1][1] = 1;
-    temp[2][2] = 1;
+    cavr::math::mat4f alteredCavr = cavr::gfx::getView();
+    alteredCavr[3][0] = 0;
+    alteredCavr[3][1] = 0;
+    alteredCavr[3][2] = 0;
 
+    cavr::math::mat4f alteredCam = Engine::getEngine()->graphics->camera->getView();
+    alteredCam[3][0] = 0;
+    alteredCam[3][1] = 0;
+    alteredCam[3][2] = 0;
     // get the view from the camera and projection matrix
-    view = cavr::gfx::getView();	// Remove any translation component of the view matrix
+    view = alteredCavr* alteredCam;	// Remove any translation component of the view matrix
     projection = cavr::gfx::getProjection();
 
     // pass the view and projection matrices to the shader
-    set("position", pos);
+    //set("position", pos);
     set("view", view);
     set("projection", projection);
     set("skybox",6);

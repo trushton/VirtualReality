@@ -17,6 +17,7 @@
 #include <camera.h>
 #include <pointer.h>
 #include <skybox.h>
+#include <texBall.h>
 
 
 // Using IrrKlang for this project
@@ -124,6 +125,8 @@ private:
   std::vector<Paintball> painting;
   Pointer cursor;
   cavr::math::vec3f currentColor;
+
+  texBall texSpheres;
 };
 
 
