@@ -147,10 +147,16 @@ void VRSim::processInput(){
   cursor.wandModel = (wand_sixdof->getMatrix() * cavr::math::mat4f::translate(0, 0, -2.5) * cavr::math::mat4f::scale(0.1));
 
   cursor.setColor(currentColor);
-  playerPos = Engine::getEngine()->graphics->camera->getPos();
 }
 
 void VRSim::tick(float dt){
+  playerPos = Engine::getEngine()->graphics->camera->getPos();
+  auto headPosition = cavr::input::getSixDOF("head")->getPosition();
+  auto emulated = cavr::input::getSixDOF("emulated");
+  auto emulatedMatrix = emulated->getMatrix();
+  emulatedMatrix[3].xyz = playerPos;
+  emulated->setState(emulatedMatrix);
+
   tree.model = cavr::math::mat4f::translate(0,0,0);
   quad.model = cavr::math::mat4f::translate(0,0,0);
   sphere.model = cavr::math::mat4f::translate(0,0,0);

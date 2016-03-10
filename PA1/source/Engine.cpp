@@ -46,6 +46,7 @@ void Engine::init()
     input_map.sixdof_map["wand"] = "vrpn[WiiMote0[0]]";
 
     input_map.sixdof_map["head"] = "vrpn[ShortGlasses[0]]";
+    input_map.sixdof_map["emulated"] = "emulated";
 
     //controls for rotation, translation, and speed
     input_map.button_map["boost"] = "vrpn[WiiMote0[16]]";
