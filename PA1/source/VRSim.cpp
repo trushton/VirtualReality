@@ -456,7 +456,7 @@ void VRSim::InitColorPalette(){
 }
 
 void VRSim::InitTexturePalette(){
-  texBall temp("./bin/spheres/iron.obj", cavr::math::vec3f(-.5,0.5,-1));
+  texBall temp("./bin/spheres/plane.obj", cavr::math::vec3f(-.5,0.5,-1));
   selectedTexture.push_back(temp);
 
   temp.modelName = "./bin/spheres/goo.obj";
