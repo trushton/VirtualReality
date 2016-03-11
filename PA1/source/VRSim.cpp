@@ -138,15 +138,18 @@ void VRSim::processInput(){
   if(cavr::input::getButton("paint")->delta() != cavr::input::Button::Open){
     cavr::math::vec3f forward = wand_sixdof->getForward();
     auto flippedY = wand_sixdof->getMatrix();
-    flippedY[3][1] = -1*(flippedY[3][1]);
+    //flippedY[3][1] = -1*(flippedY[3][1]);
+    //flippedY[3][0] = -1*(flippedY[3][0]);
 
-    cavr::math::mat4f tempMat = (/*cam->getView()**/ flippedY.inverted() * cam->getView().inverted()* cavr::math::mat4f::translate(cavr::math::vec3f(0,0,-2.5)) * cavr::math::mat4f::scale(0.1));
+    auto flippedXZ = cam->getView();
+    //flippedXZ[3][0] = -1*(flippedXZ[3][0]);
+    cavr::math::mat4f tempMat = (/*cam->getView()**/ flippedY * cavr::math::mat4f::translate(cavr::math::vec3f(0,0,-2.5)) * cavr::math::mat4f::scale(0.1));
     cavr::math::vec3f finalPos = cavr::math::vec3f(-tempMat[3][0]+playerPos.x, tempMat[3][1]+playerPos.y, -tempMat[3][2]+playerPos.z);
     if(!tex){
        Paintball temp(currentColor);
        temp.soundFile = currentSound;
        temp.model = tempMat;
-       //temp.setPos(better);
+       temp.setPos(finalPos);
 
        painting.push_back(temp);
     }

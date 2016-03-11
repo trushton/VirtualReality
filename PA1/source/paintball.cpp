@@ -49,8 +49,8 @@ void Paintball::renderPainting(cavr::math::vec3f wandPos, cavr::math::mat4f camV
   glUniformMatrix4fv(view_uniform, 1, GL_FALSE, (cavr::gfx::getView()*camView).v);
   //cavr::math::vec3f viewPoint = pos+rotation;
   //cavr::math::mat4f view = cavr::math::mat4f::look_at(pos, viewPoint, cavr::math::vec3f(0,1,0));
-//  model = model *  cavr::math::mat4f::scale(0.2);
-  
+  model = cavr::math::mat4f::translate(pos) *  cavr::math::mat4f::scale(0.2);
+
 
   // draw the sphere for the simple program
   glUniformMatrix4fv(model_uniform, 1, GL_FALSE, model.v);
