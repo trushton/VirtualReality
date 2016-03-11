@@ -56,4 +56,4 @@ add_custom_target("${PROJECT_NAME}_SUCCESSFUL" ALL
                   COMMAND ${CMAKE_COMMAND} -E copy ${PROJECT_SOURCE_DIR}/config/cavrplugins.lua ${CMAKE_CURRENT_BINARY_DIR}
                  )
 
-TARGET_LINK_LIBRARIES(${PROJECT_NAME} cavr cavrgl cavrgfx IrrKlang ${ImageMagick_LIBRARIES} ${GLOG_LIBRARIES} ${OPENGL_LIBRARY} ${GLEW_LIBRARIES} ${CAVR_LIBRARIES} assimp freeimageplus)
+TARGET_LINK_LIBRARIES(${PROJECT_NAME} cavr cavrgl cavrgfx IrrKlang ${ImageMagick_LIBRARIES} ${GLOG_LIBRARIES} ${OPENGL_LIBRARY} ${GLEW_LIBRARIES} ${CAVR_LIBRARIES} assimp freeimageplus ikpMP3)

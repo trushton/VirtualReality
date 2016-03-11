@@ -3,6 +3,8 @@
 
 #include <Vertex.h>
 #include <Engine.h>
+#include <irrKlang.h>
+using namespace irrklang;
 
 class Paintball{
 public:
@@ -16,9 +18,11 @@ public:
 
   void setPos(cavr::math::vec3f newPos);
   cavr::math::vec3f getPos();
+  cavr::math::mat4f model;
+  string soundFile;
+
 
 private:
-  cavr::math::mat4f model;
 
 
   //Taken from the app.cpp example

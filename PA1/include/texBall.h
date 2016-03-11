@@ -19,9 +19,10 @@ public:
   //terrible protection of nothing
   string modelName;
   Model model;
+  std::vector<cavr::math::vec3f> positions;
 
 private:
-  cavr::math::vec3f position;
+  cavr::math::vec3f palettePos;
 
 };
 

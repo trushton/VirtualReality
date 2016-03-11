@@ -41,6 +41,8 @@ void Engine::init()
     input_map.button_map["down"] = "vrpn[WiiMote0[9]]";
     input_map.button_map["up"] = "vrpn[WiiMote0[10]]";
 
+    // button 1
+    input_map.button_map["juan"] = "vrpn[WiiMote0[1]]";
 
     // A wand that we want to follow based on some tracker -- we are tracing point 0
     input_map.sixdof_map["wand"] = "vrpn[WiiMote0[0]]";

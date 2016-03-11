@@ -15,12 +15,19 @@ void VRSim::init(){
   InitColorPalette();
   InitTexturePalette();
 
+  soundEngine = createIrrKlangDevice();
+
   m_gbuffer.Init(windowWidth,windowHeight);
   geomProgram.init();
 
   //initialize point lights
   pointProgram.init();
   //pointProgram.SetPointLight(m_pointLight[0]);
+
+  selectedObject.resize(1);
+  selectedObject[0].init("./bin/terrain/grass.png");
+  cavr::math::vec3f pos(-.5,0.5,-1);
+  selectedObject[0].positions.push_back(pos);
 
   dirProgram.init();
   dirProgram.SetDirectionalLight(m_dirLight);
@@ -48,6 +55,7 @@ void VRSim::init(){
 
   cam = Engine::getEngine()->graphics->camera;
   currentColor = cavr::math::vec3f(1,0,0);
+  currentSound = "./bin/sounds/C4.wav";
 
   cursor.init();
   skybox = new Skybox();
@@ -109,8 +117,15 @@ void VRSim::processInput(){
   for(int i = 0; i < colorPalette.size(); i++){
     if(cavr::input::getButton("color")->delta() != cavr::input::Button::Open){
       cavr::gfx::Ray ray(wand_sixdof->getPosition(), wand_sixdof->getForward());
+      auto pos = colorPalette[i].getPos();
        if(solveRaycast(ray, colorPalette[i].getPos(), 0.075)) {
          currentColor = colorPalette[i].getColor();
+         currentSound = colorPalette[i].soundFile;
+         soundEngine->play3D(colorPalette[i].soundFile.c_str(),
+         vec3df(playerPos.x, playerPos.y, playerPos.z), // Music source position
+         false, // play looped
+         false, //  start paused
+         true);
        }
     }
   }
@@ -120,26 +135,39 @@ void VRSim::processInput(){
     texPainting.clear();
   }
 
-
-
-
   if(cavr::input::getButton("paint")->delta() != cavr::input::Button::Open){
     cavr::math::vec3f forward = wand_sixdof->getForward();
-    cavr::math::mat4f tempMat = (/*cam->getView()**/ wand_sixdof->getMatrix() * cavr::math::mat4f::translate(cavr::math::vec3f(0,0,-2)));
-    cavr::math::vec3f wf = cavr::math::vec3f(tempMat[2][0], tempMat[2][1], tempMat[2][2]);
-    cavr::math::vec3f wp = cavr::math::vec3f(tempMat[3][0], tempMat[3][1], tempMat[3][2]);
-    cavr::math::vec3f better  =  cam->getPos() + cam->ViewDir + cavr::math::vec3f(wf.x, wf.y, wf.z) +cavr::math::vec3f(-wp.x, wp.y, -wp.z) ;
+    auto flippedY = wand_sixdof->getMatrix();
+    flippedY[3][1] = -1*(flippedY[3][1]);
+
+    cavr::math::mat4f tempMat = (/*cam->getView()**/ flippedY.inverted() * cam->getView().inverted()* cavr::math::mat4f::translate(cavr::math::vec3f(0,0,-2.5)) * cavr::math::mat4f::scale(0.1));
     cavr::math::vec3f finalPos = cavr::math::vec3f(-tempMat[3][0]+playerPos.x, tempMat[3][1]+playerPos.y, -tempMat[3][2]+playerPos.z);
     if(!tex){
        Paintball temp(currentColor);
-       temp.setPos(finalPos);
+       temp.soundFile = currentSound;
+       temp.model = tempMat;
        //temp.setPos(better);
 
        painting.push_back(temp);
     }
     else{
-      texBall temp(selectedTexture[TexSphere].modelName, finalPos);
-      texPainting.push_back(temp);
+      //texBall temp(selectedTexture[TexSphere].modelName, finalPos);
+      //texPainting.push_back(temp);
+      selectedTexture[TexSphere].positions.push_back(cavr::math::vec3f(tempMat[3].xyz));
+      //usleep(500000);
+    }
+  }
+
+
+  if(cavr::input::getButton("juan")->delta()!= cavr::input::Button::Open){
+    static int counter = 0;
+    for(int i = 0; i <painting.size();i++){
+      soundEngine->play3D(painting[i].soundFile.c_str(),
+      vec3df(painting[i].getPos().x, painting[i].getPos().y, painting[i].getPos().z), // Music source position
+      false, // play looped
+      false, //  start paused
+      true);
+      usleep(10000);
     }
   }
 
@@ -151,6 +179,7 @@ void VRSim::processInput(){
 
 void VRSim::tick(float dt){
   playerPos = Engine::getEngine()->graphics->camera->getPos();
+  soundEngine->setListenerPosition(vec3df(playerPos.x,playerPos.y,playerPos.z), vec3df(cam->ViewDir.x, cam->ViewDir.y, cam->ViewDir.z));
   auto headPosition = cavr::input::getSixDOF("head")->getPosition();
   auto emulated = cavr::input::getSixDOF("emulated");
   auto emulatedMatrix = emulated->getMatrix();
@@ -248,34 +277,39 @@ void VRSim::DSGeometryPass(){
 
   cursor.render(cam->getView());
 
+  glEnable(GL_CULL_FACE);
+  glCullFace(GL_BACK);
   //render each ball of the color palette
   if(!tex){
     for(int i = 0; i < colorPalette.size(); i++){
       colorPalette[i].render(cam->getView());
     }
   }
+
   //render the painting itself
   for(int i = 0; i < painting.size(); i++){
     painting[i].renderPainting(wand_sixdof->getPosition() + cavr::math::vec3f(0, 0, -2), cam->getView(), wand_sixdof->getForward());
+
   }
-
-
 
   //enable the terrains program and render it
   terrain->enable();
   terrain->model = cavr::math::mat4f::translate(cavr::math::vec3f(0 , -100 , 0));
   terrain->render(terrain->time);
 
+  glDisable(GL_CULL_FACE);
+
   //enable geom program for those objects that require it
   geomProgram.enable();
+  for(int i= 0; i < selectedTexture.size(); i++){
+    selectedTexture[i].renderPainting(cam, &geomProgram, cam->getView());
+  }
 
   if(tex){
     selectedTexture[TexSphere].render(cam, &geomProgram);
+    //selectedObject[0].renderObjects(cam->getPos());
   }
 
-  for(int i = 0; i < texPainting.size(); i++){
-    texPainting[i].renderPainting(cam, &geomProgram, cam->getView());
-  }
 
   //load regular models
 
@@ -409,6 +443,7 @@ void VRSim::DSFinalPass()
     glBlitFramebuffer(0, 0, windowWidth, windowHeight, 0, 0, windowWidth, windowHeight, GL_COLOR_BUFFER_BIT, GL_LINEAR);
 }
 
+
 void VRSim::InitLights()
 {
   m_dirLight.AmbientIntensity = 0.5f;
@@ -432,45 +467,54 @@ void VRSim::InitColorPalette(){
   Paintball temp(cavr::math::vec3f(1,0,0));
 
   temp.setPos(cavr::math::vec3f(1,-1,-2));
+  temp.soundFile = "./bin/sounds/C4.wav";
   colorPalette.push_back(temp);
 
   temp.setColor(cavr::math::vec3f(0,1,0));
   temp.setPos(cavr::math::vec3f(1,-.5,-2));
+  temp.soundFile = "./bin/sounds/D4.wav";
   colorPalette.push_back(temp);
 
   temp.setColor(cavr::math::vec3f(0,0,1));
   temp.setPos(cavr::math::vec3f(1,0,-2));
+  temp.soundFile = "./bin/sounds/E4.wav";
   colorPalette.push_back(temp);
 
   temp.setColor(cavr::math::vec3f(1,1,0));
   temp.setPos(cavr::math::vec3f(1,.5,-2));
+  temp.soundFile = "./bin/sounds/F4.wav";
   colorPalette.push_back(temp);
 
   temp.setColor(cavr::math::vec3f(0,1,1));
   temp.setPos(cavr::math::vec3f(1,1,-2));
+  temp.soundFile = "./bin/sounds/G4.wav";
   colorPalette.push_back(temp);
 
   temp.setColor(cavr::math::vec3f(1,0,1));
   temp.setPos(cavr::math::vec3f(1,1.5,-2));
+  temp.soundFile = "./bin/sounds/C5.wav";
   colorPalette.push_back(temp);
 
   temp.setColor(cavr::math::vec3f(1,1,1));
   temp.setPos(cavr::math::vec3f(1,2,-2));
+  temp.soundFile = "./bin/sounds/D5.wav";
   colorPalette.push_back(temp);
-
-
 }
 
 void VRSim::InitTexturePalette(){
-  texBall temp("./bin/spheres/plane.obj", cavr::math::vec3f(-.5,0.5,-1));
+  texBall temp("./bin/spheres/ironWall.obj", cavr::math::vec3f(-.5,0.5,-1));
   selectedTexture.push_back(temp);
 
-  temp.modelName = "./bin/spheres/goo.obj";
+  temp.modelName = "./bin/spheres/gooWall.obj";
   temp.model.loadModel(temp.modelName);
   selectedTexture.push_back(temp);
 
   tex = false;
   TexSphere = 0;
+}
+
+void VRSim::InitObjectPalette(){
+
 }
 
 //STOLEN

@@ -18,6 +18,7 @@
 #include <pointer.h>
 #include <skybox.h>
 #include <texBall.h>
+#include <objectPaint.h>
 
 
 // Using IrrKlang for this project
@@ -50,6 +51,7 @@ public:
   void InitColorPalette();
   void InitTexturePalette();
   void InitBoxPositions();
+  void InitObjectPalette();
   void DSLightPass();
 
   bool solveQuadratic(const float a, const float b, const float c, float &x0, float &x1);
@@ -62,13 +64,13 @@ public:
   bool tex;
 
 
+
 //////////////STANDARD STUFF////////////////
   // Rotating angle
   float cube_angle;
 
   // Lets add some sound library stuff here
-  ISoundEngine* engine;
-  ISound* music;
+  ISoundEngine* soundEngine;
 
    // Shader Programs
   cavr::gl::Program* simple_program;
@@ -127,12 +129,18 @@ private:
   std::vector<Paintball> colorPalette;
   std::vector<Paintball> painting;
   cavr::math::vec3f currentColor;
-
+  string currentSound;
 
   //for painting textures
   std::vector<texBall> selectedTexture;
   std::vector<texBall> texPainting;
   int TexSphere;
+
+////////////////////////////////////////
+  vector<ObjectPaint> selectedObject;
+  vector<ObjectPaint> objectPainting;
+  int currentObject;
+////////////////////////////////////////
 
   Pointer cursor;
 

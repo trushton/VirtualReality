@@ -6,7 +6,7 @@ uniform mat4 HeightmapScaleMatrix;
 uniform mat4 gVP;
 uniform mat4 view;
 uniform mat4 projection;
-void main() {
 
+void main() {
     gl_Position = vec4(Position.x, Position.y, Position.z, 1.0);
 }
